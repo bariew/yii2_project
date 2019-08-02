@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# THIS IS FOR RUNNING USUAL CLI APP COMMANDS
+
+# ./cli up - runs frontend and api server instances on localhost:8080 (8081, 8082)
+# ./cli test {!app} {folder} {Test.php} {extra option for codecept (e.g. -vv or --debug} runs tests for app (api/frontend/backend - required)
+
+COMMAND=$1;
+PARAM1=$2;
+PARAM2=$3;
+PARAM3=$4;
+PARAM4=$5
+APP=$PARAM1;
+DIR=$( cd "$( dirname $0 )" && pwd );
+
+case "$COMMAND" in
+    init)
+        chmod 0777 app/runtime
+        chmod 0777 web/assets
+        chmod -R 0777 web/files
+        cp --no-clobber app/config/local.php.example app/config/local.php
+        chmod +x yii
+        php composer.phar install --prefer-dist
+        ./yii migrate --interactive=0
+    ;&
+    up)
+        fuser -k 8080/tcp
+        php -S localhost:8080 -t web > /dev/null 2>&1 &
+        #docker-compose up -d
+    ;;
+    update)
+        php composer.phar install --prefer-dist
+        ./yii migrate --interactive=0
+        #./yii asset $DIR/app/config/asset-config.php $DIR/app/config/assets-prod.php
+    ;;
+    dev)
+        php composer.phar install
+        ./yii migrate --interactive=0
+        ./yii message app/config/i18n.php
+        rm -rf app/runtime/cache/*
+    ;;
+    gitclean)
+        # removes local branches that were removed from origin
+        git fetch --prune
+        git fetch
+        git checkout master
+        git pull
+        git branch -d $(git branch --merged)
+    ;;
+    clean)
+        # removes local files
+        rm -rf $DIR/app/runtime/debug/*
+        rm -rf $DIR/app/runtime/mail/*
+        rm -rf $DIR/web/assets/*
+        rm -rf $DIR/tests/codeception/_output/*
+    ;;
+    test)
+        php composer.phar install
+        vendor/codeception/codeception/codecept build --config tests/codeception/codeception.yml
+        # ./yii asset $DIR/app/config/asset-config.php $DIR/app/config/assets-prod.php
+        ./tests/codeception/bin/yii misc/reset-database migrations/start_database.sql
+        ./tests/codeception/bin/yii migrate --interactive=0
+        ./tests/codeception/bin/yii fixture/load "*" --interactive=0
+    ;&
+    ftest)
+        # for fast testing with no fixtures prepare
+        # Turn off a debugger and set server config for index-test.php
+        fuser -k 4444/tcp
+        fuser -k 8089/tcp
+        fuser -k 8087/tcp
+        fuser -k 8086/tcp
+        fuser -k 8085/tcp
+        rm -rf runtime/cache/*
+        php -S localhost:8085 -t web $DIR/web/index-test.php >& /dev/null &
+
+        if [[ "$PARAM1" == "functional" && "$PARAM1" != "unit" ]] ; then
+            java -Dwebdriver.chrome.driver=vendor/enm1989/chromedriver/bin/chromedriver -jar -Dselenium.LOGGER=runtime/selenium.log vendor/se/selenium-server-standalone/bin/selenium-server-standalone.jar &
+            #phantomjs --webdriver=4444 &
+            sleep 2
+        fi
+
+        notify-send "Testing Done" 2>&1 >/dev/null
+        ;;
+    *)
+        echo "Available commands: update, dev, test, clean, up"
+        ;;
+esac
