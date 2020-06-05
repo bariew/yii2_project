@@ -131,7 +131,7 @@ return \yii\helpers\ArrayHelper::merge([
             'class' => 'yii\swiftmailer\Mailer',
             'useFileTransport'=>false,
             'htmlLayout' => 'layout_default',
-            'view' => ['theme' => ['pathMap' => ['@app/mail' => '@app/views/mail',],],],
+//            'view' => ['theme' => ['pathMap' => ['@app/mail' => '@app/views/mail',],],],
 //            'transport' => [
 //                'class' => 'Swift_SmtpTransport',
 //                'host' => 'smtp.gmail.com',

@@ -4,160 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "675332014842355f53814d45611ed5c9",
+    "content-hash": "34cc65fad42b43df354671b1f543e58d",
     "packages": [
-        {
-            "name": "2amigos/yii2-tinymce-widget",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/2amigos/yii2-tinymce-widget.git",
-                "reference": "3925cbc7ba9b456333bc92a535bc989aa67e77e6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-tinymce-widget/zipball/3925cbc7ba9b456333bc92a535bc989aa67e77e6",
-                "reference": "3925cbc7ba9b456333bc92a535bc989aa67e77e6",
-                "shasum": ""
-            },
-            "require": {
-                "tinymce/tinymce": ">=4",
-                "yiisoft/yii2": "^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                },
-                "asset-installer-paths": {
-                    "bower-asset-library": "vendor/bower"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "dosamigos\\tinymce\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "2amigOS! Consulting Group",
-                    "email": "hola@2amigos.us",
-                    "homepage": "http://2amigos.us",
-                    "role": "Developer"
-                }
-            ],
-            "description": "TinyMCE widget for Yii2.",
-            "homepage": "http://yiiwheels.com/extension/tinymce-widget",
-            "keywords": [
-                "2amigos",
-                "extension",
-                "tinymce",
-                "widget",
-                "yii",
-                "yii 2",
-                "yii2"
-            ],
-            "time": "2019-04-16T15:18:48+00:00"
-        },
-        {
-            "name": "bariew/phpquery",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bariew/phpquery.git",
-                "reference": "233afd67f5d8188fa87b95ae9371e5aadd3dd927"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bariew/phpquery/zipball/233afd67f5d8188fa87b95ae9371e5aadd3dd927",
-                "reference": "233afd67f5d8188fa87b95ae9371e5aadd3dd927",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "phpQuery/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tobiasz Cudnik",
-                    "email": "tobiasz.cudnik@gmail.com",
-                    "homepage": "https://github.com/TobiaszCudnik",
-                    "role": "Developer"
-                },
-                {
-                    "name": "didier Belot",
-                    "role": "Packager"
-                }
-            ],
-            "description": "phpQuery is a server-side, chainable, CSS3 selector driven Document Object Model (DOM) API based on jQuery JavaScript Library",
-            "homepage": "http://code.google.com/p/phpquery/",
-            "time": "2015-12-29T11:19:32+00:00"
-        },
-        {
-            "name": "bariew/phptools",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bariew/phptools.git",
-                "reference": "e7d3aed02be11fadd24c18915a36ad5a2be899b4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bariew/phptools/zipball/e7d3aed02be11fadd24c18915a36ad5a2be899b4",
-                "reference": "e7d3aed02be11fadd24c18915a36ad5a2be899b4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "helpers",
-            "autoload": {
-                "psr-4": {
-                    "bariew\\phptools\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Bariev Pavel",
-                    "email": "bariew@yandex.ru"
-                }
-            ],
-            "description": "Tools for web development",
-            "keywords": [
-                "helpers",
-                "tools"
-            ],
-            "time": "2015-02-12T12:51:29+00:00"
-        },
         {
             "name": "bariew/yii2-node-tree",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bariew/yii2-node-tree.git",
-                "reference": "c2ecfceb0d3a34efd33b32bcb4a6e95642492d75"
+                "reference": "b2c77c9f5f8b5bf054b77ebbf46abd5f4901ffaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bariew/yii2-node-tree/zipball/c2ecfceb0d3a34efd33b32bcb4a6e95642492d75",
-                "reference": "c2ecfceb0d3a34efd33b32bcb4a6e95642492d75",
+                "url": "https://api.github.com/repos/bariew/yii2-node-tree/zipball/b2c77c9f5f8b5bf054b77ebbf46abd5f4901ffaf",
+                "reference": "b2c77c9f5f8b5bf054b77ebbf46abd5f4901ffaf",
                 "shasum": ""
             },
             "type": "yii2-extension",
@@ -183,56 +43,14 @@
                 "tree",
                 "yii2"
             ],
-            "time": "2015-03-28T14:48:43+00:00"
-        },
-        {
-            "name": "bariew/yii2-tools",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bariew/yii2-tools.git",
-                "reference": "11ea454645b0feb3a1797e349e5bf60f8bd1bb7e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bariew/yii2-tools/zipball/11ea454645b0feb3a1797e349e5bf60f8bd1bb7e",
-                "reference": "11ea454645b0feb3a1797e349e5bf60f8bd1bb7e",
-                "shasum": ""
-            },
-            "require": {
-                "bariew/phpquery": "dev-master",
-                "yiisoft/yii2-imagine": "~2.0@dev"
-            },
-            "type": "helpers",
-            "autoload": {
-                "psr-4": {
-                    "bariew\\yii2Tools\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Bariev Pavel",
-                    "email": "bariew@yandex.ru"
-                }
-            ],
-            "description": "Tools for yii2 web development",
-            "keywords": [
-                "helpers",
-                "tools",
-                "yii2"
-            ],
-            "time": "2019-04-25T09:18:05+00:00"
+            "time": "2020-05-15T05:55:55+00:00"
         },
         {
             "name": "bower-asset/inputmask",
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -322,52 +140,6 @@
             "license": [
                 "MIT"
             ]
-        },
-        {
-            "name": "brick/math",
-            "version": "0.8.15",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/brick/math.git",
-                "reference": "9b08d412b9da9455b210459ff71414de7e6241cd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/9b08d412b9da9455b210459ff71414de7e6241cd",
-                "reference": "9b08d412b9da9455b210459ff71414de7e6241cd",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^7.1|^8.0"
-            },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^2.2",
-                "phpunit/phpunit": "^7.5.15|^8.5",
-                "vimeo/psalm": "^3.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Brick\\Math\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Arbitrary-precision arithmetic library",
-            "keywords": [
-                "Arbitrary-precision",
-                "BigInteger",
-                "BigRational",
-                "arithmetic",
-                "bigdecimal",
-                "bignum",
-                "brick",
-                "math"
-            ],
-            "time": "2020-04-15T15:59:35+00:00"
         },
         {
             "name": "cebe/markdown",
@@ -683,230 +455,17 @@
             "time": "2019-10-28T03:44:26+00:00"
         },
         {
-            "name": "firebase/php-jwt",
-            "version": "v5.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "feb0e820b8436873675fd3aca04f3728eb2185cb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/feb0e820b8436873675fd3aca04f3728eb2185cb",
-                "reference": "feb0e820b8436873675fd3aca04f3728eb2185cb",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": ">=4.8 <=9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Firebase\\JWT\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Neuman Vong",
-                    "email": "neuman+pear@twilio.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Anant Narayanan",
-                    "email": "anant@php.net",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
-            "homepage": "https://github.com/firebase/php-jwt",
-            "keywords": [
-                "jwt",
-                "php"
-            ],
-            "time": "2020-03-25T18:49:23+00:00"
-        },
-        {
-            "name": "google/auth",
-            "version": "v1.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "c7b295feb248f138f462a1e6b7d635e4244204c5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/c7b295feb248f138f462a1e6b7d635e4244204c5",
-                "reference": "c7b295feb248f138f462a1e6b7d635e4244204c5",
-                "shasum": ""
-            },
-            "require": {
-                "firebase/php-jwt": "~2.0|~3.0|~4.0|~5.0",
-                "guzzlehttp/guzzle": "~5.3.1|~6.0",
-                "guzzlehttp/psr7": "^1.2",
-                "php": ">=5.4",
-                "psr/cache": "^1.0",
-                "psr/http-message": "^1.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.11",
-                "guzzlehttp/promises": "0.1.1|^1.3",
-                "kelvinmo/simplejwt": "^0.2.5",
-                "phpseclib/phpseclib": "^2",
-                "phpunit/phpunit": "^4.8.36|^5.7",
-                "sebastian/comparator": ">=1.2.3"
-            },
-            "suggest": {
-                "phpseclib/phpseclib": "May be used in place of OpenSSL for signing strings or for token management. Please require version ^2."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Google\\Auth\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Google Auth Library for PHP",
-            "homepage": "http://github.com/google/google-auth-library-php",
-            "keywords": [
-                "Authentication",
-                "google",
-                "oauth2"
-            ],
-            "time": "2020-03-26T19:47:36+00:00"
-        },
-        {
-            "name": "google/cloud-bigquery",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/googleapis/google-cloud-php-bigquery.git",
-                "reference": "2bfe6c7ff903d26eb832c4b410673973a5a6bdf5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-bigquery/zipball/2bfe6c7ff903d26eb832c4b410673973a5a6bdf5",
-                "reference": "2bfe6c7ff903d26eb832c4b410673973a5a6bdf5",
-                "shasum": ""
-            },
-            "require": {
-                "google/cloud-core": "^1.35",
-                "ramsey/uuid": "^3.0|^4.0"
-            },
-            "require-dev": {
-                "erusev/parsedown": "^1.6",
-                "google/cloud-storage": "^1.3",
-                "phpdocumentor/reflection": "^3.0",
-                "phpunit/phpunit": "^4.8|^5.0",
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "suggest": {
-                "google/cloud-storage": "Makes it easier to load data from Cloud Storage into BigQuery"
-            },
-            "type": "library",
-            "extra": {
-                "component": {
-                    "displayName": "Google Cloud BigQuery",
-                    "id": "cloud-bigquery",
-                    "target": "googleapis/google-cloud-php-bigquery.git",
-                    "path": "BigQuery",
-                    "entry": "src/BigQueryClient.php"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Google\\Cloud\\BigQuery\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "BigQuery Client for PHP",
-            "time": "2020-04-22T21:58:25+00:00"
-        },
-        {
-            "name": "google/cloud-core",
-            "version": "v1.36.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "4ae49980a6c32758824838ca96205a1b22c8fc7a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/4ae49980a6c32758824838ca96205a1b22c8fc7a",
-                "reference": "4ae49980a6c32758824838ca96205a1b22c8fc7a",
-                "shasum": ""
-            },
-            "require": {
-                "google/auth": "^1.6",
-                "guzzlehttp/guzzle": "^5.3|^6.0",
-                "guzzlehttp/promises": "^1.3",
-                "guzzlehttp/psr7": "^1.2",
-                "monolog/monolog": "^1.1|^2.0",
-                "php": ">=5.5",
-                "psr/http-message": "1.0.*",
-                "rize/uri-template": "~0.3"
-            },
-            "require-dev": {
-                "erusev/parsedown": "^1.6",
-                "google/common-protos": "^1.0",
-                "google/gax": "^1.1",
-                "opis/closure": "^3",
-                "phpdocumentor/reflection": "^3.0",
-                "phpunit/phpunit": "^4.8|^5.0",
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "suggest": {
-                "opis/closure": "May be used to serialize closures to process jobs in the batch daemon. Please require version ^3.",
-                "symfony/lock": "Required for the Spanner cached based session pool. Please require the following commit: 3.3.x-dev#1ba6ac9"
-            },
-            "bin": [
-                "bin/google-cloud-batch"
-            ],
-            "type": "library",
-            "extra": {
-                "component": {
-                    "id": "cloud-core",
-                    "target": "googleapis/google-cloud-php-core.git",
-                    "path": "Core",
-                    "entry": "src/ServiceBuilder.php"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Google\\Cloud\\Core\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
-            "time": "2020-04-22T21:58:25+00:00"
-        },
-        {
             "name": "guzzlehttp/guzzle",
             "version": "6.5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "aab4ebd862aa7d04f01a4b51849d657db56d882e"
+                "reference": "a4a1b6930528a8f7ee03518e6442ec7a44155d9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/aab4ebd862aa7d04f01a4b51849d657db56d882e",
-                "reference": "aab4ebd862aa7d04f01a4b51849d657db56d882e",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/a4a1b6930528a8f7ee03518e6442ec7a44155d9d",
+                "reference": "a4a1b6930528a8f7ee03518e6442ec7a44155d9d",
                 "shasum": ""
             },
             "require": {
@@ -914,7 +473,7 @@
                 "guzzlehttp/promises": "^1.0",
                 "guzzlehttp/psr7": "^1.6.1",
                 "php": ">=5.5",
-                "symfony/polyfill-intl-idn": "^1.11"
+                "symfony/polyfill-intl-idn": "1.17.0"
             },
             "require-dev": {
                 "ext-curl": "*",
@@ -960,7 +519,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2020-04-18T10:38:46+00:00"
+            "time": "2020-05-25T19:35:05+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1019,12 +578,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "c247bf84e343f0b95927fa86cf23b7ffc9af04f3"
+                "reference": "188cc82398f157483976ccf61bd04ee80afcf29c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/c247bf84e343f0b95927fa86cf23b7ffc9af04f3",
-                "reference": "c247bf84e343f0b95927fa86cf23b7ffc9af04f3",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/188cc82398f157483976ccf61bd04ee80afcf29c",
+                "reference": "188cc82398f157483976ccf61bd04ee80afcf29c",
                 "shasum": ""
             },
             "require": {
@@ -1082,65 +641,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2020-05-13T14:56:52+00:00"
-        },
-        {
-            "name": "imagine/imagine",
-            "version": "1.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/avalanche123/Imagine.git",
-                "reference": "cb2361e5bb4410b681462d8e4f912bc5dabf84ab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/cb2361e5bb4410b681462d8e4f912bc5dabf84ab",
-                "reference": "cb2361e5bb4410b681462d8e4f912bc5dabf84ab",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "2.2.*",
-                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5 || ^8.4"
-            },
-            "suggest": {
-                "ext-gd": "to use the GD implementation",
-                "ext-gmagick": "to use the Gmagick implementation",
-                "ext-imagick": "to use the Imagick implementation"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-develop": "0.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Imagine\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bulat Shakirzyanov",
-                    "email": "mallluhuct@gmail.com",
-                    "homepage": "http://avalanche123.com"
-                }
-            ],
-            "description": "Image processing for PHP 5.3",
-            "homepage": "http://imagine.readthedocs.org/",
-            "keywords": [
-                "drawing",
-                "graphics",
-                "image manipulation",
-                "image processing"
-            ],
-            "time": "2019-12-04T09:55:33+00:00"
+            "time": "2020-05-17T20:05:25+00:00"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
@@ -1148,18 +649,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "8530f7f2e9095b13f3d2734d722701e44b6d6962"
+                "reference": "32ca5679456680f00fee5c468c3ccd3d836955ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/8530f7f2e9095b13f3d2734d722701e44b6d6962",
-                "reference": "8530f7f2e9095b13f3d2734d722701e44b6d6962",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/32ca5679456680f00fee5c468c3ccd3d836955ae",
+                "reference": "32ca5679456680f00fee5c468c3ccd3d836955ae",
                 "shasum": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0.x-dev"
+                    "dev-master": "5.1.x-dev"
                 }
             },
             "autoload": {
@@ -1199,7 +700,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2020-05-13T13:03:22+00:00"
+            "time": "2020-06-03T14:27:33+00:00"
         },
         {
             "name": "kartik-v/yii2-editors",
@@ -1317,12 +818,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
-                "reference": "8616a7686508462da3de8f8d2021fc74f2cf40dc"
+                "reference": "1530e293315bfb09661a50ed34bf1e8b57f92f69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/8616a7686508462da3de8f8d2021fc74f2cf40dc",
-                "reference": "8616a7686508462da3de8f8d2021fc74f2cf40dc",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/1530e293315bfb09661a50ed34bf1e8b57f92f69",
+                "reference": "1530e293315bfb09661a50ed34bf1e8b57f92f69",
                 "shasum": ""
             },
             "require": {
@@ -1364,7 +865,13 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2020-02-03T03:00:51+00:00"
+            "funding": [
+                {
+                    "url": "https://opencollective.com/yii2-widget-fileinput",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-06-02T17:24:23+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -1372,12 +879,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "ffe1a245fb73fc4f4add741ca3bc8657e0976c12"
+                "reference": "d44105a4cbb5f69737a5c9a02d4456e1037b8ad3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/ffe1a245fb73fc4f4add741ca3bc8657e0976c12",
-                "reference": "ffe1a245fb73fc4f4add741ca3bc8657e0976c12",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/d44105a4cbb5f69737a5c9a02d4456e1037b8ad3",
+                "reference": "d44105a4cbb5f69737a5c9a02d4456e1037b8ad3",
                 "shasum": ""
             },
             "require": {
@@ -1418,67 +925,38 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2020-02-04T11:59:36+00:00"
+            "funding": [
+                {
+                    "url": "https://opencollective.com/yii2-widget-select2",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-05-23T11:50:39+00:00"
         },
         {
-            "name": "monolog/monolog",
+            "name": "nacmartin/phpexecjs",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "13ee5dabda349251adce7cad72b69524c6281855"
+                "url": "https://github.com/nacmartin/phpexecjs.git",
+                "reference": "266befc428f1286d429fa539672efcee255da4c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/13ee5dabda349251adce7cad72b69524c6281855",
-                "reference": "13ee5dabda349251adce7cad72b69524c6281855",
+                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/266befc428f1286d429fa539672efcee255da4c7",
+                "reference": "266befc428f1286d429fa539672efcee255da4c7",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2",
-                "psr/log": "^1.0.1"
-            },
-            "provide": {
-                "psr/log-implementation": "1.0.0"
+                "symfony/process": "~2.3|~3.0|^4.0|^5.0"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
-                "doctrine/couchdb": "~1.0@dev",
-                "elasticsearch/elasticsearch": "^6.0",
-                "graylog2/gelf-php": "^1.4.2",
-                "php-amqplib/php-amqplib": "~2.4",
-                "php-console/php-console": "^3.1.3",
-                "php-parallel-lint/php-parallel-lint": "^1.0",
-                "phpspec/prophecy": "^1.6.1",
-                "phpunit/phpunit": "^8.5",
-                "predis/predis": "^1.1",
-                "rollbar/rollbar": "^1.3",
-                "ruflin/elastica": ">=0.90 <3.0",
-                "swiftmailer/swiftmailer": "^5.3|^6.0"
-            },
-            "suggest": {
-                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
-                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
-                "elasticsearch/elasticsearch": "Allow sending log messages to an Elasticsearch server via official client",
-                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mbstring": "Allow to work properly with unicode symbols",
-                "ext-mongodb": "Allow sending log messages to a MongoDB server (via driver)",
-                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
-                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
-                "php-console/php-console": "Allow sending log messages to Google Chrome",
-                "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
+                "phpunit/phpunit": "^8.3"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
             "autoload": {
-                "psr-4": {
-                    "Monolog\\": "src/Monolog"
+                "psr-0": {
+                    "Nacmartin\\PhpExecJs": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1487,19 +965,12 @@
             ],
             "authors": [
                 {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
+                    "name": "nacho",
+                    "email": "nacho@limenius.com"
                 }
             ],
-            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
-            "homepage": "http://github.com/Seldaek/monolog",
-            "keywords": [
-                "log",
-                "logging",
-                "psr-3"
-            ],
-            "time": "2020-05-11T20:22:28+00:00"
+            "description": "Run JavaScript code from PHP",
+            "time": "2019-12-30T18:17:27+00:00"
         },
         {
             "name": "npm-asset/bootstrap",
@@ -1512,106 +983,6 @@
             "license": [
                 "MIT"
             ]
-        },
-        {
-            "name": "php-ai/php-ml",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-ai/php-ml.git",
-                "reference": "aae3005aa784ab55ad465d8ce0b25621bb343d7a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-ai/php-ml/zipball/aae3005aa784ab55ad465d8ce0b25621bb343d7a",
-                "reference": "aae3005aa784ab55ad465d8ce0b25621bb343d7a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2"
-            },
-            "require-dev": {
-                "phpbench/phpbench": "^0.16.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/phpunit": "^8.0",
-                "symplify/easy-coding-standard": "^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phpml\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Arkadiusz Kondas",
-                    "email": "arkadiusz.kondas@gmail.com"
-                }
-            ],
-            "description": "PHP-ML - Machine Learning library for PHP",
-            "homepage": "https://github.com/php-ai/php-ml",
-            "keywords": [
-                "Neural network",
-                "artificial intelligence",
-                "computational learning theory",
-                "data science",
-                "feature extraction",
-                "machine learning",
-                "pattern recognition"
-            ],
-            "time": "2020-05-15T05:44:34+00:00"
-        },
-        {
-            "name": "psr/cache",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/cache.git",
-                "reference": "b9aa2cd4dd36cec02779bee07ee9dab8bd2d07d7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/b9aa2cd4dd36cec02779bee07ee9dab8bd2d07d7",
-                "reference": "b9aa2cd4dd36cec02779bee07ee9dab8bd2d07d7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Cache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for caching libraries",
-            "keywords": [
-                "cache",
-                "psr",
-                "psr-6"
-            ],
-            "time": "2019-10-04T14:04:41+00:00"
         },
         {
             "name": "psr/http-message",
@@ -1664,53 +1035,6 @@
             "time": "2019-08-29T13:16:46+00:00"
         },
         {
-            "name": "psr/log",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
-                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for logging libraries",
-            "homepage": "https://github.com/php-fig/log",
-            "keywords": [
-                "log",
-                "psr",
-                "psr-3"
-            ],
-            "time": "2020-03-23T09:12:05+00:00"
-        },
-        {
             "name": "ralouphie/getallheaders",
             "version": "3.0.3",
             "source": {
@@ -1749,191 +1073,6 @@
             ],
             "description": "A polyfill for getallheaders.",
             "time": "2019-03-08T08:55:37+00:00"
-        },
-        {
-            "name": "ramsey/collection",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ramsey/collection.git",
-                "reference": "925ad8cf55ba7a3fc92e332c58fd0478ace3e1ca"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/collection/zipball/925ad8cf55ba7a3fc92e332c58fd0478ace3e1ca",
-                "reference": "925ad8cf55ba7a3fc92e332c58fd0478ace3e1ca",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2"
-            },
-            "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
-                "fzaninotto/faker": "^1.5",
-                "jakub-onderka/php-parallel-lint": "^1",
-                "jangregor/phpstan-prophecy": "^0.6",
-                "mockery/mockery": "^1.3",
-                "phpstan/extension-installer": "^1",
-                "phpstan/phpdoc-parser": "0.4.1",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-mockery": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpunit/phpunit": "^8.5",
-                "slevomat/coding-standard": "^6.0",
-                "squizlabs/php_codesniffer": "^3.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ramsey\\Collection\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
-                }
-            ],
-            "description": "A PHP 7.2+ library for representing and manipulating collections.",
-            "homepage": "https://github.com/ramsey/collection",
-            "keywords": [
-                "array",
-                "collection",
-                "hash",
-                "map",
-                "queue",
-                "set"
-            ],
-            "time": "2020-01-05T00:22:59+00:00"
-        },
-        {
-            "name": "ramsey/uuid",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ramsey/uuid.git",
-                "reference": "f656e061dab37d543ef66789955b35b0b31c2160"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/f656e061dab37d543ef66789955b35b0b31c2160",
-                "reference": "f656e061dab37d543ef66789955b35b0b31c2160",
-                "shasum": ""
-            },
-            "require": {
-                "brick/math": "^0.8",
-                "ext-json": "*",
-                "php": "^7.2 || ^8",
-                "ramsey/collection": "^1.0",
-                "symfony/polyfill-ctype": "^1.8"
-            },
-            "replace": {
-                "rhumsaa/uuid": "self.version"
-            },
-            "require-dev": {
-                "codeception/aspect-mock": "^3",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
-                "doctrine/annotations": "^1.8",
-                "goaop/framework": "^2",
-                "mockery/mockery": "^1.3",
-                "moontoast/math": "^1.1",
-                "paragonie/random-lib": "^2",
-                "php-mock/php-mock-mockery": "^1.3",
-                "php-mock/php-mock-phpunit": "^2.5",
-                "php-parallel-lint/php-parallel-lint": "^1.1",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-mockery": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpunit/phpunit": "^8.5",
-                "psy/psysh": "^0.10.0",
-                "slevomat/coding-standard": "^6.0",
-                "squizlabs/php_codesniffer": "^3.5",
-                "vimeo/psalm": "3.9.4"
-            },
-            "suggest": {
-                "ext-bcmath": "Enables faster math with arbitrary-precision integers using BCMath.",
-                "ext-ctype": "Enables faster processing of character classification using ctype functions.",
-                "ext-gmp": "Enables faster math with arbitrary-precision integers using GMP.",
-                "ext-uuid": "Enables the use of PeclUuidTimeGenerator and PeclUuidRandomGenerator.",
-                "paragonie/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
-                "ramsey/uuid-doctrine": "Allows the use of Ramsey\\Uuid\\Uuid as Doctrine field type."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ramsey\\Uuid\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A PHP library for generating and working with universally unique identifiers (UUIDs).",
-            "homepage": "https://github.com/ramsey/uuid",
-            "keywords": [
-                "guid",
-                "identifier",
-                "uuid"
-            ],
-            "time": "2020-05-10T21:42:12+00:00"
-        },
-        {
-            "name": "rize/uri-template",
-            "version": "0.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rize/UriTemplate.git",
-                "reference": "9e5fdd5c47147aa5adf7f760002ee591ed37b9ca"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rize/UriTemplate/zipball/9e5fdd5c47147aa5adf7f760002ee591ed37b9ca",
-                "reference": "9e5fdd5c47147aa5adf7f760002ee591ed37b9ca",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Rize\\UriTemplate": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marut K",
-                    "homepage": "http://twitter.com/rezigned"
-                }
-            ],
-            "description": "PHP URI Template (RFC 6570) supports both expansion & extraction",
-            "keywords": [
-                "RFC 6570",
-                "template",
-                "uri"
-            ],
-            "time": "2017-06-14T03:57:53+00:00"
         },
         {
             "name": "select2/select2",
@@ -2034,12 +1173,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "4633950338d22b4406e5c77f6e25c658435d5db4"
+                "reference": "09176b9ab06b168fb181b7e09429d6aaf70cf290"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4633950338d22b4406e5c77f6e25c658435d5db4",
-                "reference": "4633950338d22b4406e5c77f6e25c658435d5db4",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/09176b9ab06b168fb181b7e09429d6aaf70cf290",
+                "reference": "09176b9ab06b168fb181b7e09429d6aaf70cf290",
                 "shasum": ""
             },
             "require": {
@@ -2087,67 +1226,17 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2020-03-03T08:49:48+00:00"
-        },
-        {
-            "name": "symfony/polyfill-ctype",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
-                "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "suggest": {
-                "ext-ctype": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.17-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for ctype functions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "ctype",
-                "polyfill",
-                "portable"
-            ],
             "funding": [
                 {
-                    "url": "https://symfony.com/sponsor",
+                    "url": "https://certification.symfony.com/",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://live.symfony.com/",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://symfony.com/cloud/",
                     "type": "custom"
                 },
                 {
@@ -2155,11 +1244,11 @@
                     "type": "github"
                 },
                 {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "url": "https://tidelift.com/funding/github/packagist/swiftmailer/swiftmailer",
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-12T16:14:59+00:00"
+            "time": "2020-06-02T20:39:32+00:00"
         },
         {
             "name": "symfony/polyfill-iconv",
@@ -2236,7 +1325,7 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "dev-master",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
@@ -2453,50 +1542,144 @@
             "time": "2020-05-12T16:47:27+00:00"
         },
         {
-            "name": "tinymce/tinymce",
+            "name": "symfony/polyfill-php80",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "a9e4928aac63b18db3bc670661f8661133c3c205"
+                "url": "https://github.com/symfony/polyfill-php80.git",
+                "reference": "5e30b2799bc1ad68f7feb62b60a73743589438dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/a9e4928aac63b18db3bc670661f8661133c3c205",
-                "reference": "a9e4928aac63b18db3bc670661f8661133c3c205",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/5e30b2799bc1ad68f7feb62b60a73743589438dd",
+                "reference": "5e30b2799bc1ad68f7feb62b60a73743589438dd",
                 "shasum": ""
             },
-            "type": "component",
+            "require": {
+                "php": ">=7.0.8"
+            },
+            "type": "library",
             "extra": {
-                "component": {
-                    "scripts": [
-                        "tinymce.js",
-                        "plugins/*/plugin.js",
-                        "themes/*/theme.js"
-                    ],
-                    "files": [
-                        "tinymce.min.js",
-                        "plugins/*/plugin.min.js",
-                        "themes/*/theme.min.js",
-                        "skins/**"
-                    ]
+                "branch-alias": {
+                    "dev-master": "1.17-dev"
                 }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php80\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1-only"
+                "MIT"
             ],
-            "description": "Web based JavaScript HTML WYSIWYG editor control.",
-            "homepage": "http://www.tinymce.com",
+            "authors": [
+                {
+                    "name": "Ion Bazan",
+                    "email": "ion.bazan@gmail.com"
+                },
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
             "keywords": [
-                "editor",
-                "html",
-                "javascript",
-                "richtext",
-                "tinymce",
-                "wysiwyg"
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
             ],
-            "time": "2020-04-23T02:47:51+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-12T16:47:27+00:00"
+        },
+        {
+            "name": "symfony/process",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "2cf3f1373f84bdd33a3dfb1fb99eaa29371859af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/2cf3f1373f84bdd33a3dfb1fb99eaa29371859af",
+                "reference": "2cf3f1373f84bdd33a3dfb1fb99eaa29371859af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-php80": "^1.15"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-30T20:38:10+00:00"
         },
         {
             "name": "wildbit/postmark-php",
@@ -2538,12 +1721,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a62f4404f0327f5a6f3f81e83bf9ff337c94c9a3"
+                "reference": "0a2384b1ab8a8c2c3656544f026ed82b30872cb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a62f4404f0327f5a6f3f81e83bf9ff337c94c9a3",
-                "reference": "a62f4404f0327f5a6f3f81e83bf9ff337c94c9a3",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/0a2384b1ab8a8c2c3656544f026ed82b30872cb9",
+                "reference": "0a2384b1ab8a8c2c3656544f026ed82b30872cb9",
                 "shasum": ""
             },
             "require": {
@@ -2630,7 +1813,21 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2020-05-11T09:18:15+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-06-03T11:31:26+00:00"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -2699,12 +1896,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap4.git",
-                "reference": "9dc1443a9e307c93aaaba9adfff93f38d784d64c"
+                "reference": "2731ddaa4e4d49e6da803b2acd5433726db7fcca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap4/zipball/9dc1443a9e307c93aaaba9adfff93f38d784d64c",
-                "reference": "9dc1443a9e307c93aaaba9adfff93f38d784d64c",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap4/zipball/2731ddaa4e4d49e6da803b2acd5433726db7fcca",
+                "reference": "2731ddaa4e4d49e6da803b2acd5433726db7fcca",
                 "shasum": ""
             },
             "require": {
@@ -2760,7 +1957,21 @@
                 "bootstrap4",
                 "yii2"
             ],
-            "time": "2020-05-07T10:45:17+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2-bootstrap4",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-16T11:08:10+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -2866,57 +2077,6 @@
                 "yii2"
             ],
             "time": "2020-04-23T10:06:40+00:00"
-        },
-        {
-            "name": "yiisoft/yii2-imagine",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-imagine.git",
-                "reference": "8637f63ee2eb81b7fe1f4c0e16cc8cc474a68bae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/8637f63ee2eb81b7fe1f4c0e16cc8cc474a68bae",
-                "reference": "8637f63ee2eb81b7fe1f4c0e16cc8cc474a68bae",
-                "shasum": ""
-            },
-            "require": {
-                "imagine/imagine": "^0.6 | ^0.7 | ^1.0",
-                "yiisoft/yii2": "~2.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "<7"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\imagine\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Ramirez",
-                    "email": "amigo.cobos@gmail.com"
-                }
-            ],
-            "description": "The Imagine integration for the Yii framework",
-            "keywords": [
-                "helper",
-                "image",
-                "imagine",
-                "yii2"
-            ],
-            "time": "2019-06-04T12:38:50+00:00"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -3197,16 +2357,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "6a1471ddbf2f448b35f3a8e390c903435e6dd5de"
+                "reference": "a390fde13fc9bc2ffb73340bb8f07201a8e85af8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/6a1471ddbf2f448b35f3a8e390c903435e6dd5de",
-                "reference": "6a1471ddbf2f448b35f3a8e390c903435e6dd5de",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/a390fde13fc9bc2ffb73340bb8f07201a8e85af8",
+                "reference": "a390fde13fc9bc2ffb73340bb8f07201a8e85af8",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^6.0",
@@ -3245,7 +2405,21 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2019-12-23T19:18:31+00:00"
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finstantiator",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-30T16:47:47+00:00"
         },
         {
             "name": "fzaninotto/faker",
@@ -3351,12 +2525,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opis/closure.git",
-                "reference": "c37b40d59d9afffc2e5e958e2e5ccdb08634f81d"
+                "reference": "28ade8ad575381f3faf9cc9427d1d63b18f12061"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opis/closure/zipball/c37b40d59d9afffc2e5e958e2e5ccdb08634f81d",
-                "reference": "c37b40d59d9afffc2e5e958e2e5ccdb08634f81d",
+                "url": "https://api.github.com/repos/opis/closure/zipball/28ade8ad575381f3faf9cc9427d1d63b18f12061",
+                "reference": "28ade8ad575381f3faf9cc9427d1d63b18f12061",
                 "shasum": ""
             },
             "require": {
@@ -3404,7 +2578,7 @@
                 "serialization",
                 "serialize"
             ],
-            "time": "2019-12-21T12:58:57+00:00"
+            "time": "2020-05-26T10:47:20+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3811,12 +2985,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "1a435b604264ecb2e6baa360c7f3f7940861e7a5"
+                "reference": "d6359824fc9bd2a4f90383b224906a1884aa56ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/1a435b604264ecb2e6baa360c7f3f7940861e7a5",
-                "reference": "1a435b604264ecb2e6baa360c7f3f7940861e7a5",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/d6359824fc9bd2a4f90383b224906a1884aa56ca",
+                "reference": "d6359824fc9bd2a4f90383b224906a1884aa56ca",
                 "shasum": ""
             },
             "require": {
@@ -3852,7 +3026,13 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2020-05-12T05:30:38+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-06-01T12:18:17+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -4031,6 +3211,53 @@
             ],
             "abandoned": true,
             "time": "2015-10-02T06:51:40+00:00"
+        },
+        {
+            "name": "psr/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2020-03-23T09:12:05+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -4799,6 +4026,78 @@
             "time": "2018-11-11T11:18:13+00:00"
         },
         {
+            "name": "symfony/polyfill-ctype",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
+                "reference": "e94c8b1bbe2bc77507a1056cdb06451c75b427f9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.17-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-12T16:14:59+00:00"
+        },
+        {
             "name": "symfony/yaml",
             "version": "2.8.x-dev",
             "source": {
@@ -5059,17 +4358,14 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "bariew/phptools": 20,
-        "bariew/yii2-tools": 20,
         "bariew/yii2-node-tree": 20,
-        "php-ai/php-ml": 20,
         "kartik-v/yii2-widget-select2": 20,
         "kartik-v/yii2-editors": 20,
         "kartik-v/yii2-widget-fileinput": 20,
         "yiisoft/yii2-bootstrap4": 20,
         "sweelix/yii2-postmark": 20,
         "dizews/yii2-db-console": 20,
-        "google/cloud-bigquery": 20
+        "nacmartin/phpexecjs": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

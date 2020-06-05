@@ -72,12 +72,4 @@ class ConsoleController extends Controller
         ]);
         return true;
     }
-
-    /**
-     * @param $date
-     */
-    public function actionTest($date)
-    {
-        Item::import($date);
-    }
 }

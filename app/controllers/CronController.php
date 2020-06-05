@@ -9,7 +9,11 @@ namespace app\controllers;
 use yii\console\Controller;
 
 /**
- * Description:
+  Description: for running cron jobs:
+  add in crontab -e
+
+ * * * * * /usr/bin/php /path/to/app/yii cron/all > /dev/null 2>&1
+
  */
 class CronController extends Controller
 {

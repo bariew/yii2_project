@@ -19,21 +19,17 @@
         "ext-fileinfo": "*",
         "yiisoft/yii2": ">=2.0.14",
         "yiisoft/yii2-swiftmailer": ">=2.1.0",
-        "bariew/phptools": "dev-master",
-        "bariew/yii2-tools": "dev-master",
         "bariew/yii2-node-tree" : "dev-master",
         "creocoder/yii2-nested-sets": "0.9.*",
         "yiisoft/yii2-jui": "*",
         "yiisoft/yii2-authclient": ">=2.0.0",
-        "2amigos/yii2-tinymce-widget": ">=1.1",
-        "php-ai/php-ml": "dev-master",
         "kartik-v/yii2-widget-select2": ">=2.1@dev",
         "kartik-v/yii2-editors": "@dev",
         "kartik-v/yii2-widget-fileinput": "^1.0@dev",
         "yiisoft/yii2-bootstrap4": "^1.0@dev",
         "sweelix/yii2-postmark": "dev-master",
         "dizews/yii2-db-console": "dev-master",
-        "google/cloud-bigquery": "dev-master"
+        "nacmartin/phpexecjs": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": ">=2.1.0",
