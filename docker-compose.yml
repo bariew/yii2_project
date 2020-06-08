@@ -46,5 +46,7 @@ services:
       working_dir: /application
       volumes:
         - ../yii2-project:/application
-        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+        - ./docker/php-fpm/xdebug.ini /etc/php/7.3/mods-available/xdebug.ini
+        #- ./docker/php-fpm/cronjobs /etc/cron.d/php-app-cronjob
 
