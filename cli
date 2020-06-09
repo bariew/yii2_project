@@ -62,5 +62,5 @@ case "$COMMAND" in
     ;;
     *)
         echo "Available commands: update, dev, test, clean, up"
-        ;;
+    ;;
 esac

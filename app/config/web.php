@@ -62,6 +62,7 @@ return \yii\helpers\ArrayHelper::merge([
                 '/' => 'site/index',
                 '<_c>/<_a>' => '<_c>/<_a>',
                 '<_m>/<_c>/<_a>' => '<_m>/<_c>/<_a>',
+                '<is_api:api>/<_m>/<_c>/<_a>' => '<_m>/<_c>/<_a>',
             ],
         ],
         'i18n'  => [
@@ -81,6 +82,10 @@ return \yii\helpers\ArrayHelper::merge([
                     '@app/mail' => '@app/views/mail',
                 ],
             ],
+            'renderers' => [
+                'js' => \app\modules\test\ReactRenderer::class,
+                'jsx' => \app\modules\test\ReactRenderer::class,
+            ]
         ],
         'authManager' => [
             'class' => \yii\rbac\PhpManager::class,

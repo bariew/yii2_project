@@ -72,4 +72,17 @@ class ConsoleController extends Controller
         ]);
         return true;
     }
+
+    /**
+     * @param string $dir
+     */
+    public function actionJsx2js($dir = 'app/modules')
+    {
+        $dir = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . $dir;
+        $files = FileHelper::findFiles($dir, ['only' => ['*.jsx']]);
+        foreach ($files as $file) {
+            exec("./node_modules/.bin/babel --plugins transform-react-jsx {$file} > " . preg_replace('#^(.+)x$#', '$1', $file));
+        }
+
+    }
 }

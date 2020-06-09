@@ -6,20 +6,17 @@ services:
 
     memcached:
       image: memcached:alpine
-      container_name: yii2-project-memcached
 
     mailhog:
       image: mailhog/mailhog:latest
-      container_name: yii2-project-mailhog
       ports:
         - "8091:8025"
 
     mysql:
       image: mysql:5.7
-      container_name: yii2-project-mysql
       working_dir: /application
       volumes:
-        - ../yii2-project:/application
+        - .:/application
       environment:
         - MYSQL_ROOT_PASSWORD=root
         - MYSQL_DATABASE=yii2_project
@@ -30,23 +27,20 @@ services:
 
     webserver:
       image: nginx:alpine
-      container_name: yii2-project-webserver
       working_dir: /application
       volumes:
-          - ../yii2-project:/application
+          - .:/application
+          - ./docker/nginx:/var/log/nginx
           - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       ports:
        - "8090:80"
-      links:
-        - mysql
 
     php-fpm:
       build: docker/php-fpm
-      container_name: yii2-project-php-fpm
       working_dir: /application
       volumes:
-        - ../yii2-project:/application
+        - .:/application
+        #- ./docker/php-fpm/php-fpm-startup:/usr/bin/php-fpm
         - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
-        - ./docker/php-fpm/xdebug.ini /etc/php/7.3/mods-available/xdebug.ini
+        - ./docker/php-fpm/xdebug.ini:/etc/php/7.3/mods-available/xdebug.ini
         #- ./docker/php-fpm/cronjobs /etc/cron.d/php-app-cronjob
-
