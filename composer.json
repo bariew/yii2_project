@@ -27,10 +27,7 @@
         "kartik-v/yii2-editors": "@dev",
         "kartik-v/yii2-widget-fileinput": "^1.0@dev",
         "yiisoft/yii2-bootstrap4": "^1.0@dev",
-        "sweelix/yii2-postmark": "dev-master",
-        "dizews/yii2-db-console": "dev-master",
-        "b-tokman/yii2-react": "dev-master",
-        "nacmartin/phpexecjs": "dev-master"
+        "sweelix/yii2-postmark": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": ">=2.1.0",

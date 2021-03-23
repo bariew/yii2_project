@@ -18,7 +18,7 @@ case "$COMMAND" in
         chmod 0777 app/runtime
         chmod 0777 web/assets
         chmod -R 0777 web/files
-        cp -n app/config/local.php.example app/config/local.php
+        cp -n config/local.php.example config/local.php
         chmod +x yii
         php composer.phar install --prefer-dist
         ./yii migrate --interactive=0
@@ -52,8 +52,8 @@ case "$COMMAND" in
     ;;
     clean)
         # removes local files
-        rm -rf $DIR/app/runtime/debug/*
-        rm -rf $DIR/app/runtime/mail/*
+        rm -rf $DIR/runtime/debug/*
+        rm -rf $DIR/runtime/mail/*
         rm -rf $DIR/web/assets/*
         rm -rf $DIR/tests/codeception/_output/*
     ;;
