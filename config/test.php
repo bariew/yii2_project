@@ -1,6 +1,5 @@
 <?php
-//require(dirname(dirname(__DIR__)).'/tests/codeception/_bootstrap.php');
-$mainConfig = require(dirname(__FILE__) . '/web.php');
+$mainConfig = require(dirname(__FILE__) . '/main.php');
 return \yii\helpers\ArrayHelper::merge($mainConfig, array(
     "components" => array(
         "request"   => [

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var app\modules\page\models\Item $model
+ * @var app\modules\page\models\Page $model
  */
 
 $this->title = Yii::t('modules/page', 'Create Page');

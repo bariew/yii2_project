@@ -38,6 +38,7 @@ AppAsset::register($this);
                     ['label' => Yii::t('home', 'Pages'), 'url' => ['/page/item/index']],
                     ['label' => Yii::t('home', 'Posts'), 'url' => ['/post/item/index']],
                     ['label' => Yii::t('home', 'Users'), 'url' => ['/user/user/index']],
+                    ['label' => Yii::t('home', 'Nalog'), 'url' => ['/nalog/transaction/index']],
                 ]
             ]);
         }

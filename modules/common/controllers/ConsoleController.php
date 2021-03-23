@@ -56,14 +56,15 @@ class ConsoleController extends Controller
 
     /**
      * Fast clone module content into a new one with the new namespaces replaced
-     * @example ./yii console/module-clone @app/modules/post @app/modules/news
+     * @example ./yii console/module-clone news
      * @param $oldAlias
      * @param $newAlias
      * @return bool
      * @throws ErrorException
      */
-    public function actionModuleClone($oldAlias, $newAlias)
+    public function actionModuleClone($newAlias = 'new', $oldAlias = '@app/modules/post')
     {
+        $newAlias = "@app/modules/{$newAlias}";
         $source = Yii::getAlias($oldAlias);
         if (!file_exists($source) || !is_dir($source)) {
             throw new ErrorException("Source directory {$oldAlias} not found");

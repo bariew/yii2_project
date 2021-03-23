@@ -2,13 +2,12 @@
 
 use yii\db\Schema;
 use yii\db\Migration;
-use app\modules\comment\models\Item;
+use app\modules\comment\models\Comment;
 class m150215_121021_comment_item extends Migration
 {
     public function up()
     {
-        //TODO make Item::tableName()
-        return $this->createTable(Item::tableName(), [
+         $this->createTable('{{%comment}}', [
             'id' => Schema::TYPE_PK,
             'user_id' => Schema::TYPE_INTEGER,
             'parent_class' => Schema::TYPE_STRING,
@@ -23,6 +22,6 @@ class m150215_121021_comment_item extends Migration
 
     public function down()
     {
-        return $this->dropTable(Item::tableName());
+         $this->dropTable('{{%comment}}');
     }
 }

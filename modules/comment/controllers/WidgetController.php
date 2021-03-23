@@ -6,7 +6,7 @@
 namespace app\modules\comment\controllers;
 
 use yii\web\Controller;
-use \app\modules\comment\models\Item;
+use \app\modules\comment\models\Comment;
 use \yii\db\ActiveRecord;
 
 /**
@@ -31,7 +31,7 @@ class WidgetController extends Controller
 {
     public function actionComment(ActiveRecord $parent)
     {
-        $model = new Item();
+        $model = new Comment();
         $model->parent_class = get_class($parent);
         $model->parent_id = $parent->primaryKey;
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
@@ -42,7 +42,7 @@ class WidgetController extends Controller
     
     public function actionList(ActiveRecord $parent)
     {
-        $items = Item::find()->where([
+        $items = Comment::find()->where([
             'parent_class' => get_class($parent),
             'parent_id' => $parent->primaryKey,
             'active' => true

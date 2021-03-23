@@ -5,7 +5,7 @@
 
 namespace app\modules\page\components;
 
-use app\modules\page\models\Item;
+use app\modules\page\models\Page;
 
 /**
  * Routing rule for app config.
@@ -28,7 +28,7 @@ class UrlRule extends \yii\web\UrlRule
             return false;
         }
         if ($this->enforceSeo) {
-            Item::getCurrentPage($request->pathInfo); // sets seo meta tags
+            Page::getCurrentPage($request->pathInfo); // sets seo meta tags
         }
         $manager->rules = array_filter($manager->rules, function($rule) {
             return !$rule instanceof $this;

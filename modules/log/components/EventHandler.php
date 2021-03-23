@@ -5,7 +5,7 @@
 
 namespace app\modules\log\components;
 
-use app\modules\log\models\Item;
+use app\modules\log\models\Log;
 use yii\base\Event;
 
 /**
@@ -23,6 +23,6 @@ class EventHandler
      */
     public static function common(Event $event, $attributes = [])
     {
-        return Item::create($event, $attributes)->save(false);
+        return Log::create($event, $attributes)->save(false);
     }
 }

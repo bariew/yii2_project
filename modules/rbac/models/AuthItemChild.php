@@ -8,7 +8,6 @@ namespace app\modules\rbac\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-use app\controllers\SiteController;
 use yii\helpers\FileHelper;
 
 /**

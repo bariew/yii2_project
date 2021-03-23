@@ -5,7 +5,7 @@
 
 namespace app\modules\page\controllers;
 
-use app\modules\page\models\Item;
+use app\modules\page\models\Page;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -50,9 +50,9 @@ class DefaultController extends Controller
     public function actionView($url = '/')
     {
         /**
-         * @var Item $model
+         * @var Page $model
          */
-        if (!$model = Item::getCurrentPage($url)) {
+        if (!$model = Page::getCurrentPage($url)) {
             throw new \yii\web\HttpException(404, \Yii::t('modules/page', "Page not found"));
         }
 

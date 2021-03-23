@@ -1,11 +1,11 @@
 <?php
-use app\modules\page\models\Item;
+use app\modules\page\models\Page;
 
 class m140521_140055_page_item extends \yii\db\Migration
 {
     public function safeUp()
     {
-        $this->createTable(Item::tableName(), array(
+        $this->createTable(Page::tableName(), array(
             'id'        => 'pk',
             'pid'       => 'INT(11) DEFAULT 1',
             'rank'      => 'INT(11) DEFAULT 0',
@@ -21,7 +21,7 @@ class m140521_140055_page_item extends \yii\db\Migration
             'page_description'  => 'text',
             'page_keywords'     => 'text'
         ));
-        $this->insert(Item::tableName(), array(
+        $this->insert(Page::tableName(), array(
             'pid'       => 0,
             'title'     => 'Home page',
             'url'       => '/',
@@ -34,6 +34,6 @@ class m140521_140055_page_item extends \yii\db\Migration
 
     public function safeDown()
     {
-        return $this->dropTable(Item::tableName());
+        return $this->dropTable(Page::tableName());
     }
 }

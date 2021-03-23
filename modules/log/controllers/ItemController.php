@@ -3,8 +3,8 @@
 namespace app\modules\log\controllers;
 
 use Yii;
-use app\modules\log\models\Item;
-use app\modules\log\models\ItemSearch;
+use app\modules\log\models\Log;
+use app\modules\log\models\LogSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,7 +32,7 @@ class ItemController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ItemSearch();
+        $searchModel = new LogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -70,12 +70,12 @@ class ItemController extends Controller
      * Finds the Item model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Item the loaded model
+     * @return Log the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Item::findOne($id)) !== null) {
+        if (($model = Log::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\log\models\Item */
+/* @var $model app\modules\log\models\Log */
 
 $this->title = Yii::t('modules/log', 'View Log');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('modules/log', 'Events'), 'url' => ['index']];

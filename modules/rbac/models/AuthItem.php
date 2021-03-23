@@ -5,9 +5,7 @@
 
 namespace app\modules\rbac\models;
 
-use app\controllers\SiteController;
 use Yii;
-use yii\helpers\FileHelper;
 use \yii\rbac\Item;
 use yii\db\ActiveRecord;
 use \app\modules\rbac\components\TreeBuilder;

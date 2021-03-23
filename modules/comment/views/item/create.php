@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\comment\models\Item */
+/* @var $model app\modules\comment\models\Comment */
 
 $this->title = Yii::t('modules/comment', 'Create {modelClass}', [
     'modelClass' => 'Item',

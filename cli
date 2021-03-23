@@ -57,6 +57,11 @@ case "$COMMAND" in
         rm -rf $DIR/web/assets/*
         rm -rf $DIR/tests/codeception/_output/*
     ;;
+    add)
+        COMMIT=${*#$COMMAND}
+        COMMIT=${COMMIT#\s}
+        git add -A ; git commit -am "$COMMIT" ; git push
+    ;;
     docker)
         docker-compose exec php-fpm sh cli $PARAM1
     ;;

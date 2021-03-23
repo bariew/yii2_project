@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\comment\models\Item */
+/* @var $model app\modules\comment\models\Comment */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('modules/comment', 'Items'), 'url' => ['index']];

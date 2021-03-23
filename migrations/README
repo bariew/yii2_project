@@ -1,2 +1,0 @@
-All initial migrations are in modules/{module}/migrations
-The MigrateController::$migrationPaths are set by event in app/config/_events.php

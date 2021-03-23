@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use app\modules\common\helpers\GridHelper;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\log\models\ItemSearch */
+/* @var $searchModel app\modules\log\models\LogSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('modules/log', 'Events');

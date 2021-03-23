@@ -5,17 +5,11 @@
 
 namespace app\modules\post\controllers;
 
-use app\controllers\actions\FileUpload;
-use app\controllers\actions\ImageDelete;
-use app\controllers\actions\VideoUpload;
-use app\modules\post\actions\CreateAction;
-use app\modules\post\actions\DeleteAction;
-use app\modules\post\actions\IndexAction;
-use app\modules\post\actions\UpdateAction;
-use app\modules\post\actions\ViewAction;
+use app\modules\common\controllers\actions\FileUpload;
+use app\modules\common\controllers\actions\ImageDelete;
+use app\modules\common\controllers\actions\VideoUpload;
 use app\modules\post\models\Category;
 use app\modules\post\models\CategorySearch;
-use app\modules\post\Module;
 use Yii;
 use app\modules\post\models\Item;
 use app\modules\post\models\ItemSearch;

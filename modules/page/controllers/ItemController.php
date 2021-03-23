@@ -6,7 +6,7 @@
 namespace app\modules\page\controllers;
 
 use Yii;
-use app\modules\page\models\Item;
+use app\modules\page\models\Page;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -21,7 +21,7 @@ class ItemController extends Controller
      */
     public function getMenu()
     {
-        return Item::findOne(['pid'=>0])->menuWidget();
+        return Page::findOne(['pid'=>0])->menuWidget();
     }
 
     /**
@@ -52,7 +52,7 @@ class ItemController extends Controller
      */
     public function actionCreate($id)
     {
-        $model = new Item();
+        $model = new Page();
         $model->pid = $id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('modules/page', 'Success'));
@@ -96,15 +96,15 @@ class ItemController extends Controller
      * Finds the Item model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Item the loaded model
+     * @return Page the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function findModel($id = null)
     {
         if ($id === null) {
-            return new Item();
+            return new Page();
         }
-        if (($model = Item::findOne($id)) !== null) {
+        if (($model = Page::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('modules/page', 'The requested page does not exist.'));

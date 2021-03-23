@@ -9,7 +9,7 @@
 namespace app\modules\log\widgets;
 
 
-use app\modules\log\models\ItemSearch;
+use app\modules\log\models\LogSearch;
 use yii\base\Widget;
 
 class ModelEventLog extends Widget
@@ -19,7 +19,7 @@ class ModelEventLog extends Widget
     public $viewFile = 'event_log';
     public function run()
     {
-        $searchModel = new ItemSearch();
+        $searchModel = new LogSearch();
         $dataProvider = $searchModel->search([
             'model_name' => get_class($this->model),
             'model_id' => $this->model->primaryKey

@@ -39,7 +39,7 @@ class Item extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'post_item';
+        return '{{%post_item}}';
     }
 
     /**

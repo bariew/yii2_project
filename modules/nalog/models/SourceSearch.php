@@ -1,30 +1,29 @@
 <?php
 
-namespace app\modules\log\models;
+namespace app\modules\nalog\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\log\models\Item;
+use app\modules\nalog\models\Source;
 
 /**
- * ItemSearch represents the model behind the search form about `app\modules\log\models\Item`.
+ * SourceSearch represents the model behind the search form of `app\modules\nalog\models\Source`.
  */
-class ItemSearch extends Item
+class SourceSearch extends Source
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['event', 'model_name', 'model_id', 'message', 'created_at'], 'safe'],
+            [['name', 'description'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -37,21 +36,21 @@ class ItemSearch extends Item
      *
      * @param array $params
      *
-     * @param null $fullName
      * @return ActiveDataProvider
      */
-    public function search($params, $fullName = null)
+    public function search($params)
     {
-        $query = Item::find();
+        $query = Source::find()->andWhere([
+            'user_id' => $this->user_id,
+        ]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]]
         ]);
 
-        $this->load($params, $fullName);
+        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -63,16 +62,11 @@ class ItemSearch extends Item
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'model_id' => $this->model_id,
         ]);
 
-        $query->andFilterWhere(['like', 'event', $this->event])
-            ->andFilterWhere(['like', 'model_name', $this->model_name])
-            ->andFilterWhere(['like', 'message', $this->message]);
-        if ($this->created_at) {
-            $query->andWhere("DATE_FORMAT(FROM_UNIXTIME(created_at), '%Y-%m-%d') = :created_at")
-                ->addParams([':created_at' => $this->created_at]);
-        }
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description]);
+
         return $dataProvider;
     }
 }

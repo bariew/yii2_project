@@ -11,4 +11,12 @@ return \yii\helpers\ArrayHelper::merge([
             'baseUrl' => $mainConfig['params']['hostInfo'],
         ],
     ],
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => array_filter(array_map(function($v) {
+                return (isset($v['class']) && strpos($v['class'], 'app') === 0 ? '@'.str_replace(['\\','Module'], ['/', 'migrations'], $v['class']) : null);
+            }, $mainConfig['modules'])),
+        ]
+    ]
 ], $mainConfig);

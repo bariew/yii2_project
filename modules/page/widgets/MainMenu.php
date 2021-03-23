@@ -5,7 +5,7 @@
 
 namespace app\modules\page\widgets;
 use bariew\dropdown\Nav;
-use \app\modules\page\models\Item;
+use \app\modules\page\models\Page;
 use yii\helpers\Url;
 
 /**
@@ -29,7 +29,7 @@ class MainMenu extends Nav
         if ($cssClass != $this->options['class']) {
             \yii\helpers\Html::removeCssClass($this->options, 'nav');
         }
-        $this->items = Item::find()
+        $this->items = Page::find()
             ->select(['*', 'parent_id' => '(IF(pid=1,"",pid))', 'name' => 'title'])
             ->where(['visible' => true])
             ->andWhere(['<>', 'pid', ''])

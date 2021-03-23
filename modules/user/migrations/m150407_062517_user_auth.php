@@ -16,7 +16,7 @@ class m150407_062517_user_auth extends Migration
             'created_at' => Schema::TYPE_INTEGER,
             'data' => Schema::TYPE_TEXT
         ]);
-        \app\modules\common\helpers\DbHelper::addForeignKey('{{%user_auth}}', 'user_id', '{{%user_user}}', 'id');
+        \app\modules\common\helpers\DbHelper::addForeignKey('{{%user_auth}}', 'user_id', '{{%user}}', 'id');
     }
 
     public function down()

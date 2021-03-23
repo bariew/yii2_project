@@ -5,7 +5,7 @@ namespace app\modules\comment\models;
 use Yii;
 
 /**
- * This is the model class for table "comment_item".
+ * This is the model class for table "comment".
  *
  * @property integer $id
  * @property integer $user_id
@@ -17,14 +17,14 @@ use Yii;
  * @property integer $updated_at
  * @property integer $active
  */
-class Item extends \yii\db\ActiveRecord
+class Comment extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'comment_item';
+        return '{{%comment}}';
     }
 
     /**

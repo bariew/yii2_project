@@ -4,6 +4,7 @@
  */
 
 namespace app\modules\common\helpers;
+use kartik\daterange\DateRangePicker;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
@@ -151,6 +152,30 @@ class GridHelper
             'attribute' => $attribute,
             'format' => 'date',
             'filter' => DatePicker::widget($pickerOptions)
+        ], $options);
+    }
+
+    /**
+     * Renders Date format Grid column
+     * @param $model
+     * @param $attribute
+     * @param array $options
+     * @param array $pickerOptions
+     * @return array
+     * @throws \Exception
+     */
+    public static function dateRangeFormat($model, $attribute, $options = [])
+    {
+        return array_merge([
+            'attribute' => $attribute,
+            'format' => 'date',
+            'filter' => DateRangePicker::widget([
+                'language' => Yii::$app->language == 'en' ? 'en-US' : Yii::$app->language,
+                'model' => $model,
+                'attribute' => $attribute,
+                'pluginOptions' => ['locale' => ['format' => 'YYYY-MM-DD']],
+                'options' => ['class' => 'form-control'],
+            ])
         ], $options);
     }
 

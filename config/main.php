@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/bootstrap.php';
-$localConfig =  require __DIR__ . DIRECTORY_SEPARATOR . 'local.php';
 return \yii\helpers\ArrayHelper::merge([
     'id' => 'app',
     'name'  => 'Yii2 Project',
@@ -9,6 +8,7 @@ return \yii\helpers\ArrayHelper::merge([
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
+        '@app' => dirname(__DIR__),
         '@webroot' => dirname(__DIR__) . '/eb',
         '@vendor' => dirname(__DIR__) . '/vendor',
         '@bower' => '@vendor/bower-asset',
@@ -73,7 +73,13 @@ return \yii\helpers\ArrayHelper::merge([
                 'jsx' => \app\modules\test\ReactRenderer::class,
             ]
         ],
-        'authManager' => ['class' => \yii\rbac\PhpManager::class, 'defaultRoles' => ['guest'],],
+        'authManager' => [
+            'class' => \yii\rbac\PhpManager::class,
+            'defaultRoles' => ['guest'],
+            'itemFile' => '@app/config/rbac/items.php',
+            'assignmentFile' => '@app/config/rbac/assignments.php',
+            'ruleFile' => '@app/config/rbac/rules.php',
+        ],
         'cache'=>['class'=>'yii\caching\FileCache', 'dirMode' => 0777, 'fileMode' => 0777,],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -131,6 +137,8 @@ return \yii\helpers\ArrayHelper::merge([
         //'rbac' => ['class' => 'app\\modules\\rbac\\Module'],
         'post' => ['class' => 'app\\modules\\post\\Module'],
         'comment' => ['class' => 'app\\modules\\comment\\Module'],
+        'nalog' => ['class' => 'app\\modules\\nalog\\Module'],
+        'datecontrol' => ['class' => '\kartik\datecontrol\Module'],//, 'convertAction' => '/common/site/date-convert'],
     ],
     'params' => [
         'bsVersion' => 4, //for kartik widgets
@@ -141,4 +149,4 @@ return \yii\helpers\ArrayHelper::merge([
             'en' => ['code' => 'en', 'title' => 'English (US)'],
         ],
     ]
-], $localConfig);
+], require __DIR__ . DIRECTORY_SEPARATOR . 'local.php');

@@ -3,8 +3,8 @@
 namespace app\modules\comment\controllers;
 
 use Yii;
-use app\modules\comment\models\Item;
-use app\modules\comment\models\SearchItem;
+use app\modules\comment\models\Comment;
+use app\modules\comment\models\SearchComment;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,7 +32,7 @@ class ItemController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchItem();
+        $searchModel = new SearchComment();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +60,7 @@ class ItemController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Item();
+        $model = new Comment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -107,12 +107,12 @@ class ItemController extends Controller
      * Finds the Item model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Item the loaded model
+     * @return Comment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Item::findOne($id)) !== null) {
+        if (($model = Comment::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

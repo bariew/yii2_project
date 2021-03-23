@@ -28,7 +28,7 @@ use yii\db\ActiveRecord;
  * @mixin ARTreeBehavior
  *
  */
-class Item extends ActiveRecord
+class Page extends ActiveRecord
 {
     const VISIBLE_YES = 1;
     const VISIBLE_NO = 0;
@@ -39,7 +39,7 @@ class Item extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{page_item}}';
+        return '{{page}}';
     }
 
     /**
