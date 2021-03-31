@@ -88,6 +88,11 @@ class TransactionController extends Controller
         return $this->render('create', ['model' => $model]);
     }
 
+    public function actionCbr()
+    {
+        return $this->render('cbr');
+    }
+
     /**
      * Updates an existing Transaction model.
      * If update is successful, the browser will be redirected to the 'view' page.

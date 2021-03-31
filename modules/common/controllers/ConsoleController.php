@@ -8,6 +8,8 @@ namespace app\modules\common\controllers;
 
 
 use app\modules\ad\models\Item;
+use app\modules\nalog\components\Cbr;
+use app\modules\nalog\models\CurrencyHistory;
 use app\modules\user\models\User;
 use Google\Cloud\BigQuery\Dataset;
 use Google\Cloud\BigQuery\Table;
@@ -147,5 +149,14 @@ class ConsoleController extends Controller
         foreach ($files as $file) {
             exec("./node_modules/.bin/babel --plugins transform-react-jsx {$file} > " . preg_replace('#^(.+)x$#', '$1', $file));
         }
+    }
+
+    public function actionTmp()
+    {
+        var_export(Cbr::instance()->DragMetDynamic('2021-03-01', '2021-03-31'));
+//        $data = Cbr::instance()->GetCursDynamic('2000-01-01', '2021-03-31', 'R01235')['ValuteData']['ValuteCursDynamic'];
+//        Yii::$app->db->createCommand()->batchInsert(CurrencyHistory::tableName(), ['date', 'usd'], array_map(function ($v) {
+//            return [substr($v['CursDate'], 0, 10), $v['Vcurs']];
+//        }, $data))->execute();
     }
 }
