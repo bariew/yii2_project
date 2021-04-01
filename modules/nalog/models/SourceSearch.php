@@ -17,7 +17,7 @@ class SourceSearch extends Source
     public function rules()
     {
         return [
-            [['id', 'user_id'], 'integer'],
+            [['id', 'user_id', 'type'], 'integer'],
             [['name', 'description'], 'safe'],
         ];
     }
@@ -48,6 +48,7 @@ class SourceSearch extends Source
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['name' => SORT_ASC]]
         ]);
 
         $this->load($params);
@@ -62,6 +63,7 @@ class SourceSearch extends Source
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'type' => $this->type,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

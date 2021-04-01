@@ -5,6 +5,7 @@ namespace app\modules\nalog\controllers;
 use app\modules\common\helpers\DateHelper;
 use app\modules\common\widgets\Alert;
 use app\modules\nalog\components\Cbr;
+use app\modules\nalog\models\CurrencyHistory;
 use app\modules\nalog\models\Source;
 use app\modules\user\models\User;
 use Yii;
@@ -75,22 +76,26 @@ class TransactionController extends Controller
      */
     public function actionCreate()
     {
-        if (!$source = Source::last()) {
-            Yii::$app->session->addFlash(Alert::TYPE_WARNING, Yii::t('modules/nalog', 'Please add some source first'));
-            return $this->redirect(['/nalog/source/create']);
+        $model = new Transaction(['user_id' => User::current()->id, 'date' => DateHelper::now()]);
+        if ($prev = Transaction::last()) {
+            $model->load($prev->attributes, '');
         }
-
-        $model = new Transaction(['user_id' => User::current()->id, 'source_id' => $source->id, 'date' => DateHelper::now()]);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }
 
-        return $this->render('create', ['model' => $model]);
+        return Yii::$app->request->isAjax
+            ? $this->renderAjax('create', ['model' => $model,])
+            : $this->render('create', ['model' => $model,]);
     }
 
+    /**
+     * @return string
+     */
     public function actionCbr()
     {
-        return $this->render('cbr');
+        $model = new CurrencyHistory();
+        return $this->render('cbr', ['model' => $model, 'data' => $model->search(Yii::$app->request->get())->asArray()->all()]);
     }
 
     /**

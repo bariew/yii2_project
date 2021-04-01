@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'type')->dropDownList($model::typeList()) ?>
+    <?= $form->field($model, 'tax_type')->dropDownList($model::taxTypeList()) ?>
 
     <?= $form->field($model, 'source_id', [
         'template' => "{label}"

@@ -17,6 +17,7 @@ class m210323_104223_create_nalog_transaction extends Migration
         $this->createTable('{{%nalog_source}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
+            'type' => $this->smallInteger()->defaultValue(0),
             'name' => $this->string(),
             'currency' => $this->string(3),
             'description' => $this->text(),
@@ -24,8 +25,8 @@ class m210323_104223_create_nalog_transaction extends Migration
         \app\modules\common\helpers\DbHelper::addForeignKey('{{%nalog_source}}', 'user_id', '{{%user}}', 'id');
         $this->createTable($this->table, [
             'id' => $this->primaryKey(),
-            'type' => $this->smallInteger()->defaultValue(0),
             'user_id' => $this->integer(),
+            'tax_type' => $this->smallInteger()->defaultValue(1),
             'source_id' => $this->integer(),
             'date' => $this->dateTime(),
             'amount' => $this->decimal(20, 2),

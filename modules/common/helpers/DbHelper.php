@@ -56,13 +56,9 @@ class DbHelper
             $columns = $columns ? : array_keys($row);
             $data[$key] = array_values($row);
         }
-        $sql = \Yii::$app->$db->createCommand()->batchInsert($tableName, $columns, $data)->getSql();
-        $sql .= ' ON DUPLICATE KEY UPDATE ';
-        $values = [];
-        foreach ($columns as $column) {
-            $values[] = "`{$column}` = VALUES(`{$column}`)";
-        }
-        $sql .= implode($values, ', ');
+        $sql = \Yii::$app->$db->createCommand()->batchInsert($tableName, $columns, array_values($data))->getSql()
+            . ' ON DUPLICATE KEY UPDATE '
+            . implode(', ', array_map(function ($v) { return "`{$v}` = VALUES(`{$v}`)"; }, $columns));
         return \Yii::$app->$db->createCommand($sql)->execute();
     }
 

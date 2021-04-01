@@ -1,11 +1,12 @@
 <?php
 
+use kartik\daterange\DateRangePicker;
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
+use yii\widgets\ActiveForm;
+
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\nalog\models\TransactionSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $model app\modules\nalog\models\CurrencyHistory */
+/** @var $data array|\app\modules\nalog\models\CurrencyHistory[] */
 
 $this->title = Yii::t('models/nalog', 'Cbr');
 $this->params['breadcrumbs'][] = $this->title;
@@ -14,47 +15,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php $form = ActiveForm::begin(['method' => 'get', 'options' => [
+        'class' => 'form-inline'
+    ]]); ?>
 
-    <?php Pjax::begin(); ?>
-
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'type') ?>
-
-    <?= $form->field($model, 'user_id') ?>
-
-    <?= $form->field($model, 'source_id') ?>
-
-    <?= $form->field($model, 'date') ?>
-
-    <?php // echo $form->field($model, 'amount') ?>
-
-    <?php // echo $form->field($model, 'currency') ?>
+    <?= $form->field($model, 'date')->label(false)->widget(DateRangePicker::class, [
+        'language' => Yii::$app->language == 'en' ? 'en-US' : Yii::$app->language,
+        'pluginOptions' => ['locale' => ['format' => 'YYYY-MM-DD']],
+        'options' => ['placeholder' => $model->getAttributeLabel('date')]
+    ]) ?>
+    <?= $form->field($model, 'select')->label(false)->widget(\kartik\select2\Select2::class, [
+        'data' => array_diff(array_combine($model->attributes(), $model->attributes()), ['date']),
+        'options' => ['multiple' => true, 'placeholder' => $model->getAttributeLabel('select')]
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('models/nalog', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('models/nalog', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'showFooter' => true,
-        'columns' => [
-
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
+    <?= \app\modules\common\widgets\apexcharts\ApexCharts::widget($data); ?>
 
 </div>

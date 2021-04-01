@@ -23,6 +23,13 @@ class GridHelper
      */
     private static $lists = [];
 
+    const HIDE_OPTIONS = [
+        'headerOptions' => ['class' => 'd-none hidden'],
+        'filterOptions' => ['class' => 'd-none hidden'],
+        'contentOptions' => ['class' => 'd-none hidden'],
+        'footerOptions' => ['class' => 'd-none hidden'],
+    ];
+
     /**
      * Gets sum for GridList model attribute
      * @param $dataProvider
@@ -174,7 +181,7 @@ class GridHelper
                 'model' => $model,
                 'attribute' => $attribute,
                 'pluginOptions' => ['locale' => ['format' => 'YYYY-MM-DD']],
-                'options' => ['class' => 'form-control'],
+                'options' => ['class' => 'form-control', 'autocomplete' => 'off'],
             ])
         ], $options);
     }

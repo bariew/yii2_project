@@ -132,7 +132,7 @@ class GeoHelper
             'ZAR' => ['name' => 'Rand', 'symbol' => 'R', 'code' => 'ZAR'],
             'ZWD' => ['name' => 'Zimbabwe Dollars', 'symbol' => 'Z$', 'code' => 'ZWD'],
         ];
-        $first = HtmlHelper::isRtl() ? ['ILS', 'USD', 'EUR'] : ['USD', 'ILS', 'EUR'];
+        $first = HtmlHelper::isRtl() ? ['ILS', 'USD', 'EUR'] : ['USD', 'EUR', 'RUB'];
         $result = array_replace(array_flip($first), $result); // place popular currencies first
         return array_map(function ($v) use ($return) { return $v[$return] ?? $v; }, $result);
     }

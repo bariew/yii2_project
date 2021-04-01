@@ -11,13 +11,15 @@ use app\modules\nalog\models\Transaction;
  */
 class TransactionSearch extends Transaction
 {
+    public $type;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'type', 'user_id', 'source_id'], 'integer'],
+            [['id', 'user_id', 'source_id', 'tax_type', 'type'], 'integer'],
             [['date', 'currency'], 'safe'],
             [['amount'], 'number'],
         ];
@@ -41,17 +43,15 @@ class TransactionSearch extends Transaction
      */
     public function search($params)
     {
-        $query = Transaction::find()->andWhere([
-            'user_id' => $this->user_id,
+        $query = Transaction::find()->alias('t')->joinWith('source')->andWhere([
+            't.user_id' => $this->user_id,
         ]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => [
-                'defaultOrder' => ['date' => SORT_DESC]
-            ]
+            'sort' => ['defaultOrder' => ['date' => SORT_DESC]]
         ]);
 
         $this->load($params);
@@ -64,16 +64,16 @@ class TransactionSearch extends Transaction
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'type' => $this->type,
-            'source_id' => $this->source_id,
-            'currency' => $this->currency,
+            't.source_id' => $this->source_id,
+            't.currency' => $this->currency,
+            't.tax_type' => $this->tax_type,
+            'source.type' => $this->type,
         ]);
 
-        $query->andFilterWhere(['like', 'amount', $this->amount]);
+        $query->andFilterWhere(['like', 't.amount', $this->amount]);
         if ($this->date) {
             list($from, $to) = explode(' - ', $this->date);
-            $query->andFilterWhere(['between', 'date', $from, $to . ' 23:59:59']);
+            $query->andFilterWhere(['between', 't.date', $from, $to . ' 23:59:59']);
         }
 
         return $dataProvider;

@@ -78,9 +78,9 @@ class SourceController extends Controller
             return $this->redirect(['index']);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return Yii::$app->request->isAjax
+            ? $this->renderAjax('create', ['model' => $model,])
+            : $this->render('create', ['model' => $model,]);
     }
 
     /**
@@ -98,9 +98,7 @@ class SourceController extends Controller
             return $this->redirect(['index']);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render('update', ['model' => $model,]);
     }
 
     /**
