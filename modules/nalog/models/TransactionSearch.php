@@ -20,8 +20,7 @@ class TransactionSearch extends Transaction
     {
         return [
             [['id', 'user_id', 'source_id', 'tax_type', 'type'], 'integer'],
-            [['date', 'currency'], 'safe'],
-            [['amount'], 'number'],
+            [['amount', 'date', 'currency'], 'safe'],
         ];
     }
 
@@ -51,7 +50,8 @@ class TransactionSearch extends Transaction
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['date' => SORT_DESC]]
+            'sort' => ['defaultOrder' => ['date' => SORT_DESC]],
+            'pagination' => ['defaultPageSize' => 10]
         ]);
 
         $this->load($params);
@@ -69,8 +69,10 @@ class TransactionSearch extends Transaction
             't.tax_type' => $this->tax_type,
             'source.type' => $this->type,
         ]);
-
-        $query->andFilterWhere(['like', 't.amount', $this->amount]);
+        if (strpos($this->amount, '+') === 0) {
+            $query->andWhere(['not like', 't.amount', '-']);
+        }
+        $query->andFilterWhere(['like', 't.amount', str_replace('+', '', $this->amount)]);
         if ($this->date) {
             list($from, $to) = explode(' - ', $this->date);
             $query->andFilterWhere(['between', 't.date', $from, $to . ' 23:59:59']);

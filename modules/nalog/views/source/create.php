@@ -6,15 +6,11 @@ use yii\helpers\Html;
 /* @var $model app\modules\nalog\models\Source */
 
 $this->title = Yii::t('models/nalog', 'Create Source');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('models/nalog', 'Sources'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="source-create">
 
-    <h1 class="modal-title"><?= Html::encode($this->title) ?></h1>
+    <h2 class="modal-title"><?= Html::encode($this->title) ?></h2>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?= $this->render('_form', ['model' => $model,]) ?>
 
 </div>

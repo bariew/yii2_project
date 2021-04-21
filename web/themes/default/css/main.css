@@ -81,7 +81,10 @@ a.desc:after {
     margin-top: 5px;
     color: #999;
 }
-
+/* GRID */
+a[data-sort]{
+    color: #343a40;
+}
 .error-summary {
     color: #a94442;
     background: #fdf7f7;
@@ -89,3 +92,24 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+.page-item.active .page-link {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+.page-link {
+    color: #6c757d;
+}
+/* NAVBAR */
+.navbar-dark .dropdown-menu{
+    background-color: #343a40;
+}
+.navbar-dark .dropdown-menu .dropdown-item:hover{
+    background-color: #555;
+}
+.navbar-dark .dropdown-menu .dropdown-item {
+    color: #fff;
+}
+.modal-content {
+    border: 10px solid #dee2e6 !important;
+}
+/* PAPER */

@@ -66,7 +66,10 @@ class TransactionController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', ['model' => $this->findModel($id)]);
+        $model = $this->findModel($id);
+        return Yii::$app->request->isAjax
+            ? $this->renderAjax('view', ['model' => $model,])
+            : $this->render('view', ['model' => $model,]);
     }
 
     /**
@@ -81,7 +84,7 @@ class TransactionController extends Controller
             $model->load($prev->attributes, '');
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(Yii::$app->request->referrer ? : ['index']);
         }
 
         return Yii::$app->request->isAjax
@@ -110,10 +113,12 @@ class TransactionController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(Yii::$app->request->referrer ? : ['index']);
         }
 
-        return $this->render('update', ['model' => $model]);
+        return Yii::$app->request->isAjax
+            ? $this->renderAjax('update', ['model' => $model,])
+            : $this->render('update', ['model' => $model,]);
     }
 
     /**
@@ -127,7 +132,7 @@ class TransactionController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->referrer ? : ['index']);
     }
 
     /**

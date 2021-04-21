@@ -32,7 +32,7 @@ use yii\widgets\ActiveForm;
             'options' => ['prompt' => Yii::t('app','Currency'), 'value' => ($model->isNewRecord ? ($model->currency ? : $model->source->currency) : $model->currency)],
         ]) ?>
         <?= Html::button('<i class="glyphicon glyphicon-refresh p-1"></i>', [
-            'class' => 'btn btn-success form-group',
+            'class' => 'btn btn-info btn-sm',
             'title' => Yii::t('modules/nalog', 'Conver to RUB'),
             'data-url' => \yii\helpers\Url::to(['convert']),
             'onclick' => <<<JS
@@ -52,7 +52,7 @@ JS
     <?= $form->field($model, 'description')->textarea(); ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('models/nalog', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('models/nalog', 'Save'), ['class' => 'btn btn-success float-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

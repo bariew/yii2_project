@@ -8,26 +8,30 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('models/nalog', 'Sources');
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="source-index">
 
-    <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-dark btn-sm float-right rounded-circle', 'data-toggle' => "ajax-modal"]) ?>
+    <?= \app\modules\common\helpers\HtmlHelper::button() ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?= Html::encode($this->title) ?></h2>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'summary' => false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'options' => ['class' => 'paper grid-view text-right bg-white shoadow-sm p-2'],
+        'pager' => ['class' => \yii\bootstrap4\LinkPager::class, 'options' => ['class' => 'float-right']],
         'columns' => [
             'name',
             \app\modules\common\helpers\GridHelper::listFormat($searchModel, 'type'),
             'description:ntext',
-            ['class' => 'yii\grid\ActionColumn', 'options' => ['style' => 'width:90px']],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttonOptions' => ['data-toggle' => "ajax-modal", 'class' => 'text-dark'],
+                'options' => ['style' => 'width:90px']
+            ],
         ],
     ]); ?>
 

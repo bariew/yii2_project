@@ -22,19 +22,8 @@ use yii\widgets\ActiveForm;
         'options' => ['prompt' => Yii::t('modules/nalog','Default Currency')],
     ]) ?>
 
-    <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-        <?= Html::activeRadioList($model, 'type', $model::typeList(), [
-            'class' => 'btn-group btn-group-toggle', 'data-toggle' => 'buttons',
-            'item' => function ($index, $label, $name, $checked, $value) {
-                return Html::label(Html::radio($name, $checked, ['value' => $value]) . $label, null, [
-                    'class' => 'btn btn-sm ' . ($checked ? 'active ' : '')
-                        . ($index == 0 ? 'btn-outline-success' : 'btn-outline-danger')
-                ]);
-            }]); ?>
-    </div>
-
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('models/nalog', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('models/nalog', 'Save'), ['class' => 'btn btn-success float-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

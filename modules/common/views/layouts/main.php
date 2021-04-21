@@ -20,11 +20,11 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="bg-light">
 <?php $this->beginBody() ?>
 <div class="wrap">
     <?php \yii\bootstrap4\NavBar::begin( array(
-        'options' => ['class' => 'navbar-light navbar-expand'],
+        'options' => ['class' => 'navbar-dark bg-dark navbar-expand'],
         'brandLabel' => Yii::$app->name,
     ));
     if (Yii::$app->user->can('admin')) {

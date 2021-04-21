@@ -150,4 +150,18 @@ JS
         $host = explode('.', preg_replace('/^(www\.)?([\w\.-]+)(:\w+)?$/', '$2',$url));
         return count($host) > 2 || @$host[1] == 'localhost' ? $host[0] : null;
     }
+
+    /**
+     * @param string $icon
+     * @param string[] $url
+     * @param array $options
+     * @return string
+     */
+    public static function button($icon = 'plus', $url = ['create'], $options = [])
+    {
+        return Html::a('<i class="glyphicon glyphicon-'.$icon.'"></i>', $url, array_merge(
+            ['class' => 'btn btn-default shadow-sm float-right rounded-circle', 'data-toggle' => "ajax-modal"],
+            $options
+        ));
+    }
 }

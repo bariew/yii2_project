@@ -8,44 +8,34 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('models/nalog', 'Transactions');
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaction-index">
 
-    <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-dark btn-sm float-right rounded-circle', 'data-toggle' => "ajax-modal"]) ?>
+    <?= \app\modules\common\helpers\HtmlHelper::button() ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?= Html::encode($this->title) ?></h2>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'summary' => false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'showFooter' => true,
+        'options' => ['class' => 'paper grid-view text-right bg-white shoadow-sm p-2'],
+        'pager' => ['class' => \yii\bootstrap4\LinkPager::class, 'options' => ['class' => 'float-right']],
         'columns' => [
             \app\modules\common\helpers\GridHelper::listFormat($searchModel, 'type', \app\modules\common\helpers\GridHelper::HIDE_OPTIONS),
             \app\modules\common\helpers\GridHelper::listFormat($searchModel, 'tax_type', \app\modules\common\helpers\GridHelper::HIDE_OPTIONS),
             \app\modules\common\helpers\GridHelper::listFormat($searchModel, 'source_id'),
             \app\modules\common\helpers\GridHelper::dateRangeFormat($searchModel, 'date', \app\modules\common\helpers\GridHelper::HIDE_OPTIONS),
-            [
-                'attribute' =>'amount',
-                'format' => 'raw',
-                'value' => function (\app\modules\nalog\models\Transaction $model) {
-                    return Html::tag('span', $model->amount, [
-                        'class' => ($model->source->type == \app\modules\nalog\models\Source::TYPE_INCOME ? 'text-success' : 'text-danger')
-                    ]);
-                },
-                'footer' => "TOTAL: ". array_sum(array_map(function (\app\modules\nalog\models\Transaction $v) {
-                    return $v->source->type == \app\modules\nalog\models\Source::TYPE_INCOME ? $v->amount : -$v->amount;
-                }, $dataProvider->models)),
-            ],
+            ['attribute' =>'amount', 'footer' => "TOTAL: ". $dataProvider->query->sum('amount')],
             array_merge(['attribute' => 'description'], \app\modules\common\helpers\GridHelper::HIDE_OPTIONS),
             [
                 'class' => 'yii\grid\ActionColumn',
+                'buttonOptions' => ['data-toggle' => "ajax-modal", 'class' => 'text-dark'],
                 'header' => Html::a('<i class="glyphicon glyphicon-fullscreen"></i>', '#', [
-                    'class' => 'float-right',
+                    'class' => 'text-dark',
                     'onclick' => <<<JS
     $('.hidden').toggleClass('d-none')  
 JS

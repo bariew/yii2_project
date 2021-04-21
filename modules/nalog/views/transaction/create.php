@@ -6,12 +6,10 @@ use yii\helpers\Html;
 /* @var $model app\modules\nalog\models\Transaction */
 
 $this->title = Yii::t('models/nalog', 'Create Transaction');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('models/nalog', 'Transactions'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaction-create">
 
-    <h1 class="modal-title"><?= Html::encode($this->title) ?></h1>
+    <h2 class="modal-title"><?= Html::encode($this->title) ?></h2>
 
     <?= $this->render('_form', [
         'model' => $model,

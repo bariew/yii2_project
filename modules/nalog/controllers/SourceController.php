@@ -60,9 +60,10 @@ class SourceController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+        return Yii::$app->request->isAjax
+            ? $this->renderAjax('view', ['model' => $model,])
+            : $this->render('view', ['model' => $model,]);
     }
 
     /**
@@ -98,7 +99,9 @@ class SourceController extends Controller
             return $this->redirect(['index']);
         }
 
-        return $this->render('update', ['model' => $model,]);
+        return Yii::$app->request->isAjax
+            ? $this->renderAjax('update', ['model' => $model,])
+            : $this->render('update', ['model' => $model,]);
     }
 
     /**
