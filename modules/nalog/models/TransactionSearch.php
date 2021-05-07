@@ -20,7 +20,7 @@ class TransactionSearch extends Transaction
     {
         return [
             [['id', 'user_id', 'source_id', 'tax_type', 'type'], 'integer'],
-            [['amount', 'date', 'currency'], 'safe'],
+            [['amount', 'date', 'currency', 'description'], 'safe'],
         ];
     }
 
@@ -68,7 +68,7 @@ class TransactionSearch extends Transaction
             't.currency' => $this->currency,
             't.tax_type' => $this->tax_type,
             'source.type' => $this->type,
-        ]);
+        ])->andFilterWhere(['like', 't.description', $this->description]);
         if (strpos($this->amount, '+') === 0) {
             $query->andWhere(['not like', 't.amount', '-']);
         }
