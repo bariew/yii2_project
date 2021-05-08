@@ -1,5 +1,5 @@
 # configs
-/app/config/local.php
+/config/local.php
 
 # phpstorm project files
 .idea

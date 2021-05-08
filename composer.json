@@ -34,7 +34,8 @@
         "kartik-v/yii2-number": "1.0.x-dev",
         "kartik-v/yii2-date-range": "1.7.x-dev",
         "rubix/ml": "dev-master",
-        "scheb/yahoo-finance-api": "4.x-dev"
+        "scheb/yahoo-finance-api": "4.x-dev",
+        "cboden/ratchet": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": ">=2.1.0",

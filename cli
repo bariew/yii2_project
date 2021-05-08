@@ -14,8 +14,18 @@ APP=$PARAM1;
 DIR=$( cd "$( dirname $0 )" && pwd );
 
 case "$COMMAND" in
+    deploy)
+        SERVER="prizma"
+        PATH="/var/www/pragmi"
+        if [ -z "$PARAM1" ]
+        then
+            $PARAM1="update"
+        fi
+        /usr/bin/rsync --recursive --links --compress --compress-level=9 --delete-after -e '/usr/bin/ssh -o Compression=no -x' --exclude-from=$DIR/.gitignore $DIR/ $SERVER:$PATH/
+        /usr/bin/ssh $SERVER sh $PATH/cli $PARAM1 2>&1
+    ;;
     init)
-        chmod 0777 app/runtime
+        chmod 0777 runtime
         chmod 0777 web/assets
         chmod -R 0777 web/files
         cp -n config/local.php.example config/local.php
