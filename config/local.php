@@ -41,5 +41,10 @@ return [
     'params' => [
         'admin_email' => 'baript@gmail.com',
         'salt' => 'a689839638e2243145ac9b2683cac9bd',
+        'videochat' => [
+            'address' => 'ws://0.0.0.0:8090',
+            'certificate' => '',
+            'key' => '',
+        ],
     ]
 ];

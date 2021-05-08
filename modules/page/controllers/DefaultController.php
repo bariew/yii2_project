@@ -24,11 +24,7 @@ class DefaultController extends Controller
             'access' => [
                 'class' => AccessControl::class,
                 'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['view', 'index'],
-                        'roles' => ['?', '@']
-                    ]
+                    ['allow' => true, 'roles' => ['?', '@']]
                 ]
             ]
         ];
@@ -61,5 +57,10 @@ class DefaultController extends Controller
         }
 
         return $this->render('view', compact('model'));
+    }
+
+    public function actionTmp123()
+    {
+        return $this->render('@app/modules/common/widgets/videochat/views/chat');
     }
 }

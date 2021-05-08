@@ -9,12 +9,17 @@ namespace app\modules\common\controllers;
 
 use app\modules\ad\models\Item;
 use app\modules\common\helpers\DbHelper;
+use app\modules\common\widgets\videochat\VideoChat;
 use app\modules\nalog\components\Cbr;
 use app\modules\nalog\models\CurrencyHistory;
 use app\modules\user\models\User;
 use Google\Cloud\BigQuery\Dataset;
 use Google\Cloud\BigQuery\Table;
 use Google\Cloud\BigQuery\Timestamp;
+use Ratchet\App;
+use Ratchet\Http\HttpServer;
+use Ratchet\Server\IoServer;
+use Ratchet\WebSocket\WsServer;
 use Yii;
 use yii\base\ErrorException;
 use yii\console\Controller;
@@ -154,6 +159,10 @@ class ConsoleController extends Controller
 
     public function actionTmp()
     {
-        CurrencyHistory::importDragMetals();
+        VideoChat::init('0.0.0.0:8090', [
+            'local_cert' => Yii::$app->params['videochat']['certificate'],
+            'local_pk' => Yii::$app->params['videochat']['key'],
+            'verify_peer' => false
+        ]);
     }
 }
