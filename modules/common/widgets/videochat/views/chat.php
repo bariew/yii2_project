@@ -106,26 +106,26 @@ JS
 
 
 
-<div class="container-fluid room-comm" hidden>
-    <div class="row local-vid-div">
-        <video class="local-video mirror-mode" id='local' volume='0' autoplay muted></video>
+<div class="container-fluid room-comm row" hidden>
+    <div class="col-sm-3 local-vid-div">
+        <video class="col-12 local-video mirror-mode" id='local' volume='0' autoplay muted></video>
     </div>
 
-    <div class="row">
-        <div class="col-md-12 main" id='main-section'>
-            <div class="row mt-2 mb-2" id='videos'></div>
+    <div class="col-sm-3 chat-col mb-2 bg-info" id='chat-pane'>
+        <div class="">
+            <div class="text-center">CHAT</div>
         </div>
 
-        <div class="col-md-3 chat-col d-print-none mb-2 bg-info" id='chat-pane' hidden>
-            <div class="row">
-                <div class="col-12 text-center h2 mb-3">CHAT</div>
-            </div>
+        <div id='chat-messages'></div>
 
-            <div id='chat-messages'></div>
+        <div class="">
+            <textarea id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3' placeholder="Type here..."></textarea>
+        </div>
+    </div>
 
-            <div class="row">
-                <textarea id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3' placeholder="Type here..."></textarea>
-            </div>
+    <div class="col-sm-6">
+        <div class="main col-12" id='main-section'>
+            <div class="" id='videos'></div>
         </div>
     </div>
 </div>

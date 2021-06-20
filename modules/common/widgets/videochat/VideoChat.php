@@ -36,7 +36,7 @@ class VideoChat implements MessageComponentInterface
         if (is_resource($connection)) {
             return fclose($connection);
         }
-        //putenv("RATCHET_DISABLE_XDEBUG_WARN=true");
+        putenv("RATCHET_DISABLE_XDEBUG_WARN=true");
         $app = new \Ratchet\Http\HttpServer(new \Ratchet\WebSocket\WsServer(new VideoChat()));
         $loop = \React\EventLoop\Factory::create();
         $secure_websockets = new \React\Socket\Server($uri, $loop);

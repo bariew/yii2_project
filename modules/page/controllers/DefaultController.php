@@ -59,7 +59,7 @@ class DefaultController extends Controller
         return $this->render('view', compact('model'));
     }
 
-    public function actionTmp123()
+    public function actionTmpChat()
     {
         return $this->render('@app/modules/common/widgets/videochat/views/chat');
     }

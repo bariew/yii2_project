@@ -18,7 +18,7 @@ class AppAsset extends AssetBundle
         'css/glyphicon.css',
     ];
     public $js = [
-        'css/main.js',
+        'js/main.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

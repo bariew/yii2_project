@@ -159,6 +159,7 @@ class ConsoleController extends Controller
 
     public function actionTmp()
     {
+        exec("fuser -k 8090/tcp");
         VideoChat::init('0.0.0.0:8090', [
             'local_cert' => Yii::$app->params['videochat']['certificate'],
             'local_pk' => Yii::$app->params['videochat']['key'],
