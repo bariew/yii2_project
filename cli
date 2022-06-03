@@ -43,37 +43,46 @@ case "$COMMAND" in
     update)
         php composer.phar install --prefer-dist
         ./yii migrate --interactive=0
-        #./yii asset $DIR/app/config/asset-config.php $DIR/app/config/assets-prod.php
+        #./yii asset $DIR/config/asset-config.php $DIR/config/assets-prod.php
     ;;
     dev)
         php composer.phar install
         npm install
         ./yii migrate --interactive=0
-        ./yii message app/config/i18n.php
-        rm -rf app/runtime/cache/*
+        ./yii message config/i18n.php
+        rm -rf runtime/cache/*
     ;;
-    gitclean)
-        # removes local branches that were removed from origin
-        git fetch --prune
-        git fetch
-        git checkout master
-        git pull
-        git branch -d $(git branch --merged)
-    ;;
-    clean)
-        # removes local files
-        rm -rf $DIR/runtime/debug/*
-        rm -rf $DIR/runtime/mail/*
-        rm -rf $DIR/web/assets/*
-        rm -rf $DIR/tests/codeception/_output/*
+    db)
+        ./yii console/db
     ;;
     add)
         COMMIT=${*#$COMMAND}
         COMMIT=${COMMIT#\s}
         git add -A ; git commit -am "$COMMIT" ; git push
     ;;
+    delete)
+        git remote prune origin
+        git branch -D $PARAM1
+        git push --delete origin $PARAM1
+    ;;
     docker)
         docker-compose exec php-fpm sh cli $PARAM1
+    ;;
+    test)
+        # Turn off debugger and set server config for index-test.php
+        php composer.phar install --dev
+        cp -n tests/config/config-local.example.php tests/config/config-local.php
+        fuser -k 8081/tcp
+        php -S localhost:8081 -t web $DIR/web/index-test.php &
+        ./yii cache/flush-all
+        ./tests/bin/yii migrate --interactive=0
+    #        ./tests/codeception/bin/yii fixture/load "*" --interactive=0
+        ./vendor/codeception/codeception/codecept run $PARAM1 $PARAM2 --config tests/codeception.yml
+        RESULT=$?
+        fuser -k 8081/tcp
+    #        ./yii console/sniff
+        ./yii cache/flush-all
+        exit $RESULT
     ;;
     *)
         echo "Available commands: update, dev, test, clean, up"

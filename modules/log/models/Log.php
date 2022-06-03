@@ -51,14 +51,14 @@ class Log extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('modules/log', 'ID'),
-            'user_id' => Yii::t('modules/log', 'User'),
-            'event' => Yii::t('modules/log', 'Event'),
-            'model_name' => Yii::t('modules/log', 'Model Name'),
-            'model_id' => Yii::t('modules/log', 'Model ID'),
-            'message' => Yii::t('modules/log', 'Message'),
-            'viewMessage' => Yii::t('modules/log', 'Message'),
-            'created_at' => Yii::t('modules/log', 'Created At'),
+            'id' => Yii::t('log', 'ID'),
+            'user_id' => Yii::t('log', 'User'),
+            'event' => Yii::t('log', 'Event'),
+            'model_name' => Yii::t('log', 'Model Name'),
+            'model_id' => Yii::t('log', 'Model ID'),
+            'message' => Yii::t('log', 'Message'),
+            'viewMessage' => Yii::t('log', 'Message'),
+            'created_at' => Yii::t('log', 'Created At'),
         ];
     }
 
@@ -158,7 +158,7 @@ class Log extends ActiveRecord
      */
     public function createMessage($eventName)
     {
-        return Yii::t('modules/log', "{event} for {model} by {username}", [
+        return Yii::t('log', "{event} for {model} by {username}", [
             'event' => $eventName,
             'model' => $this->getLink(),
             'username' => Html::a(@User::current()->username,
@@ -172,8 +172,8 @@ class Log extends ActiveRecord
     public static function eventList()
     {
         return [
-            \yii\web\User::EVENT_AFTER_LOGIN => Yii::t('modules/log', 'Session Start'),
-            ContactForm::EVENT_AFTER_SEND => Yii::t('modules/log', 'Contact form send')
+            \yii\web\User::EVENT_AFTER_LOGIN => Yii::t('log', 'Session Start'),
+            ContactForm::EVENT_AFTER_SEND => Yii::t('log', 'Contact form send')
         ];
     }
 }

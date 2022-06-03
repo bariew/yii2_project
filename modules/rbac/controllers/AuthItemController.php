@@ -26,7 +26,7 @@ class AuthItemController extends Controller
      */
     public function getMenu()
     {
-        $model = $this->findModel('root');
+        $model = $this->findModel(AuthItem::ROLE_ROOT);
         return $model->menuWidget([], 'menuCallback');
     }
     /**
@@ -43,7 +43,7 @@ class AuthItemController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index', compact('model'));
+        return $this->render('index');
     }
     /**
      * Обновление модели.

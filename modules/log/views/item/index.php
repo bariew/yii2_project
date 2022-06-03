@@ -8,7 +8,7 @@ use app\modules\common\helpers\GridHelper;
 /* @var $searchModel app\modules\log\models\LogSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('modules/log', 'Events');
+$this->title = Yii::t('log', 'Events');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">

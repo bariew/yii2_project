@@ -1,6 +1,6 @@
 <?php
 
-use yii\bootstrap4\ActiveForm;
+use yii\widgets\ActiveForm;
 use \yii\jui\AutoComplete;
 use \yii\helpers\Html;
 use \yii\rbac\Item;

@@ -110,15 +110,15 @@ class Category extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('modules/post', 'ID'),
-            'title' => Yii::t('modules/post', 'Title'),
-            'name' => Yii::t('modules/post', 'Name'),
-            'content' => Yii::t('modules/post', 'Content'),
-            'lft' => Yii::t('modules/post', 'Lft'),
-            'rgt' => Yii::t('modules/post', 'Rgt'),
-            'depth' => Yii::t('modules/post', 'Depth'),
-            'is_active' => Yii::t('modules/post', 'Is Active'),
-            'image' => Yii::t('modules/post', 'Image'),
+            'id' => Yii::t('post', 'ID'),
+            'title' => Yii::t('post', 'Title'),
+            'name' => Yii::t('post', 'Name'),
+            'content' => Yii::t('post', 'Content'),
+            'lft' => Yii::t('post', 'Lft'),
+            'rgt' => Yii::t('post', 'Rgt'),
+            'depth' => Yii::t('post', 'Depth'),
+            'is_active' => Yii::t('post', 'Is Active'),
+            'image' => Yii::t('post', 'Image'),
         ];
     }
 
@@ -129,7 +129,7 @@ class Category extends \yii\db\ActiveRecord
     {
         if ($this->depth == 0) {
             throw new \BadMethodCallException(
-                Yii::t('modules/post', "Root category can not be deleted.")
+                Yii::t('post', "Root category can not be deleted.")
             );
         }
         return parent::beforeDelete();
@@ -151,8 +151,8 @@ class Category extends \yii\db\ActiveRecord
     public static function activeList()
     {
         return [
-            0 => Yii::t('modules/post', 'No'),
-            1 => Yii::t('modules/post', 'Yes'),
+            0 => Yii::t('post', 'No'),
+            1 => Yii::t('post', 'Yes'),
         ];
     }
     /**

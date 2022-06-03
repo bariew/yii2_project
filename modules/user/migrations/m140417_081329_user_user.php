@@ -5,7 +5,7 @@ class m140417_081329_user_user extends \yii\db\Migration
 {
     public function up()
     {
-        $this->createTable(User::tableName(), array(
+        $this->createTable('{{%user}}', array(
             'id'            => 'pk',
             'email'         => 'string',
             'password'      => 'string',
@@ -18,19 +18,20 @@ class m140417_081329_user_user extends \yii\db\Migration
             'updated_at'    => 'integer',
         ));
 
-        return $this->insert(User::tableName(), array(
+        $this->insert(User::tableName(), array(
             'id'            => 1,
-            'email'         => 'admin@test.com',
-            'password'      => '$2y$13$Rx7MzVUFuYsrKAE4pUksBO2r7fecmboV4MM8WZrSCPDFI3LiHSGOm',//admin
+            'email'         => 'user1@user1.user1',
+            'password'      => '$2y$13$zxH1XXv656hqeaPPzo7yyeSvaaVx5nAtfU7xraAOB9.E720DwJe2e',//123123
             'username'      => 'admin',
             'company_name'  => 'admin',
             'status'        => 10,
             'created_at'    => time(),
         ));
+        (new \app\modules\rbac\models\AuthAssignment(['item_name' => \app\modules\rbac\models\AuthItem::ROLE_ROOT, 'user_id' => 1]))->save();
     }
 
     public function down()
     {
-        return $this->dropTable(User::tableName());
+         $this->dropTable('{{%user}}');
     }
 }

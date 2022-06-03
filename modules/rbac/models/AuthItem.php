@@ -5,7 +5,9 @@
 
 namespace app\modules\rbac\models;
 
+use app\controllers\SiteController;
 use Yii;
+use yii\helpers\FileHelper;
 use \yii\rbac\Item;
 use yii\db\ActiveRecord;
 use \app\modules\rbac\components\TreeBuilder;
@@ -30,9 +32,11 @@ use \yii\web\HttpException;
 class AuthItem extends ActiveRecord
 {
     const ROLE_ROOT = 'root';
+    const ROLE_MANAGER = 'manager';
     const ROLE_DEFAULT = 'default';
     const ROLE_GUEST = 'guest';
 
+    const ACCESS_MODULES = ['rbac', 'admin', 'log'];
     /**
      * @var array container for autItem tree for menu widget.
      */
@@ -44,7 +48,8 @@ class AuthItem extends ActiveRecord
     public static function defaultRoleList()
     {
         return [
-            static::ROLE_ROOT => Yii::t('modules/rbac', 'role_root'),
+            static::ROLE_ROOT => Yii::t('modules/rbac', 'role_admin'),
+            static::ROLE_MANAGER => Yii::t('modules/rbac', 'role_manager'),
             static::ROLE_DEFAULT => Yii::t('modules/rbac', 'role_default'),
             static::ROLE_GUEST => Yii::t('modules/rbac', 'role_guest'),
         ];

@@ -36,8 +36,8 @@ class CategoryToItem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'category_id' => Yii::t('modules/post', 'Category ID'),
-            'item_id' => Yii::t('modules/post', 'Item ID'),
+            'category_id' => Yii::t('post', 'Category ID'),
+            'item_id' => Yii::t('post', 'Item ID'),
         ];
     }
 }

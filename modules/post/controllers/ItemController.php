@@ -102,7 +102,7 @@ class ItemController extends Controller
     {
         $model = $this->getModel(null);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->addFlash('success', Yii::t('modules/post', 'Successfully created.'));
+            Yii::$app->session->addFlash('success', Yii::t('post', 'Successfully created.'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', compact('model'));
@@ -116,7 +116,7 @@ class ItemController extends Controller
     {
         $model = $this->getModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->addFlash('success', Yii::t('modules/post', 'Successfully updated.'));
+            Yii::$app->session->addFlash('success', Yii::t('post', 'Successfully updated.'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', compact('model'));
@@ -133,9 +133,9 @@ class ItemController extends Controller
     public function actionDelete($id)
     {
         if ($this->getModel($id)->delete()) {
-            Yii::$app->session->addFlash('success', Yii::t('modules/post', 'Successfully deleted.'));
+            Yii::$app->session->addFlash('success', Yii::t('post', 'Successfully deleted.'));
         } else {
-            Yii::$app->session->addFlash('error', Yii::t('modules/post', 'Could not delete item.'));
+            Yii::$app->session->addFlash('error', Yii::t('post', 'Could not delete item.'));
         }
 
         return $this->redirect(['index']);
@@ -151,9 +151,9 @@ class ItemController extends Controller
     {
         $model = $this->getModel($id);
         if ($model->deleteFile($name)) {
-            Yii::$app->session->setFlash('success', Yii::t('modules/post', 'File successfully deleted'));
+            Yii::$app->session->setFlash('success', Yii::t('post', 'File successfully deleted'));
         } else {
-            Yii::$app->session->setFlash('error', Yii::t('modules/post', 'File delete error'));
+            Yii::$app->session->setFlash('error', Yii::t('post', 'File delete error'));
         }
         return $this->redirect(Yii::$app->request->referrer);
     }
@@ -173,9 +173,9 @@ class ItemController extends Controller
             && $newName != $name
             && $model->renameFile($name, $newName)
         ) {
-            Yii::$app->session->setFlash('success', Yii::t('modules/post', 'File successfully renamed'));
+            Yii::$app->session->setFlash('success', Yii::t('post', 'File successfully renamed'));
         } else {
-            Yii::$app->session->setFlash('error', Yii::t('modules/post', 'File rename error'));
+            Yii::$app->session->setFlash('error', Yii::t('post', 'File rename error'));
         }
         return $this->redirect(Yii::$app->request->referrer);
     }

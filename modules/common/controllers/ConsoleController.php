@@ -105,8 +105,8 @@ class ConsoleController extends Controller
      */
     public function actionDb()
     {
-        $dsn = explode('=', \Yii::$app->db->dsn);
-        return static::runProgram('mysql', '-u'.\Yii::$app->db->username . ' -p'.\Yii::$app->db->password . ' ' . end($dsn));
+        preg_match('/host\=([^;]+);dbname=(.*)$/', \Yii::$app->db->dsn, $m);
+        return static::runProgram('mysql', '-u'.\Yii::$app->db->username . ' -p'.\Yii::$app->db->password . ' -h'.$m[1] .' ' . $m[2]);
     }
 
     /**
@@ -159,11 +159,7 @@ class ConsoleController extends Controller
 
     public function actionTmp()
     {
-        exec("fuser -k 8090/tcp");
-        VideoChat::init('0.0.0.0:8090', [
-            'local_cert' => Yii::$app->params['videochat']['certificate'],
-            'local_pk' => Yii::$app->params['videochat']['key'],
-            'verify_peer' => false
-        ]);
+        (new \app\modules\rbac\models\AuthAssignment(['item_name' => \app\modules\rbac\models\AuthItem::ROLE_ROOT, 'user_id' => 1]))->save();
+
     }
 }

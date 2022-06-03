@@ -54,7 +54,7 @@ class UserController extends Controller
     {
         $model = $this->findModel(null);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('modules/user', 'Successfully saved'));
+            Yii::$app->session->setFlash('success', Yii::t('user', 'Successfully saved'));
             return $this->redirect(['index']);
         } else {
             return $this->render('create', ['model' => $model,]);
@@ -71,7 +71,7 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('modules/user', 'Successfully saved'));
+            Yii::$app->session->setFlash('success', Yii::t('user', 'Successfully saved'));
             return $this->redirect(['index']);
         } else {
             return $this->render('update', ['model' => $model,]);
@@ -87,7 +87,7 @@ class UserController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('success', Yii::t('modules/user', 'Successfully deleted'));
+        Yii::$app->session->setFlash('success', Yii::t('user', 'Successfully deleted'));
         return $this->redirect(['index']);
     }
 
@@ -106,7 +106,7 @@ class UserController extends Controller
         } elseif (!$id) {
             $model = new User();
         } elseif (!$model = User::findOne($id)) {
-            throw new NotFoundHttpException(\Yii::t('modules/user', 'User not found'));
+            throw new NotFoundHttpException(\Yii::t('user', 'User not found'));
         }
         $model->scenario = User::SCENARIO_ROOT;
         return $model;

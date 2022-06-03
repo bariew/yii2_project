@@ -20,7 +20,7 @@ use kartik\select2\Select2;
     <?= $form->field($model, 'categoryIds')->widget(Select2::className(), [
         'data' => $model->allCategoryList(),
         'options' => [
-            'placeholder' => Yii::t('modules/post', 'Select categories'),
+            'placeholder' => Yii::t('post', 'Select categories'),
             'multiple' => true,
             'class' => 'form-control',
         ]
@@ -31,7 +31,7 @@ use kartik\select2\Select2;
     <?= $form->field($model, 'is_active')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('modules/post', 'Create') : Yii::t('modules/post', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('post', 'Create') : Yii::t('post', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

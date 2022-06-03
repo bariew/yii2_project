@@ -46,15 +46,15 @@ class Comment extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('modules/comment', 'ID'),
-            'user_id' => Yii::t('modules/comment', 'User ID'),
-            'parent_class' => Yii::t('modules/comment', 'Parent Class'),
-            'parent_id' => Yii::t('modules/comment', 'Parent ID'),
-            'branch_id' => Yii::t('modules/comment', 'Branch ID'),
-            'content' => Yii::t('modules/comment', 'Content'),
-            'created_at' => Yii::t('modules/comment', 'Created At'),
-            'updated_at' => Yii::t('modules/comment', 'Updated At'),
-            'active' => Yii::t('modules/comment', 'Active'),
+            'id' => Yii::t('comment', 'ID'),
+            'user_id' => Yii::t('comment', 'User ID'),
+            'parent_class' => Yii::t('comment', 'Parent Class'),
+            'parent_id' => Yii::t('comment', 'Parent ID'),
+            'branch_id' => Yii::t('comment', 'Branch ID'),
+            'content' => Yii::t('comment', 'Content'),
+            'created_at' => Yii::t('comment', 'Created At'),
+            'updated_at' => Yii::t('comment', 'Updated At'),
+            'active' => Yii::t('comment', 'Active'),
         ];
     }
 

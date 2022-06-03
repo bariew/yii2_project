@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\post\models\Category */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/post', 'Categories'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('post', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('modules/post', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('modules/post', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('post', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('post', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('modules/post', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('post', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>

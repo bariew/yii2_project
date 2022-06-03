@@ -9,8 +9,8 @@ use yii\web\View;
  */
 
 $this->registerJsFile("https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sons-of-obsidian");
-$this->title = Yii::t('modules/log', 'Error view');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/log', 'Errors'), 'url' => ['index']];
+$this->title = Yii::t('log', 'Error view');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('log', 'Errors'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

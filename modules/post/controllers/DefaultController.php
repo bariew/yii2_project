@@ -4,8 +4,7 @@
  */
 
 namespace app\modules\post\controllers;
-use app\modules\post\actions\IndexAction;
-use app\modules\post\actions\ViewAction;
+
 use app\modules\post\models\Item;
 
 /**
@@ -25,11 +24,4 @@ class DefaultController extends ItemController
         return Item::SCENARIO_DEFAULT;
     }
 
-    public function actions()
-    {
-        return [
-            'index' => IndexAction::className(),
-            'view'  => ViewAction::className(),
-        ];
-    }
 }

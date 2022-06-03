@@ -34,8 +34,8 @@ class Error extends ActiveRecord
     public static function activeList()
     {
         return [
-            self::ACTIVE_NO  => Yii::t('modules/log', 'No'),
-            self::ACTIVE_YES => Yii::t('modules/log', 'Yes'),
+            self::ACTIVE_NO  => Yii::t('log', 'No'),
+            self::ACTIVE_YES => Yii::t('log', 'Yes'),
         ];
     }
 
@@ -64,13 +64,13 @@ class Error extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'       =>  Yii::t('modules/log', 'Id'),
-            'level'    =>  Yii::t('modules/log', 'Level'),
-            'category' =>  Yii::t('modules/log', 'Category'),
-            'log_time' =>  Yii::t('modules/log', 'Log Time'),
-            'prefix'   =>  Yii::t('modules/log', 'Prefix'),
-            'message'  =>  Yii::t('modules/log', 'Message'),
-            'active'   =>  Yii::t('modules/log', 'Active'),
+            'id'       =>  Yii::t('log', 'Id'),
+            'level'    =>  Yii::t('log', 'Level'),
+            'category' =>  Yii::t('log', 'Category'),
+            'log_time' =>  Yii::t('log', 'Log Time'),
+            'prefix'   =>  Yii::t('log', 'Prefix'),
+            'message'  =>  Yii::t('log', 'Message'),
+            'active'   =>  Yii::t('log', 'Active'),
         ];
     }
 

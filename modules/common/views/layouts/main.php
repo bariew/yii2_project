@@ -27,7 +27,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-dark bg-dark navbar-expand'],
         'brandLabel' => Yii::$app->name,
     ));
-    if (Yii::$app->user->can('admin')) {
+    if (Yii::$app->user->can(\app\modules\rbac\models\AuthItem::ROLE_ROOT)) {
         echo \yii\bootstrap4\Nav::widget([
             'options' => ['class' => 'navbar-nav'],
             'items' => [
@@ -36,6 +36,8 @@ AppAsset::register($this);
                     ['label' => Yii::t('home', 'Errors'), 'url' => ['/log/error/index']],
                 ]],
                 ['label' => Yii::t('home', 'Pages'), 'url' => ['/page/item/index']],
+                ['label' => Yii::t('home', 'Translations'), 'url' => ['/i18n/message/index']],
+                ['label' => Yii::t('home', 'Permissions'), 'url' => ['/rbac/auth-item/index']],
                 ['label' => Yii::t('home', 'Posts'), 'url' => ['/post/item/index']],
                 ['label' => Yii::t('home', 'Users'), 'url' => ['/user/user/index']],
                 ['label' => Yii::t('home', 'Nalog'), 'items' => [

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\comment\models\Comment */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/comment', 'Items'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('comment', 'Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('modules/comment', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('modules/comment', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('comment', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('comment', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('modules/comment', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('comment', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>

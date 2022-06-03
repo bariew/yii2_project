@@ -7,9 +7,9 @@ use yii\helpers\Html;
  * @var app\modules\page\models\Page $model
  */
 
-$this->title = Yii::t('modules/page', 'Update Page: ') . $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/page', 'Items'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = Yii::t('modules/page', 'Update');
+$this->title = Yii::t('page', 'Update Page: ') . $model->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('page', 'Items'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = Yii::t('page', 'Update');
 ?>
 
 <div class="row">

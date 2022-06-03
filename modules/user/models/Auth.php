@@ -34,12 +34,12 @@ class Auth extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('modules/user', 'ID'),
-            'user_id' => Yii::t('modules/user', 'User ID'),
-            'name' => Yii::t('modules/user', 'Name'),
-            'service_id' => Yii::t('modules/user', 'Service ID'),
-            'created_at' => Yii::t('modules/user', 'Created At'),
-            'data' => Yii::t('modules/user', 'Data'),
+            'id' => Yii::t('user', 'ID'),
+            'user_id' => Yii::t('user', 'User ID'),
+            'name' => Yii::t('user', 'Name'),
+            'service_id' => Yii::t('user', 'Service ID'),
+            'created_at' => Yii::t('user', 'Created At'),
+            'data' => Yii::t('user', 'Data'),
         ];
     }
 

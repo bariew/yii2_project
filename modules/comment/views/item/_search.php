@@ -34,8 +34,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'active') ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('modules/comment', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('modules/comment', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('comment', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('comment', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

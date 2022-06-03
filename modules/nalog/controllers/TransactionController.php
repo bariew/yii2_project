@@ -83,6 +83,7 @@ class TransactionController extends Controller
         if ($prev = Transaction::last()) {
             $model->load($prev->attributes, '');
         }
+        $model->date = DateHelper::now();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(Yii::$app->request->referrer ? : ['index']);
         }

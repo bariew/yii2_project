@@ -7,9 +7,8 @@ return \yii\helpers\ArrayHelper::merge([
     'components' => [
         'urlManager' => [
             'hostInfo' => $mainConfig['params']['hostInfo'],
-            'scriptUrl' => $mainConfig['params']['hostInfo'],
-            'baseUrl' => $mainConfig['params']['hostInfo'],
-        ],
+            'baseUrl' => '/',
+	],
     ],
     'controllerMap' => [
         'migrate' => [

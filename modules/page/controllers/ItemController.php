@@ -55,7 +55,7 @@ class ItemController extends Controller
         $model = new Page();
         $model->pid = $id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('modules/page', 'Success'));
+            Yii::$app->session->setFlash('success', Yii::t('page', 'Success'));
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', ['model' => $model,]);
@@ -72,7 +72,7 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('modules/page', 'Success'));
+            Yii::$app->session->setFlash('success', Yii::t('page', 'Success'));
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', ['model' => $model,]);
@@ -87,7 +87,7 @@ class ItemController extends Controller
      */
     public function actionDelete($id)
     {
-        Yii::$app->session->setFlash('success', Yii::t('modules/page', 'Success'));
+        Yii::$app->session->setFlash('success', Yii::t('page', 'Success'));
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
@@ -107,7 +107,7 @@ class ItemController extends Controller
         if (($model = Page::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('modules/page', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('page', 'The requested page does not exist.'));
         }
     }
 }

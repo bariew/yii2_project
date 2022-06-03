@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'currency')->label(false)->widget(\kartik\select2\Select2::class, [
         'data' => $model::currencyList(),
         'language' => Yii::$app->language,
-        'options' => ['prompt' => Yii::t('modules/nalog','Default Currency')],
+        'options' => ['prompt' => Yii::t('nalog','Default Currency')],
     ]) ?>
 
     <div class="form-group">

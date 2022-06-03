@@ -21,7 +21,10 @@ return \yii\helpers\ArrayHelper::merge([
         'db'    => [
             'class' => '\yii\db\Connection',
             'dsn'   => 'mysql:host=localhost;dbname=yii2_project',
+            'charset'=>'utf8mb4',
             'enableSchemaCache' => true,
+            'enableQueryCache'=>true,
+            'queryCacheDuration'=>3600,
         ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
@@ -55,13 +58,10 @@ return \yii\helpers\ArrayHelper::merge([
                 '<is_api:api>/<_m>/<_c>/<_a>' => '<_m>/<_c>/<_a>',
             ],
         ],
-        'i18n'  => [
-            'translations' => [
-                '*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                ],
-            ],
-        ],
+        'i18n' => ['translations' => [
+            '*' => ['class' => 'yii\i18n\DbMessageSource', 'enableCaching' => true],
+            'yii' => ['class' => 'yii\i18n\DbMessageSource', 'enableCaching' => true]
+        ]],
         'view' => [
             'theme' => [
                 'pathMap' => [
@@ -74,11 +74,8 @@ return \yii\helpers\ArrayHelper::merge([
             ]
         ],
         'authManager' => [
-            'class' => \yii\rbac\PhpManager::class,
+            'class' => \yii\rbac\DbManager::class,
             'defaultRoles' => ['guest'],
-            'itemFile' => '@app/config/rbac/items.php',
-            'assignmentFile' => '@app/config/rbac/assignments.php',
-            'ruleFile' => '@app/config/rbac/rules.php',
         ],
         'cache'=>['class'=>'yii\caching\FileCache', 'dirMode' => 0777, 'fileMode' => 0777,],
         'log' => [
@@ -116,8 +113,8 @@ return \yii\helpers\ArrayHelper::merge([
 //        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport'=>false,
             'htmlLayout' => 'layout_default',
+            'view' => ['theme' => ['pathMap' => ['@app/mail' => '@app/modules/common/views/mail',],],],
 //            'view' => ['theme' => ['pathMap' => ['@app/mail' => '@app/views/mail',],],],
 //            'transport' => [
 //                'class' => 'Swift_SmtpTransport',
@@ -134,7 +131,8 @@ return \yii\helpers\ArrayHelper::merge([
         'log' => ['class' => 'app\\modules\\log\\Module'],
         'user' => ['class' => 'app\\modules\\user\\Module'],
         'page' => ['class' => 'app\\modules\\page\\Module'],
-        //'rbac' => ['class' => 'app\\modules\\rbac\\Module'],
+        'i18n' => ['class' => 'app\\modules\\i18n\\Module'],
+        'rbac' => ['class' => 'app\\modules\\rbac\\Module'],
         'post' => ['class' => 'app\\modules\\post\\Module'],
         'comment' => ['class' => 'app\\modules\\comment\\Module'],
         'nalog' => ['class' => 'app\\modules\\nalog\\Module'],

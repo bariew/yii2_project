@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\post\models\ItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('modules/post', 'Items');
+$this->title = Yii::t('post', 'Items');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a(
-            Yii::t('modules/post', 'Create Item'), 
+            Yii::t('post', 'Create Item'), 
             ['create'], 
             ['class' => 'btn btn-success']
         ) ?>

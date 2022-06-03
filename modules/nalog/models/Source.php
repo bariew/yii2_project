@@ -50,12 +50,12 @@ class Source extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('modules/nalog', 'ID'),
-            'user_id' => Yii::t('modules/nalog', 'User ID'),
-            'type' => Yii::t('modules/nalog', 'Type'),
-            'name' => Yii::t('modules/nalog', 'Name'),
-            'description' => Yii::t('modules/nalog', 'Description'),
-            'currency' => Yii::t('modules/nalog', 'Default Currency'),
+            'id' => Yii::t('nalog', 'ID'),
+            'user_id' => Yii::t('nalog', 'User ID'),
+            'type' => Yii::t('nalog', 'Type'),
+            'name' => Yii::t('nalog', 'Name'),
+            'description' => Yii::t('nalog', 'Description'),
+            'currency' => Yii::t('nalog', 'Default Currency'),
         ];
     }
 
@@ -76,8 +76,8 @@ class Source extends \yii\db\ActiveRecord
     public static function typeList()
     {
         return [
-            static::TYPE_INCOME => Yii::t('modules/nalog', 'Income'),
-            static::TYPE_OUTCOME => Yii::t('modules/nalog', 'Outcome'),
+            static::TYPE_INCOME => Yii::t('nalog', 'Income'),
+            static::TYPE_OUTCOME => Yii::t('nalog', 'Outcome'),
         ];
     }
 

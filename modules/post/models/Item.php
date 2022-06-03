@@ -113,16 +113,16 @@ class Item extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('modules/post', 'ID'),
-            'user_id' => Yii::t('modules/post', 'User ID'),
-            'title' => Yii::t('modules/post', 'Title'),
-            'brief' => Yii::t('modules/post', 'Brief'),
-            'content' => Yii::t('modules/post', 'Content'),
-            'is_active' => Yii::t('modules/post', 'Is Active'),
-            'created_at' => Yii::t('modules/post', 'Created At'),
-            'updated_at' => Yii::t('modules/post', 'Updated At'),
-            'image' => Yii::t('modules/post', 'Image'),
-            'categoryIds' => Yii::t('modules/post', 'Category list'),
+            'id' => Yii::t('post', 'ID'),
+            'user_id' => Yii::t('post', 'User ID'),
+            'title' => Yii::t('post', 'Title'),
+            'brief' => Yii::t('post', 'Brief'),
+            'content' => Yii::t('post', 'Content'),
+            'is_active' => Yii::t('post', 'Is Active'),
+            'created_at' => Yii::t('post', 'Created At'),
+            'updated_at' => Yii::t('post', 'Updated At'),
+            'image' => Yii::t('post', 'Image'),
+            'categoryIds' => Yii::t('post', 'Category list'),
         ];
     }
 
@@ -141,8 +141,8 @@ class Item extends ActiveRecord
     public static function activeList()
     {
         return [
-            0 => Yii::t('modules/post', 'No'),
-            1 => Yii::t('modules/post', 'Yes'),
+            0 => Yii::t('post', 'No'),
+            1 => Yii::t('post', 'Yes'),
         ];
     }
 }

@@ -5,8 +5,8 @@
 
 namespace app\modules\rbac\components;
 
-use \bariew\nodeTree\ARTreeMenuWidget;
-use \bariew\nodeTree\SimpleTreeBehavior;
+use app\modules\rbac\components\nodetree\ARTreeMenuWidget;
+use app\modules\rbac\components\nodetree\SimpleTreeBehavior;
 use app\modules\rbac\models\AuthItem;
 use app\modules\rbac\models\AuthItemChild;
 use yii\helpers\ArrayHelper;

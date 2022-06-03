@@ -35,7 +35,7 @@ class WidgetController extends Controller
         $model->parent_class = get_class($parent);
         $model->parent_id = $parent->primaryKey;
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->session->setFlash('success', \Yii::t('modules/comment', "Comment added"));
+            \Yii::$app->session->setFlash('success', \Yii::t('comment', "Comment added"));
         }
         return $this->renderPartial('comment', compact('model'));
     }

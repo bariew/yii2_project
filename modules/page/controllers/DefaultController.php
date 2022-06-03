@@ -49,7 +49,7 @@ class DefaultController extends Controller
          * @var Page $model
          */
         if (!$model = Page::getCurrentPage($url)) {
-            throw new \yii\web\HttpException(404, \Yii::t('modules/page', "Page not found"));
+            throw new \yii\web\HttpException(404, \Yii::t('page', "Page not found"));
         }
 
         if ($model->layout) {

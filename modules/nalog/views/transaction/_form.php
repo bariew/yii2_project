@@ -33,7 +33,7 @@ use yii\widgets\ActiveForm;
         ]) ?>
         <?= Html::button('<i class="glyphicon glyphicon-refresh p-1"></i>', [
             'class' => 'btn btn-info btn-sm',
-            'title' => Yii::t('modules/nalog', 'Conver to RUB'),
+            'title' => Yii::t('nalog', 'Conver to RUB'),
             'data-url' => \yii\helpers\Url::to(['convert']),
             'onclick' => <<<JS
 $('#transaction-description').val($('#transaction-description').val()+$('#transaction-amount').val()+$('#transaction-currency').val()).trigger('change');

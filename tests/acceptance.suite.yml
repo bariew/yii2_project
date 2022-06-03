@@ -1,0 +1,14 @@
+# Codeception Test Suite Configuration
+
+class_name: AcceptanceTester
+modules:
+    enabled:
+      - Asserts
+      - PhpBrowser
+    config:
+        PhpBrowser:
+            url: http://localhost:8081
+#        WebDriver:
+#            url: http://localhost:8080
+#            browser: firefox
+#            restart: true

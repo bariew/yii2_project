@@ -11,11 +11,13 @@ namespace app\modules\rbac\components;
 
 use app\modules\rbac\models\AuthAssignment;
 use app\modules\rbac\models\AuthItem;
+use yii\base\ActionEvent;
 use yii\base\Event;
 use yii\base\ViewEvent;
 use Yii;
 use yii\console\Application;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\HttpException;
 
 class EventHandlers
@@ -41,6 +43,10 @@ class EventHandlers
         if (get_class(Yii::$app) == Application::className()) {
             return true;
         }
+        if (!in_array(Yii::$app->controller->module->id, AuthItem::ACCESS_MODULES)) {
+            return true;
+        }
+
         $event->sender->content = ViewAccess::denyLinks($event->sender->content);
     }
 
@@ -50,12 +56,16 @@ class EventHandlers
      * @param Event $event controller beforeAction event.
      * @throws \yii\web\HttpException
      */
-    public static function beforeActionAccess($event)
+    public static function beforeActionAccess(ActionEvent $event)
     {
+        /** @var Controller $controller */
         $controller = $event->sender;
+        if (!$controller->module || !in_array($controller->module->id, AuthItem::ACCESS_MODULES)) {
+            return;
+        }
         $permissionName = AuthItem::createPermissionName([$controller->module->id, $controller->id, $controller->action->id]);
         if (!AuthItem::checkAccess($permissionName, Yii::$app->user)) {
-            throw new HttpException(403, Yii::t('modules/rbac', 'Access denied'));
+            throw new ForbiddenHttpException("You have no access rights");
         }
     }
 

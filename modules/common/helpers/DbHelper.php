@@ -8,6 +8,7 @@ namespace app\modules\common\helpers;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\db\AfterSaveEvent;
+use yii\db\Connection;
 use yii\db\Query;
 
 /**
@@ -16,50 +17,25 @@ use yii\db\Query;
 class DbHelper
 {
     /**
-     * @param $class ActiveRecord|string
-     * @param $data array
+     * Inserts OR updates data if primary key exists
+     * @param $table
+     * @param $data
+     * @param Connection $db
+     * @return int|void
+     * @throws \yii\db\Exception
      */
-    public static function batchInsert($class, $data)
+    public static function insertUpdate($table, $data, $db = null)
     {
-        if (!$data) {
+        if(!$data || !is_array($data) || !($firstRow = reset($data))){
             return;
         }
-        $columns = [];
-        foreach ($data as $key => $datum) {
-            $columns = array_keys($datum);
-            $data[$key] = array_values($datum);
-        }
-        \Yii::$app->db->createCommand()->batchInsert($class::tableName(), $columns, $data)->execute();
-        foreach ($data as $datum) {
-            $model = Yii::createObject($class, array_combine($columns, $datum));
-            AfterSaveEvent::trigger($model, $class::EVENT_AFTER_INSERT);
-        }
-    }
-
-    /**
-     * Inserts new data into table or updates on duplicate key.
-     *
-     * $data keys are ignored as per Yii batch_insert
-     *
-     * @param string $tableName db table name
-     * @param array $data data to insert
-     * @param array $columns db column names
-     * @param string $db application connection name
-     * @return boolean whether operation is successful
-     */
-    public static function insertUpdate($tableName, $data, $columns = null, $db = 'db')
-    {
-        if (!$data) {
-            return false;
-        }
-        foreach ($data as $key => $row) {
-            $columns = $columns ? : array_keys($row);
-            $data[$key] = array_values($row);
-        }
-        $sql = \Yii::$app->$db->createCommand()->batchInsert($tableName, $columns, array_values($data))->getSql()
-            . ' ON DUPLICATE KEY UPDATE '
-            . implode(', ', array_map(function ($v) { return "`{$v}` = VALUES(`{$v}`)"; }, $columns));
-        return \Yii::$app->$db->createCommand($sql)->execute();
+        if(!$fields = array_keys($firstRow)){
+            return;
+        };
+        $db = $db ?? Yii::$app->db;
+        return $db->createCommand($db->queryBuilder->batchInsert($table, $fields, $data) . ' ON DUPLICATE KEY UPDATE ' .
+            join(', ', array_map(function($field) { return $field . ' = VALUES(' . $field . ')'; }, $fields))
+        )->execute();
     }
 
     /**

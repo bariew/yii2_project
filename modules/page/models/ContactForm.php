@@ -37,8 +37,8 @@ class ContactForm extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'email' => Yii::t('modules/page', 'email'),
-            'message' => Yii::t('modules/page', 'message'),
+            'email' => Yii::t('page', 'email'),
+            'message' => Yii::t('page', 'message'),
         ];
     }
 

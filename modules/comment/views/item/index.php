@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\comment\models\SearchComment */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('modules/comment', 'Items');
+$this->title = Yii::t('comment', 'Items');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('modules/comment', 'Create {modelClass}', [
+        <?= Html::a(Yii::t('comment', 'Create {modelClass}', [
     'modelClass' => 'Item',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>

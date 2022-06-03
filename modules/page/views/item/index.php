@@ -3,7 +3,7 @@
  * @var yii\web\View $this
  */
 
-$this->title = Yii::t('modules/page', 'Items');
+$this->title = Yii::t('page', 'Items');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">

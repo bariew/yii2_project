@@ -56,14 +56,14 @@ class Transaction extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('modules/nalog', 'ID'),
-            'tax_type' => Yii::t('modules/nalog', 'Tax Type'),
-            'user_id' => Yii::t('modules/nalog', 'User ID'),
-            'source_id' => Yii::t('modules/nalog', 'Source ID'),
-            'date' => Yii::t('modules/nalog', 'Date'),
-            'amount' => Yii::t('modules/nalog', 'Amount'),
-            'currency' => Yii::t('modules/nalog', 'Currency'),
-            'description' => Yii::t('modules/nalog', 'Description'),
+            'id' => Yii::t('nalog', 'ID'),
+            'tax_type' => Yii::t('nalog', 'Tax Type'),
+            'user_id' => Yii::t('nalog', 'User ID'),
+            'source_id' => Yii::t('nalog', 'Source ID'),
+            'date' => Yii::t('nalog', 'Date'),
+            'amount' => Yii::t('nalog', 'Amount'),
+            'currency' => Yii::t('nalog', 'Currency'),
+            'description' => Yii::t('nalog', 'Description'),
         ];
     }
 
@@ -76,9 +76,9 @@ class Transaction extends \yii\db\ActiveRecord
     public static function taxTypeList()
     {
         return [
-            static::TAX_TYPE_USN_INCOME => Yii::t('modules/nalog', 'USN income'),
-            static::TAX_TYPE_USN_INCOME_OUTCOME => Yii::t('modules/nalog', 'USN income/outcome'),
-            static::TAX_TYPE_PATENT => Yii::t('modules/nalog', 'Patent'),
+            static::TAX_TYPE_USN_INCOME => Yii::t('nalog', 'USN income'),
+            static::TAX_TYPE_USN_INCOME_OUTCOME => Yii::t('nalog', 'USN income/outcome'),
+            static::TAX_TYPE_PATENT => Yii::t('nalog', 'Patent'),
         ];
     }
 

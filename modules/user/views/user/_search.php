@@ -22,8 +22,8 @@ use yii\widgets\ActiveForm;
     <?php echo $form->field($model, 'username') ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton(Yii::t('modules/user', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::resetButton(Yii::t('modules/user', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?php echo Html::submitButton(Yii::t('user', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::resetButton(Yii::t('user', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

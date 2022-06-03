@@ -54,7 +54,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['email', 'username', 'password'], 'required'],
             [['email', 'username', 'api_key'], 'unique'],
             [['username', 'company_name'], 'string', 'min' => 2, 'max' => 255],
-            'password' => ['password', 'string', 'min' => 5, 'max' => 255], /** @see LoginForm::rules() */
+            'password' => ['password', 'string', 'min' => 5, 'max' => 255], /** @see Login::rules() */
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'email'],
         ];
@@ -76,11 +76,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'email'        => Yii::t('modules/user', 'Email'),
-            'username'     => Yii::t('modules/user', 'Name'),
-            'company_name' => Yii::t('modules/user', 'Company name'),
-            'auth_key'     => Yii::t('modules/user', 'Auth key'),
-            'api_key'      => Yii::t('modules/user', 'Api key'),
+            'email'        => Yii::t('user', 'Email'),
+            'username'     => Yii::t('user', 'Name'),
+            'company_name' => Yii::t('user', 'Company name'),
+            'auth_key'     => Yii::t('user', 'Auth key'),
+            'api_key'      => Yii::t('user', 'Api key'),
         ];
     }
 
@@ -119,8 +119,8 @@ class User extends ActiveRecord implements IdentityInterface
     public static function statusList()
     {
         return [
-            static::STATUS_INACTIVE => Yii::t('modules/user', 'Deactivated'),
-            static::STATUS_ACTIVE   => Yii::t('modules/user', 'Active')
+            static::STATUS_INACTIVE => Yii::t('user', 'Deactivated'),
+            static::STATUS_ACTIVE   => Yii::t('user', 'Active')
         ];
     }
 

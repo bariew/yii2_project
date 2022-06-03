@@ -8,6 +8,7 @@ namespace app\modules\rbac\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use app\controllers\SiteController;
 use yii\helpers\FileHelper;
 
 /**
@@ -27,7 +28,7 @@ class AuthItemChild extends ActiveRecord
      */
     public static function roleList()
     {
-        return AuthItem::roleList();
+        return AuthItem::defaultRoleList();
     }
     
     public static function permissionList()

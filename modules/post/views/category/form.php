@@ -2,11 +2,11 @@
 echo \yii\jui\Tabs::widget([
     'items' => [
         [
-            'label' => Yii::t('modules/post', 'Settings'),
+            'label' => Yii::t('post', 'Settings'),
             'content' => $this->render('_form', compact('model')),
         ],
         [
-            'label' => Yii::t('modules/post', 'Items'),
+            'label' => Yii::t('post', 'Items'),
             'url' => ['item/index', 'SearchItem[category_id]' => $model->id],
             'visible'   => false
         ],

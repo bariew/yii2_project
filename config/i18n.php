@@ -1,13 +1,19 @@
 <?php
-$mainConfig = require 'web.php';
+/**
+ * Console .yii/message command config
+ * @link http://www.yiiframework.com/
+ * @copyright Copyright (c) 2008 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ */
+
 return [
-    'sourcePath' => __DIR__ . '/..',
-    'messagePath' => __DIR__ . '/../messages',
-    'languages' => array_keys($mainConfig['params']['languages']),
+    'sourcePath' => dirname(__DIR__),
+    'messagePath' => dirname(__DIR__).'/messages',
+    'languages' => array_keys(app\modules\common\helpers\ArrayHelper::languageList()),
     'translator' => 'Yii::t',
     'sort' => true,
     'overwrite' => true,
-    'removeUnused' => true,
+    'removeUnused' => false,
     'markUnused' => false,
     'except' => [
         '.svn',
@@ -16,11 +22,17 @@ return [
         '.gitkeep',
         '.hgignore',
         '.hgkeep',
+        '/messages',
+        '/web',
+        '/tests',
+        '/runtime',
+        '/migrations',
+        '.idea',
     ],
     'only' => ['*.php'],
-    'format' => 'php',
-    'exclude'=>array('/messages', '/runtime', '/tests', '/migrations', '/config', '/modules'),
-
-    // Connection component ID for "db" format.
-    //'db' => 'db',
+    'phpFileHeader' => '',
+    'format' => 'db',
+   // 'db' => 'db_prod',
+    'sourceMessageTable' => '{{%source_message}}',
+    'messageTable' => '{{%message}}'
 ];

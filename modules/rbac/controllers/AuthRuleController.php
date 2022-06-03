@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
  */
 class AuthRuleController extends Controller
 {
+    public $layout = '@app/modules/admin/views/layouts/main';
     public function behaviors()
     {
         return [

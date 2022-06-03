@@ -6,10 +6,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\comment\models\Comment */
 
-$this->title = Yii::t('modules/comment', 'Create {modelClass}', [
+$this->title = Yii::t('comment', 'Create {modelClass}', [
     'modelClass' => 'Item',
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/comment', 'Items'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('comment', 'Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-create">

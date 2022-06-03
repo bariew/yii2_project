@@ -6,11 +6,10 @@
 namespace app\modules\common\components;
 
 use app\modules\page\models\ContactForm;
-use app\modules\user\models\LoginForm;
-use app\modules\user\models\RegisterForm;
+use app\modules\user\models\forms\Login;
+use app\modules\user\models\forms\Register;
 use Yii;
 use yii\base\Event;
-use yii\helpers\Url;
 
 /**
  * Description:
@@ -43,7 +42,7 @@ class Mailer
      */
     public static function passwordForgot(Event $event)
     {
-        /** @var LoginForm $model */
+        /** @var Login $model */
         $model = $event->sender;
         return static::send(static::VIEW_PASSWORD_FORGOT, ['model' => $model], $model->email);
     }
@@ -54,7 +53,7 @@ class Mailer
      */
     public static function registrationComplete(Event $event)
     {
-        /** @var RegisterForm $model */
+        /** @var Register $model */
         $model = $event->sender;
         return static::send(static::VIEW_REGISTRATION_COMPLETE, ['model' => $model], $model->email);
     }

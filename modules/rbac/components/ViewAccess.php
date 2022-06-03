@@ -5,17 +5,13 @@
 
 namespace app\modules\rbac\components;
 
-use \Yii;
-use yii\base\Object;
-use yii\base\ViewEvent;
 use app\modules\rbac\helpers\UrlHelper;
 use app\modules\rbac\models\AuthItem;
-use yii\console\Application;
 
 /**
  * Manages View access: removes restricted elements.
  *
- * Usage: attach this class via events (see https://packagist.org/packages/bariew/yii2-event-component)
+ * Usage: attach this class via events
  *   'yii\web\View' => [
  *       'afterRender' => [
  *           ['app\modules\rbac\components\ViewAccess', 'afterRender'],
@@ -23,7 +19,7 @@ use yii\console\Application;
  *   ],
  *
  */
-class ViewAccess extends Object
+class ViewAccess
 {
     /**
      * Checks whether links are available and removes/disables them.

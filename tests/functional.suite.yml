@@ -10,4 +10,9 @@ class_name: FunctionalTester
 modules:
     enabled:
       - Filesystem
+      - Asserts
       - Yii2
+    config:
+        Yii2:
+            transaction: false
+            configFile: 'config/functional.php'

@@ -66,19 +66,19 @@ class Page extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('modules/page', 'ID'),
-            'pid' => Yii::t('modules/page', 'Pid'),
-            'rank' => Yii::t('modules/page', 'Rank'),
-            'title' => Yii::t('modules/page', 'Title'),
-            'brief' => Yii::t('modules/page', 'Brief'),
-            'content' => Yii::t('modules/page', 'Content'),
-            'name' => Yii::t('modules/page', 'Path'),
-            'url' => Yii::t('modules/page', 'Url'),
-            'layout' => Yii::t('modules/page', 'Layout'),
-            'visible' => Yii::t('modules/page', 'Visible'),
-            'page_title' => Yii::t('modules/page', 'SEO Title'),
-            'page_description' => Yii::t('modules/page', 'SEO Description'),
-            'page_keywords' => Yii::t('modules/page', 'SEO Keywords'),
+            'id' => Yii::t('page', 'ID'),
+            'pid' => Yii::t('page', 'Pid'),
+            'rank' => Yii::t('page', 'Rank'),
+            'title' => Yii::t('page', 'Title'),
+            'brief' => Yii::t('page', 'Brief'),
+            'content' => Yii::t('page', 'Content'),
+            'name' => Yii::t('page', 'Path'),
+            'url' => Yii::t('page', 'Url'),
+            'layout' => Yii::t('page', 'Layout'),
+            'visible' => Yii::t('page', 'Visible'),
+            'page_title' => Yii::t('page', 'SEO Title'),
+            'page_description' => Yii::t('page', 'SEO Description'),
+            'page_keywords' => Yii::t('page', 'SEO Keywords'),
         ];
     }
 

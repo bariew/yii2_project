@@ -3,7 +3,7 @@
 use yii\grid\GridView;
 use app\modules\log\models\ErrorSearch;
 use app\modules\common\helpers\GridHelper;
-$this->title = Yii::t('modules/log', 'Errors');
+$this->title = Yii::t('log', 'Errors');
 $this->params['breadcrumbs'][] = $this->title;
 
 /**
@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
  */
 ?>
 <?= \yii\helpers\Html::a('<i class="glyphicon glyphicon-trash"></i>'
-    . Yii::t('modules/log', 'delete all'),
+    . Yii::t('log', 'delete all'),
     ['delete-all'],
     ['class' => 'btn btn-danger float-right'])
 ?>

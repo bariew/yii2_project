@@ -44,8 +44,8 @@ class CurrencyHistory extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'date' => Yii::t('modules/nalog', 'Date'),
-            'select' => Yii::t('modules/nalog', 'Select'),
+            'date' => Yii::t('nalog', 'Date'),
+            'select' => Yii::t('nalog', 'Select'),
         ];
     }
 

@@ -21,6 +21,7 @@ use yii\rbac\Item;
  */
 class AuthItemChildController extends Controller
 {
+    public $layout = '@app/modules/admin/views/layouts/main';
     /**
      * Название раздела.
      *
