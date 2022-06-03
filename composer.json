@@ -37,7 +37,7 @@
         "scheb/yahoo-finance-api": "4.x-dev",
         "cboden/ratchet": "dev-master",
         "vova07/yii2-imperavi-widget": "^2.0",
-        "electrolinux/phpquery": "dev-master"
+        "guzzlehttp/guzzle": "7.4.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

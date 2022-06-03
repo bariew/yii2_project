@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c75cf74441f91b7d04e5ef0d15d8364",
+    "content-hash": "d299c470ed81b6014f986fc3f6187753",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1016,54 +1016,6 @@
             "time": "2022-05-28T22:19:18+00:00"
         },
         {
-            "name": "electrolinux/phpquery",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/electrolinux/phpquery.git",
-                "reference": "cfe59d2bc47775124ba3fd90b6ac5632667aba80"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/electrolinux/phpquery/zipball/cfe59d2bc47775124ba3fd90b6ac5632667aba80",
-                "reference": "cfe59d2bc47775124ba3fd90b6ac5632667aba80",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "phpQuery/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "didier Belot",
-                    "homepage": "https://github.com/electrolinux/phpquery",
-                    "role": "Packager, maintainer"
-                },
-                {
-                    "name": "Tobiasz Cudnik",
-                    "email": "tobiasz.cudnik@gmail.com",
-                    "homepage": "https://github.com/TobiaszCudnik",
-                    "role": "Developer"
-                }
-            ],
-            "description": "phpQuery is a server-side, chainable, CSS3 selector driven Document Object Model (DOM) API based on jQuery JavaScript Library",
-            "homepage": "http://code.google.com/p/phpquery/",
-            "support": {
-                "source": "https://github.com/electrolinux/phpquery/tree/master"
-            },
-            "time": "2021-10-09T10:03:13+00:00"
-        },
-        {
             "name": "evenement/evenement",
             "version": "v3.0.1",
             "source": {
@@ -1163,7 +1115,7 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "dev-master",
+            "version": "7.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
@@ -1198,7 +1150,6 @@
                 "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -9502,8 +9453,7 @@
         "kartik-v/yii2-date-range": 20,
         "rubix/ml": 20,
         "scheb/yahoo-finance-api": 20,
-        "cboden/ratchet": 20,
-        "electrolinux/phpquery": 20
+        "cboden/ratchet": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
