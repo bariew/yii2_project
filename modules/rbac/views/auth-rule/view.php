@@ -8,7 +8,6 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('modules/rbac', 'Auth Rules'
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-rule-view">
-    <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a(Yii::t('modules/rbac', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('modules/rbac', 'Delete'), ['delete', 'id' => $model->name], [

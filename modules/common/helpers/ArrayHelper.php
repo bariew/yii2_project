@@ -55,21 +55,13 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     }
 
     /**
-     * @return array|string[]
-     */
-    public static function languageList()
-    {
-        return Yii::$app->params['languages'];
-    }
-
-    /**
      * @return array
      */
     public static function booleanList()
     {
         return [
-            true => Yii::t('misc', 'Yes'),
-            false => Yii::t('misc', 'No')
+            true => Yii::t('common', 'Yes'),
+            false => Yii::t('common', 'No')
         ];
     }
 

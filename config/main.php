@@ -140,11 +140,22 @@ return \yii\helpers\ArrayHelper::merge([
     ],
     'params' => [
         'bsVersion' => 4, //for kartik widgets
-        'admin_email' => 'admin@test.com',
+        'adminMail' => 'admin@test.com',
         'salt' => 'a689839638e2243145ac9b2683cac9bd',
         'hostInfo' => 'http://localhost:8080',
         'languages' => [
-            'en' => ['code' => 'en', 'title' => 'English (US)'],
+            'he' => 'עברית',
+            'en' => 'English',
+            'el' => 'Ελληνικά',
+            'uk' => 'Українська',
+            'ru' => 'Русский',
+            'ar' => 'عربى',
+            'de' => 'Deutsch',
+            'es' => 'Español',
+            'fr' => 'Français',
+            'pt' => 'Português',
+            //'nl' => 'Nederlands',
+            'it' => 'Italiano',
         ],
     ]
 ], require __DIR__ . DIRECTORY_SEPARATOR . 'local.php');

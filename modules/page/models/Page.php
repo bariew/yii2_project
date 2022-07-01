@@ -5,6 +5,10 @@
 
 namespace app\modules\page\models;
 
+use app\modules\common\components\ActiveRecordCachedTrait;
+use app\modules\common\components\behaviors\FileBehavior;
+use app\modules\common\helpers\FileHelper;
+use app\modules\i18n\behaviors\ModelTranslateBehavior;
 use bariew\nodeTree\ARTreeBehavior;
 use Yii;
 use yii\base\Exception;
@@ -21,18 +25,22 @@ use yii\db\ActiveRecord;
  * @property string $url
  * @property string $layout
  * @property integer $visible
- * @property string $page_title
- * @property string $page_description
- * @property string $page_keywords
+ * @property string $seo_title
+ * @property string $seo_description
+ * @property string $seo_keywords
  *
+ * @property Page[] $children
  * @mixin ARTreeBehavior
- *
+ * @mixin ModelTranslateBehavior
  */
 class Page extends ActiveRecord
 {
+    use ActiveRecordCachedTrait;
+
     const VISIBLE_YES = 1;
     const VISIBLE_NO = 0;
     public static $currentPage = false;
+    private static $_all;
 
     /**
      * @inheritdoc
@@ -55,8 +63,8 @@ class Page extends ActiveRecord
                 'whenClient' => 'function($attribute, $value) { return false; }'
             ],
             [['pid', 'rank', 'visible'], 'integer'],
-            [['brief', 'content', 'page_description', 'page_keywords'], 'string'],
-            [['title', 'name', 'url', 'layout', 'page_title'], 'string', 'max' => 255]
+            [['brief', 'content', 'seo_description', 'seo_keywords'], 'string'],
+            [['title', 'name', 'url', 'layout', 'seo_title'], 'string', 'max' => 255],
         ];
     }
 
@@ -76,20 +84,10 @@ class Page extends ActiveRecord
             'url' => Yii::t('page', 'Url'),
             'layout' => Yii::t('page', 'Layout'),
             'visible' => Yii::t('page', 'Visible'),
-            'page_title' => Yii::t('page', 'SEO Title'),
-            'page_description' => Yii::t('page', 'SEO Description'),
-            'page_keywords' => Yii::t('page', 'SEO Keywords'),
-        ];
-    }
+            'seo_title' => Yii::t('page', 'SEO Title'),
+            'seo_description' => Yii::t('page', 'SEO Description'),
+            'seo_keywords' => Yii::t('page', 'SEO Keywords'),
 
-    /**
-     * @inheritdoc
-     */
-    public function scopes()
-    {
-        return [
-            'visible'           => ['condition'=>"visible = 1", "order"=>"rank"],
-            'visibleChildren'   => ['condition'=>"visible = 1 AND pid = $this->id", "order"=>"rank"],
         ];
     }
 
@@ -102,7 +100,11 @@ class Page extends ActiveRecord
             'nodeTree' => [
                 'class'         => ARTreeBehavior::className(),
                 'actionPath'    => '/page/item/update'
-            ]
+            ],
+            'translate' => [
+                'class' => ModelTranslateBehavior::class,
+                'attributes' => ['title', 'content', 'seo_title', 'seo_description', 'seo_keywords']
+            ],
         ];
     }
 
@@ -127,10 +129,26 @@ class Page extends ActiveRecord
         if ($model->layout) {
             Yii::$app->controller->layout = $model->layout;
         }
-        Yii::$app->view->title = $model->page_title;
-        Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $model->page_description]);
-        Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $model->page_keywords]);
+        Yii::$app->view->title = $model->seo_title;
+        Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
+        Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
         return static::$currentPage = $model;
+    }
+
+    /**
+     * @return array|ActiveRecord[]|static[]
+     */
+    public static function all()
+    {
+        return static::$_all = static::$_all ?? static::find()->indexBy('name')->all();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getChildren()
+    {
+        return $this->hasMany(static::class, ['pid' => 'id'])->alias('children');
     }
 
     /**
@@ -141,6 +159,12 @@ class Page extends ActiveRecord
         if (!$this->pid) {
             throw new Exception("Can not delete the root page");
         }
-        return parent::beforeDelete();
+        if (!parent::beforeDelete()) {
+            return false;
+        }
+        foreach ($this->children as $child) {
+            $child->delete();
+        }
+        return true;
     }
 }

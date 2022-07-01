@@ -7,15 +7,20 @@
 
 namespace app\modules\i18n\controllers;
 
+use app\modules\common\helpers\DbHelper;
+use app\modules\common\widgets\Alert;
 use app\modules\i18n\models\SourceMessage;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Yii;
 use app\modules\i18n\models\Message;
 use app\modules\i18n\models\SourceMessageSearch;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\web\UploadedFile;
 
 /**
  * Manages site translation from admin area.
@@ -132,6 +137,56 @@ class MessageController extends Controller
                 }, $v->messages)
             ];
         }, SourceMessage::find()->andWhere(['>', 'id', $id])->with('messages')->all());
+    }
+
+    /**
+     * @return Response
+     * @throws \yii\db\Exception
+     */
+    public function actionImport()
+    {
+        ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', 0);
+        if ($file = UploadedFile::getInstanceByName('file')) {
+            $data = [];
+            $existingMessageIds = SourceMessage::find()->select('id')->column();
+            $reader = ReaderEntityFactory::createXLSXReader();
+            $reader->open($file->tempName);
+
+            foreach ($reader->getSheetIterator() as $a => $sheet) { /*** @var  */
+                if ($a > 1) {
+                    continue;
+                }
+                foreach ($sheet->getRowIterator() as $k => $row) {
+                    $item = array_map(function ($v) { return $v->getValue();}, $row->getCells());
+                    if ($k == 1) {
+                        try {
+                            list($from_lang, $to_lang) = array_values(array_intersect(array_keys(Yii::$app->params['languages']), $item));
+                        } catch (\Exception $e) {
+                            throw new BadRequestHttpException("Incorrect Languages");
+                        }
+                        $keys = array_flip(array_filter($item));
+                        continue;
+                    }
+                    if (!$item[$keys['id']]) {
+                        if ($item[$keys[$to_lang]]) {
+                            throw new BadRequestHttpException("Missing ID value");
+                        }
+                        break; // quit processing rows for there might be much more empty ones
+                    }
+                    if (!in_array($item[$keys['id']], $existingMessageIds)) {
+                        continue;
+                    }
+                    $data[] = ['id' => $item[$keys['id']], 'language' => $to_lang, 'translation' => $item[$keys[$to_lang]]];
+                }
+            }
+            $reader->close();
+            Yii::$app->session->addFlash(Alert::TYPE_SUCCESS, "Successfully imported");
+            foreach (array_chunk($data, 100) as $values) {
+                DbHelper::insertUpdate(Message::tableName(), $values, Message::getDb());
+            }
+        }
+        return $this->redirect('index');
     }
 
     /**

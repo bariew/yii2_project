@@ -8,7 +8,6 @@ $this->title = Yii::t('modules/rbac', 'Auth Rules');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-rule-index">
-    <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a(Yii::t('modules/rbac', 'Create {modelClass}', [
                     'modelClass' => 'Auth Rule',

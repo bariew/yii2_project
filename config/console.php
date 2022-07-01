@@ -18,4 +18,6 @@ return \yii\helpers\ArrayHelper::merge([
             }, $mainConfig['modules'])),
         ]
     ]
-], $mainConfig);
+], $mainConfig, [
+    'language' => 'en', //this is important for generating rtl-free assets
+]);

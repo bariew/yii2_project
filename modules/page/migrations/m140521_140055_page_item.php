@@ -17,16 +17,16 @@ class m140521_140055_page_item extends \yii\db\Migration
             'url'       => 'string',
             'layout'    => 'string',
             'visible'   => 'TINYINT(1) DEFAULT 1',
-            'page_title'        => 'string',
-            'page_description'  => 'text',
-            'page_keywords'     => 'text'
+            'seo_title'        => 'string',
+            'seo_description'  => 'text',
+            'seo_keywords'     => 'text'
         ));
         $this->insert(Page::tableName(), array(
             'pid'       => 0,
             'title'     => 'Home page',
             'url'       => '/',
             'visible'   => 1,
-            'page_title'=> 'Home page',
+            'seo_title'=> 'Home page',
             'content'   => '<div class="jumbotron"><p class="lead">Welcome to Page module Home page!</p></div>'
         ));
         return true;

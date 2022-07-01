@@ -9,7 +9,7 @@
 return [
     'sourcePath' => dirname(__DIR__),
     'messagePath' => dirname(__DIR__).'/messages',
-    'languages' => array_keys(app\modules\common\helpers\ArrayHelper::languageList()),
+    'languages' => Yii::$app->params['languages'],
     'translator' => 'Yii::t',
     'sort' => true,
     'overwrite' => true,

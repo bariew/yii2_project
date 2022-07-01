@@ -54,13 +54,13 @@ $this->title = Yii::t('modules/i18n', "Translations");
             'format' => 'raw',
             'value' => function(SourceMessageSearch $model) {
                 return  \yii\helpers\Html::a("<i class='fa fa-plus'></i>", ['create', 'id' => $model->id], [
-                    'title' => Yii::t('misc', 'Add translation'),
+                    'title' => Yii::t('i18n', 'Add translation'),
                 ]) . ' '
                 . ($model->language
                     ? \yii\helpers\Html::a(
                         "<i class='fa fa-pen'></i>",
                         ['update', 'id' => $model->id, 'language' => $model->language],
-                        ['title' => Yii::t('misc', 'Update')]
+                        ['title' => Yii::t('common', 'Update')]
                     ) . ' '
                     . \yii\helpers\Html::a("<i class='fa fa-save'></i>", '#', [
                         'data-url'=>\yii\helpers\Url::toRoute(['fast-update', 'id' => $model->id]),

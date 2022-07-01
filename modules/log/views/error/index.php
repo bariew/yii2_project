@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= \yii\helpers\Html::a('<i class="glyphicon glyphicon-trash"></i>'
     . Yii::t('log', 'delete all'),
-    ['delete-all'],
+    \yii\helpers\Url::current(['delete-all']),
     ['class' => 'btn btn-danger float-right'])
 ?>
 <br /><br />

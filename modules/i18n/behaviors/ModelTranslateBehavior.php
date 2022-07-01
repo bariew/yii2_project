@@ -8,8 +8,6 @@ namespace app\modules\i18n\behaviors;
 use app\modules\i18n\models\SourceMessage;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use yii\db\AfterSaveEvent;
-use yii\helpers\Inflector;
 
 /**
  * Class ModelTranslateBehavior
@@ -23,7 +21,6 @@ use yii\helpers\Inflector;
  */
 class ModelTranslateBehavior extends Behavior
 {
-    public $prefix;
     public $attributes = ['name'];
 
     /**
@@ -32,9 +29,17 @@ class ModelTranslateBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_INSERT => function ($e) { $this->afterSave($e); },
-            ActiveRecord::EVENT_AFTER_UPDATE => function ($e) { $this->afterSave($e); },
-            ActiveRecord::EVENT_AFTER_DELETE => function ($e) { $this->afterSave($e); },
+            ActiveRecord::EVENT_AFTER_INSERT => function ($e) {
+                foreach ($this->attributes as $attribute) {
+                    $model = new SourceMessage(['category' => $this->category($attribute), 'message' => $this->message($attribute)]);
+                    $model->save(false);
+                }
+            },
+            ActiveRecord::EVENT_AFTER_DELETE => function ($e) {
+                foreach ($this->attributes as $attribute) {
+                    SourceMessage::deleteAll(['category' => $this->category($attribute), 'message' => $this->message($attribute)]);
+                }
+            },
         ];
     }
 
@@ -50,60 +55,17 @@ class ModelTranslateBehavior extends Behavior
             return $this->owner->{$attribute};
         }
         $method = 't';
-        return \Yii::$method($this->category($attribute), $this->owner->{$attribute}, [], ($language ?? \Yii::$app->language));
+        return \Yii::$method($this->category($attribute), $this->message($attribute), [], ($language ?? \Yii::$app->language));
     }
 
     /**
-     * @param $attribute
-     * @return bool
+     * @param string $attribute
+     * @return array
      * @throws \yii\base\InvalidConfigException
      */
-    public function isTranslated($attribute)
+    public function translationLink($attribute = 'name')
     {
-        return ($this->owner->{$attribute} != $this->translate($attribute)) && $this->translate($attribute);
-    }
-
-    /**
-     * @var AfterSaveEvent $event
-     */
-    private function afterSave($event)
-    {
-        $owner = $this->owner;
-        foreach ($this->attributes as $attribute) {
-            if (!$value = $owner->getAttribute($attribute)) {
-                $value = $attribute."_".$owner->primaryKey;
-                $owner->updateAttributes([$attribute => $value]);
-            };
-            $condition = ['category' => $this->category($attribute), 'message' => $this->getOldAttribute($event, $attribute)];
-            $data = ['category' => $this->category($attribute), 'message' => $value];
-            switch ($event->name) {
-                case ActiveRecord::EVENT_AFTER_INSERT :
-                case ActiveRecord::EVENT_AFTER_UPDATE  :
-                    $model = SourceMessage::findOne($condition) ? : new SourceMessage($data);
-                    $model->message = $owner->getAttribute($attribute);
-                    $model->save(false);
-                    break;
-                case ActiveRecord::EVENT_AFTER_DELETE :
-                    SourceMessage::deleteAll($condition);
-                    break;
-            }
-        }
-    }
-
-    /**
-     * @param $event
-     * @param $attribute
-     * @return mixed
-     */
-    private function getOldAttribute($event, $attribute)
-    {
-        if (isset($event->changedAttributes) && isset($event->changedAttributes[$attribute])) {
-            return $event->changedAttributes[$attribute];
-        } else if(isset($event->sender->oldAttributes[$attribute])) {
-            return $event->sender->oldAttributes[$attribute];
-        } else {
-            return $event->sender->{$attribute};
-        }
+        return ['/i18n/message/index', 'SourceMessageSearch[message]' => $this->message($attribute), 'SourceMessageSearch[category]' => $this->category($attribute)];
     }
 
     /**
@@ -113,7 +75,15 @@ class ModelTranslateBehavior extends Behavior
      */
     private function category($attribute)
     {
-        $prefix = $this->prefix ? : str_replace(['{{', '%', '}}'], ['', '', ''], $this->owner->tableName());
-        return "{$prefix}_{$attribute}";
+        return str_replace(['{{', '%', '}}'], ['', '', ''], $this->owner->tableName()) . "_{$attribute}";
+    }
+
+    /**
+     * @param $attribute
+     * @return string
+     */
+    private function message($attribute)
+    {
+        return $this->category($attribute)."_".$this->owner->primaryKey;
     }
 }

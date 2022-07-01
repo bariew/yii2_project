@@ -1,10 +1,13 @@
 <?php
-
+/**
+ * ItemController class file
+ */
+ 
 namespace app\modules\log\controllers;
 
-use Yii;
 use app\modules\log\models\Log;
 use app\modules\log\models\LogSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +17,9 @@ use yii\filters\VerbFilter;
  */
 class ItemController extends Controller
 {
+    /**
+     * @inheritDoc
+     */
     public function behaviors()
     {
         return [
@@ -21,6 +27,7 @@ class ItemController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'delete-all' => ['POST'],
                 ],
             ],
         ];
@@ -62,7 +69,15 @@ class ItemController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        return $this->redirect(['index']);
+    }
 
+    /**
+     * @return \yii\web\Response
+     */
+    public function actionDeleteAll()
+    {
+        Log::deleteAll();
         return $this->redirect(['index']);
     }
 

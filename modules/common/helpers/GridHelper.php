@@ -5,6 +5,7 @@
 
 namespace app\modules\common\helpers;
 use kartik\daterange\DateRangePicker;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
@@ -47,7 +48,7 @@ class GridHelper
      */
     public static function listName($attribute)
     {
-        return Inflector::camelize(str_replace('_id', '', $attribute).'List');
+        return lcfirst(Inflector::camelize(str_replace('_id', '', $attribute).'List'));
     }
 
     /**
@@ -59,25 +60,45 @@ class GridHelper
      */
     public static function listFormat($model, $attribute, $options = [])
     {
-        $listFunction = function ($model, $attribute) {
-            $method = static::listName($attribute);
-            $key = get_class($model) . $attribute;
-            return static::$lists[$key] = method_exists(get_class($model), $method) && isset(static::$lists[$key])
-                ? static::$lists[$key] : $model->$method();
-        };
-
-        $list = $listFunction($model, $attribute);
+        $list = static::listFunction($model, $attribute);
         return array_merge([
             'attribute' => $attribute,
             'format' => 'raw',
             'value' => !$model->isNewRecord
-                ? @$list[$model->$attribute]
-                : function ($data) use ($listFunction, $attribute) {
-                    return @$listFunction($data, $attribute)[$data->$attribute];
+                ? implode(', ', array_intersect_key($list, array_flip((array) $model->$attribute)))
+                : function ($data) use ($attribute) {
+                    return @static::listFunction($data, $attribute)[$data->$attribute];
                 },
             'filter' => $list ? : null,
             'visible' => $model->isAttributeSafe($attribute),
         ], $options);
+    }
+
+    /**
+     * @param $model
+     * @param $attribute
+     * @param array $options
+     * @return array
+     */
+    public static function kartikListFormat($model, $attribute, $options = [])
+    {
+        return \yii\helpers\ArrayHelper::merge(static::listFormat($model, $attribute), [
+            'filterType' => \kartik\grid\GridView::FILTER_SELECT2,
+            'filterWidgetOptions' => ['pluginOptions' => ['allowClear' => true], 'options' => ['prompt' => ''],],
+        ], $options);
+    }
+
+    /**
+     * @param $model
+     * @param $attribute
+     * @return mixed
+     */
+    private static function listFunction($model, $attribute)
+    {
+        $method = static::listName($attribute);
+        $key = get_class($model) . $attribute;
+        return static::$lists[$key] = method_exists(get_class($model), $method) && isset(static::$lists[$key])
+            ? static::$lists[$key] : $model->$method();
     }
 
     /**
@@ -112,7 +133,7 @@ class GridHelper
     public static function viaListFormat($model, $attribute, $options = [])
     {
         $relation = $model->getRelation($attribute);
-        $relationClass = $relation->modelClass;
+        $relationClass = $relation->modelClass; /** @var ActiveRecord $relationClass */
         $columns = Yii::$app->db->getTableSchema($relationClass::tableName())->columnNames;
         $titles = array_intersect(['title', 'name', 'username'], $columns);
         if (!$title = reset($titles)) {
@@ -160,9 +181,8 @@ class GridHelper
      * @param $model
      * @param $attribute
      * @param array $options
-     * @param array $pickerOptions
      * @return array
-     * @throws \Exception
+     * @throws \Throwable
      */
     public static function dateRangeFormat($model, $attribute, $options = [])
     {
@@ -188,9 +208,14 @@ class GridHelper
      */
     public static function arrayFormat($model, $attribute, $options = [])
     {
-        $replacer = function($v){
-            return '<pre>'.preg_replace(['#[\s\n]*\)#', '#Array[\s\n]*\(#'], ['', ''], print_r($v, true)).'</pre>';
-        };
+        $listMethod = static::listName($attribute);
+        $replacer =  method_exists($model, $listMethod)
+            ? function ($v) use ($model, $listMethod) {
+                return implode(', ', array_intersect_key(call_user_func([$model,$listMethod]), array_flip($v)));
+            }
+            : function($v){
+                return '<pre>'.preg_replace(['#[\s\n]*\)#', '#Array[\s\n]*\(#'], ['', ''], print_r($v, true)).'</pre>';
+            };
         return array_merge([
             'attribute' => $attribute,
             'format' => 'raw',
@@ -200,6 +225,17 @@ class GridHelper
                     return $replacer($data->$attribute);
                 },
             'visible' => $model->isAttributeSafe($attribute),
+        ], $options);
+    }
+
+    public static function currencyFormat($attribute, $options = [])
+    {
+        return array_merge([
+            'attribute' => $attribute,
+            'format' => 'raw',
+            'value' => function (ActiveRecord $v) use ($attribute) {
+                return Yii::$app->formatter->asCurrency($v->$attribute, $v->currency);
+            },
         ], $options);
     }
 
@@ -247,5 +283,7 @@ class GridHelper
         }
         return $result;
     }
+
+
 
 }

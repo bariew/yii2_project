@@ -6,8 +6,6 @@
 
 namespace app\modules\common\helpers;
 
-use app\modules\common\widgets\datepicker\DatePickerMobile;
-use app\modules\company\models\Company;
 use kartik\datecontrol\DateControl;
 use kartik\datetime\DateTimePicker;
 use Yii;
@@ -77,28 +75,41 @@ class DateHelper
 
     /**
      * @param array $options
+     * @param null $defaultDate
      * @return array
+     * @throws \yii\db\Exception
      */
-    public static function dateControlOptions($options = [])
+    public static function dateControlOptions($options = [], $defaultDate = null)
     {
-        return \yii\helpers\ArrayHelper::merge([
-            'type' => DateControl::FORMAT_DATETIME,
-            'displayFormat' => 'dd.MM.yyyy HH:mm',
+        $result = \yii\helpers\ArrayHelper::merge([
+            'type' => DateControl::FORMAT_DATE, // these 3 options are for nondefault Kartik DatePicker
+//            'autoWidget' => false,
+//            'widgetClass' => DatePickerMobile::class,
+            'displayFormat' => 'dd.MM.yyyy',
             'saveFormat' => DateHelper::DATE_SAVING_FORMAT,
             'displayTimezone' => Yii::$app->timeZone,
             'saveTimezone' => 'UTC',
             'widgetOptions' => [
                 'options' => ['autocomplete' => 'off'],
+                'type' => (HtmlHelper::isRtl() ? DateTimePicker::TYPE_COMPONENT_APPEND : DateTimePicker::TYPE_COMPONENT_PREPEND),
                 'pluginOptions' => [ // these options are for Kartik DatePicker
                     'autoclose' => true,
                     //'startDate' => date('Y-m-d'),
                     //'locale'=>['format' => 'Y-m-d'],
-                   // 'rtl' => HtmlHelper::isRtl(),
+                    // 'rtl' => HtmlHelper::isRtl(),
+                    'minView' => 2, // exclude hours and minutes
+                    'initialDate' => ($defaultDate ? : false),
                     'language' => \Yii::$app->language,
-                    'todayHighlight' => true,
+                    'todayHighlight' => false,
+                   // 'weekStart' => \app\modules\company\models\Company::current()->starting_weekday,
+                    'viewSelect' => 2, //insert input value after day select
+                ],
+                'pluginEvents' => [
+                    // 'changeDay' => new JsExpression("function (e) { console.log(e); }")
                 ]
             ]
         ], $options);
+        return $result;
     }
 
     /**
@@ -116,15 +127,19 @@ class DateHelper
      * Transforms default site data format to sql search format
      * @param ActiveRecord $model
      * @param $attribute
+     * @param bool $isTimestamp
      * @return array
      */
-    public static function dateCondition(ActiveRecord $model, $attribute)
+    public static function dateCondition(ActiveRecord $model, $attribute, $isTimestamp = false)
     {
         $date = $model->getAttribute(preg_replace('/^(.*\.)?(.*)$/', '$2', $attribute));// in case it's a search prefixed attribute like 'p.name'
-        return $date
-            ? ['between', $attribute, date('Y-m-d', strtotime($date)), date('Y-m-d 23:59:59', strtotime($date))]
-            : ['between', $attribute, null, null];
+        if (!preg_match('/(\d{4}-\d{2}-\d{2}) - (\d{4}-\d{2}-\d{2})/', $date, $matches)) {
+            return ['between', $attribute, null, null];
+        }
+        $attribute = $isTimestamp ? "FROM_UNIXTIME({$attribute})" : $attribute;
+        return ['between', "DATE_FORMAT({$attribute}, '%Y-%m-%d')", $matches[1], $matches[2]];
     }
+
 
     /**
      * Calculates a rounded difference between two dates
@@ -187,7 +202,7 @@ class DateHelper
      */
     public static function monthDaysList()
     {
-        return array_combine(range(1,31), range(1,31)) + [static::MONTHDAY_LAST => Yii::t('misc', 'Last Day')];
+        return array_combine(range(1,31), range(1,31)) + [static::MONTHDAY_LAST => Yii::t('common', 'Last Day')];
     }
 
     /**
@@ -222,9 +237,9 @@ class DateHelper
     public static function dayNames()
     {
         return [
-            Yii::$app->formatter->asDate(strtotime('-1day')) => Yii::t('misc', 'yesterday'),
-            Yii::$app->formatter->asDate(strtotime('now')) => Yii::t('misc', 'today'),
-            Yii::$app->formatter->asDate(strtotime('+1day')) => Yii::t('misc', 'tomorrow'),
+            Yii::$app->formatter->asDate(strtotime('-1day')) => Yii::t('common', 'yesterday'),
+            Yii::$app->formatter->asDate(strtotime('now')) => Yii::t('common', 'today'),
+            Yii::$app->formatter->asDate(strtotime('+1day')) => Yii::t('common', 'tomorrow'),
         ];
     }
 
