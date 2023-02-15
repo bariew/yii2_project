@@ -1,7 +1,7 @@
 <?php
 use app\modules\user\models\User;
 
-class m141217_081329_user_user extends \yii\db\Migration
+class m140417_081329_user_user extends \yii\db\Migration
 {
     public function up()
     {

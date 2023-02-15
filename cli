@@ -11,18 +11,15 @@ PARAM2=$3;
 PARAM3=$4;
 PARAM4=$5
 APP=$PARAM1;
+PHP="/usr/bin/php";
 DIR=$( cd "$( dirname $0 )" && pwd );
 
 case "$COMMAND" in
     deploy)
         SERVER="prizma"
         PATH="/var/www/pragmi"
-        if [ -z "$PARAM1" ]
-        then
-            $PARAM1="update"
-        fi
         /usr/bin/rsync --recursive --links --compress --compress-level=9 --delete-after -e '/usr/bin/ssh -o Compression=no -x' --exclude-from=$DIR/.gitignore $DIR/ $SERVER:$PATH/
-        /usr/bin/ssh $SERVER sh $PATH/cli $PARAM1 2>&1
+        /usr/bin/ssh $SERVER "cd $PATH ; sh cli update" 2>&1
     ;;
     init)
         chmod 0777 runtime
@@ -31,7 +28,7 @@ case "$COMMAND" in
         cp -n config/local.php.example config/local.php
         chmod +x yii
         php composer.phar install --prefer-dist
-        ./yii migrate --interactive=0
+        php yii migrate --interactive=0
     ;;
     up)
         fuser -k 8080/tcp
@@ -42,18 +39,18 @@ case "$COMMAND" in
     ;;
     update)
         php composer.phar install --prefer-dist
-        ./yii migrate --interactive=0
+        php yii migrate --interactive=0
         #./yii asset $DIR/config/asset-config.php $DIR/config/assets-prod.php
     ;;
     dev)
         php composer.phar install
         npm install
-        ./yii migrate --interactive=0
-        ./yii message config/i18n.php
+        php yii migrate --interactive=0
+        php yii message config/i18n.php
         rm -rf runtime/cache/*
     ;;
     db)
-        ./yii console/db
+        php yii console/db
     ;;
     add)
         COMMIT=${*#$COMMAND}
