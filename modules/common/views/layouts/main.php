@@ -20,8 +20,18 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="bg-white" style="background-image: url(/img/bg_brick.jpg);background-size: 600px;">
+<!--<body class="bg-white" style="background-image: url(/img/bg_brick.jpg);background-size: 600px;">-->
+<body class="bg-black">
 <?php $this->beginBody() ?>
+<style>
+    body {
+        background-color: #fff;
+        transition: background .5s ease-out;
+    }
+    body:hover {
+        background-color: #000;
+    }
+</style>
 <div class="wrap">
     <?php \yii\bootstrap4\NavBar::begin( array(
         'options' => ['class' => 'navbar-light navbar-expand '],
