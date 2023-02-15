@@ -20,12 +20,13 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="bg-light">
+<body class="bg-white" style="height: 97%">
 <?php $this->beginBody() ?>
 <div class="wrap">
     <?php \yii\bootstrap4\NavBar::begin( array(
-        'options' => ['class' => 'navbar-dark bg-dark navbar-expand'],
-        'brandLabel' => Yii::$app->name,
+        'options' => ['class' => 'navbar-light bg-light navbar-expand '],
+        'brandLabel' => 'Home',
+        'brandOptions' => ['class' => 'text-secondary']
     ));
     if (Yii::$app->user->can(\app\modules\rbac\models\AuthItem::ROLE_ROOT)) {
         echo \yii\bootstrap4\Nav::widget([
@@ -47,14 +48,7 @@ AppAsset::register($this);
             ]
         ]);
     }
-    if (Yii::$app->user->isGuest) {
-        echo \yii\bootstrap4\Nav::widget([
-            'options' => ['class' => 'navbar-nav ml-auto'],
-            'items' => [
-                ['label' => 'Log In', 'url' => ['/user/default/login']],
-            ]
-        ]);
-    } else {
+    if (!Yii::$app->user->isGuest) {
         echo \yii\bootstrap4\Nav::widget([
             'options' => ['class' => 'navbar-nav ml-auto'],
             'items' => [
@@ -77,10 +71,10 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
-<footer class="footer">
+<footer class="footer text-secondary">
     <div class="container">
         <p class="float-left">&copy; <?= Yii::$app->name . ' ' . date('Y') ?></p>
-        <p class="float-right"><?= Yii::powered() ?></p>
+        <p class="float-right"></p>
     </div>
 </footer>
 <?= \app\modules\common\widgets\Modal::widget(); ?>

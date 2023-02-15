@@ -26,14 +26,8 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['error', 'captcha'],
                         'roles' => ['?', '@']
                     ],
-                    [
-                        'allow' => true,
-                        'actions' => ['index'],
-                        'roles' => ['@']
-                    ]
                 ]
             ]
         ];
@@ -45,13 +39,10 @@ class SiteController extends Controller
     public function actions()
     {
         return array(
-            // captcha action renders the CAPTCHA image displayed on the contact page
             'captcha' => array(
                 'class' => '\yii\captcha\CaptchaAction',
                 'backColor' => 0xFFFFFF,
             ),
-            // page action renders "static" pages stored under 'protected/views/site/pages'
-            // They can be accessed via: index\php?r=site/page&view=FileName
             'page' => array(
                 'class' => '\yii\web\ViewAction',
             ),

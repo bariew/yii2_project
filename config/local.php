@@ -48,3 +48,4 @@ return [
         ],
     ]
 ];
+// openai api key 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

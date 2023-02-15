@@ -2,7 +2,7 @@
 require_once __DIR__ . '/bootstrap.php';
 return \yii\helpers\ArrayHelper::merge([
     'id' => 'app',
-    'name'  => 'Yii2 Project',
+    'name'  => 'Pragmi',
     'language'  => 'en',
     'timeZone' => 'Europe/Moscow',
     'basePath' => dirname(__DIR__),
