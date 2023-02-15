@@ -20,13 +20,13 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="bg-white" style="height: 97%">
+<body class="bg-white" style="background-image: url(/img/bg_brick.jpg);background-size: 600px;">
 <?php $this->beginBody() ?>
 <div class="wrap">
     <?php \yii\bootstrap4\NavBar::begin( array(
-        'options' => ['class' => 'navbar-light bg-light navbar-expand '],
-        'brandLabel' => 'Home',
-        'brandOptions' => ['class' => 'text-secondary']
+        'options' => ['class' => 'navbar-light navbar-expand '],
+        'brandLabel' => '<i class="glyphicon glyphicon-home h1"></i>',
+        'brandOptions' => ['class' => 'text-dark ']
     ));
     if (Yii::$app->user->can(\app\modules\rbac\models\AuthItem::ROLE_ROOT)) {
         echo \yii\bootstrap4\Nav::widget([
@@ -71,12 +71,7 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
-<footer class="footer text-secondary">
-    <div class="container">
-        <p class="float-left">&copy; <?= Yii::$app->name . ' ' . date('Y') ?></p>
-        <p class="float-right"></p>
-    </div>
-</footer>
+
 <?= \app\modules\common\widgets\Modal::widget(); ?>
 <?php $this->endBody() ?>
 </body>
