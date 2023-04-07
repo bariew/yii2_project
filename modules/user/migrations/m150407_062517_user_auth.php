@@ -17,6 +17,8 @@ class m150407_062517_user_auth extends Migration
             'data' => $this->text()
         ]);
         \app\modules\common\helpers\DbHelper::addForeignKey('{{%user_auth}}', 'user_id', '{{%user}}', 'id');
+        (new \app\modules\rbac\models\AuthAssignment(['item_name' => \app\modules\rbac\models\AuthItem::ROLE_ROOT, 'user_id' => 1]))->save();
+
     }
 
     public function down()

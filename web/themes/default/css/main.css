@@ -4,7 +4,7 @@ body {
 }
 @font-face {
     font-family: "graffiti";
-    src: local("graffiti"), url("graffiti.ttf") format("opentype");
+    src: local("graffiti"), url("graffiti.ttf?v=1") format("opentype");
 }
 .wrap {
     min-height: 100%;

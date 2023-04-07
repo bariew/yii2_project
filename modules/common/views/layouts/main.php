@@ -21,22 +21,33 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <!--<body class="bg-white" style="background-image: url(/img/bg_brick.jpg);background-size: 600px;">-->
-<body class="bg-black">
-<?php $this->beginBody() ?>
+<body>
+<?php $this->beginBody();
+//$this->registerJs(<<<JS
+//    setInterval(function () {
+//        $('body div').fadeOut().fadeIn();
+//    }, 2500)
+//JS)
+?>
 <style>
+    /*body { background-color: #fff; transition: background .5s ease-out;}*/
+    /*body:hover { background-color: #000; }*/
     body {
-        background-color: #fff;
-        transition: background .5s ease-out;
-    }
-    body:hover {
         background-color: #000;
+        background-image: url("/img/stars.jpg");
+
     }
+    .blinker {
+        animation: blinker 2.3s cubic-bezier(0, 0, 1, 1) infinite alternate;
+    }
+    @keyframes blinker { to { opacity: 0; } }
 </style>
+<!--<img src="/img/earth.webp" class="col-12" style="opacity: 1; position: absolute">-->
+
 <div class="wrap">
     <?php \yii\bootstrap4\NavBar::begin( array(
-        'options' => ['class' => 'navbar-light navbar-expand '],
-        'brandLabel' => '<i class="glyphicon glyphicon-home h1"></i>',
-        'brandOptions' => ['class' => 'text-dark ']
+        'options' => ['class' => 'navbar-dark navbar-expand ', 'style' => "font-family:'graffiti'"],
+        'brandLabel' => '<i class="glyphicon glyphicon-home"></i> H O M E',
     ));
     if (Yii::$app->user->can(\app\modules\rbac\models\AuthItem::ROLE_ROOT)) {
         echo \yii\bootstrap4\Nav::widget([
@@ -68,6 +79,7 @@ AppAsset::register($this);
     }
     \yii\bootstrap4\NavBar::end();
     ?>
+
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -80,6 +92,7 @@ AppAsset::register($this);
         <?php endforeach; ?>
         <?= $content ?>
     </div>
+
 </div>
 
 <?= \app\modules\common\widgets\Modal::widget(); ?>

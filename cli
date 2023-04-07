@@ -62,8 +62,18 @@ case "$COMMAND" in
         git branch -D $PARAM1
         git push --delete origin $PARAM1
     ;;
+    dockerup)
+         docker-compose build
+         docker-compose up -d
+         #docker-compose up -d --remove-orphans
+    ;;
     docker)
-        docker-compose exec php-fpm sh cli $PARAM1
+        docker-compose exec php sh cli $PARAM1
+        #sudo docker ps
+    ;;
+    dockerdeleteall)
+        docker rm -vf $(docker ps -aq)
+        docker rmi -f $(docker images -aq)
     ;;
     test)
         # Turn off debugger and set server config for index-test.php

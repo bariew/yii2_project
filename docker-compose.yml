@@ -1,46 +1,34 @@
-###############################################################################
-#                          Generated on docker.io                          #
-###############################################################################
-version: "3.1"
-services:
+version : '3'
+services :
+  php :
+    image: yiisoftware/yii2-php:7.4-fpm-23.2.0-nginx
+    volumes :
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app:delegated
+    ports :
+      - '8000:80'
+    links :
+      - mariadb
+  mariadb :
+    image : mariadb:10.1
+    volumes :
+      - mariadb:/var/lib/mysql
+    environment :
+      MYSQL_ALLOW_EMPTY_PASSWORD : " no"
+      MYSQL_ROOT_PASSWORD : "root"
+      MYSQL_USER : 'root'
+      MYSQL_PASSWORD : 'root'
+      MYSQL_DATABASE : 'yii2_project'
 
-    memcached:
-      image: memcached:alpine
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8888:80'
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+    depends_on:
+      - mariadb
 
-    mailhog:
-      image: mailhog/mailhog:latest
-      ports:
-        - "8091:8025"
-
-    mysql:
-      image: mysql:5.7
-      working_dir: /application
-      volumes:
-        - .:/application
-      environment:
-        - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=yii2_project
-        - MYSQL_USER=root
-        - MYSQL_PASSWORD=root
-      ports:
-        - "8092:3306"
-
-    webserver:
-      image: nginx:alpine
-      working_dir: /application
-      volumes:
-          - .:/application
-          - ./docker/nginx:/var/log/nginx
-          - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      ports:
-       - "8090:80"
-
-    php-fpm:
-      build: docker/php-fpm
-      working_dir: /application
-      volumes:
-        - .:/application
-        #- ./docker/php-fpm/php-fpm-startup:/usr/bin/php-fpm
-        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
-        - ./docker/php-fpm/xdebug.ini:/etc/php/7.3/mods-available/xdebug.ini
-        #- ./docker/php-fpm/cronjobs /etc/cron.d/php-app-cronjob
+volumes :
+  mariadb:

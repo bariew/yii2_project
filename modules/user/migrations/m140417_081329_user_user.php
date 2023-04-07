@@ -27,7 +27,6 @@ class m140417_081329_user_user extends \yii\db\Migration
             'status'        => 10,
             'created_at'    => time(),
         ));
-        (new \app\modules\rbac\models\AuthAssignment(['item_name' => \app\modules\rbac\models\AuthItem::ROLE_ROOT, 'user_id' => 1]))->save();
     }
 
     public function down()
