@@ -5,10 +5,7 @@ return \yii\helpers\ArrayHelper::merge([
     'id' => 'console',
     'controllerNamespace' => 'app\modules\common\controllers',
     'components' => [
-        'urlManager' => [
-            'hostInfo' => $mainConfig['params']['hostInfo'],
-            'baseUrl' => '/',
-	],
+        'urlManager' => ['hostInfo' => $mainConfig['params']['hostInfo'], 'baseUrl' => '/',],
     ],
     'controllerMap' => [
         'migrate' => [

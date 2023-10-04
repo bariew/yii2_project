@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/bootstrap.php';
+Yii::setAlias('@app', dirname(__DIR__));
+require_once '_events.php';
 return \yii\helpers\ArrayHelper::merge([
     'id' => 'app',
     'name'  => 'Pragmi',
@@ -8,8 +9,7 @@ return \yii\helpers\ArrayHelper::merge([
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
-        '@app' => dirname(__DIR__),
-        '@webroot' => dirname(__DIR__) . '/eb',
+        '@webroot' => dirname(__DIR__) . '/web',
         '@vendor' => dirname(__DIR__) . '/vendor',
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -18,14 +18,7 @@ return \yii\helpers\ArrayHelper::merge([
     ],
     'layoutPath' => '@app/modules/common/views/layouts',
     'components' => [
-        'db'    => [
-            'class' => '\yii\db\Connection',
-            'dsn'   => 'mysql:host=localhost;dbname=yii2_project',
-            'charset'=>'utf8mb4',
-            'enableSchemaCache' => true,
-            'enableQueryCache'=>true,
-            'queryCacheDuration'=>3600,
-        ],
+        'assetManager' => ['appendTimestamp' => true, 'linkAssets' => true,],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [
@@ -41,57 +34,29 @@ return \yii\helpers\ArrayHelper::merge([
                 ],
             ],
         ],
-        'assetManager' => ['appendTimestamp' => true, 'linkAssets' => true,],
-        'urlManager' => [
-            'enablePrettyUrl'       => true,
-            'showScriptName'        => false,
-            'enableStrictParsing'   => true,
-            'rules' => [
-                '/' => 'common/site/index',
-                '<controller:(site|admin)>/<action>' => 'common/<controller>/<action>',
-                [
-                    'class' => \app\modules\page\components\UrlRule::class,
-                    'pattern' => '<url:\\S*>',
-                    'route' => 'page/default/view',
-                ],
-                '<_m>/<_c>/<_a>' => '<_m>/<_c>/<_a>',
-                '<is_api:api>/<_m>/<_c>/<_a>' => '<_m>/<_c>/<_a>',
-            ],
+        'authManager' => ['class' => \yii\rbac\DbManager::class, 'defaultRoles' => ['guest'],],
+        'cache'=>['class'=>'yii\caching\FileCache', 'dirMode' => 0777, 'fileMode' => 0777,],
+        'db'    => [
+            'class' => '\yii\db\Connection',
+            'dsn'   => 'mysql:host=localhost;dbname=yii2_project',
+            'charset'=>'utf8mb4',
+            'enableSchemaCache' => true,
+            'enableQueryCache'=>true,
+            'queryCacheDuration'=>3600,
+            'on afterOpen' => function(\yii\base\Event $event) {
+                $sender = $event->sender;/** @var \yii\db\Connection $sender */
+                $sender->createCommand("SET time_zone='+00:00'; SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));")->execute();
+            },
         ],
         'i18n' => ['translations' => [
             '*' => ['class' => 'yii\i18n\DbMessageSource', 'enableCaching' => true],
             'yii' => ['class' => 'yii\i18n\DbMessageSource', 'enableCaching' => true]
         ]],
-        'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/mail' => '@app/modules/common/views/mail',
-                ],
-            ],
-            'renderers' => [
-                'js' => \app\modules\test\ReactRenderer::class,
-                'jsx' => \app\modules\test\ReactRenderer::class,
-            ]
-        ],
-        'authManager' => [
-            'class' => \yii\rbac\DbManager::class,
-            'defaultRoles' => ['guest'],
-        ],
-        'cache'=>['class'=>'yii\caching\FileCache', 'dirMode' => 0777, 'fileMode' => 0777,],
+
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error'],
-                    'except' => [
-                        'yii\web\HttpException:400',
-                        'yii\web\HttpException:403',
-                        'yii\web\HttpException:404',
-                        'yii\i18n\PhpMessageSource::loadMessages',
-                        'yii\web\UnauthorizedHttpException',
-                    ],
-                ],
                 [
                     'class' => 'yii\log\DbTarget',
                     'levels' => ['error'],
@@ -104,13 +69,16 @@ return \yii\helpers\ArrayHelper::merge([
                         'yii\web\UnauthorizedHttpException',
                     ],
                 ],
+                [
+                    'class' => 'yii\log\DbTarget',
+                    'levels' => ['info'],
+                    'logTable' => '{{%log_error}}',
+                    'exportInterval' => 1,
+                    'except'  => ['yii\db\*', 'yii\web\*', 'yashop\ses\Mailer*', 'yii\mail\BaseMailer*'],
+                ],
             ],
         ],
-//        'authManager'   => [
-//            'class' => '\yii\rbac\DbManager',
-//            'cache' => 'yii\caching\FileCache',
-//            'defaultRoles' => ['user/default/logout', 'user/default/login']
-//        ],
+
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'htmlLayout' => 'layout_default',
@@ -124,6 +92,47 @@ return \yii\helpers\ArrayHelper::merge([
 //                'port' => '465',
 //                'encryption' => 'ssl',
 //            ],
+        ],
+        'urlManager' => [
+            'enablePrettyUrl'       => true,
+            'showScriptName'        => false,
+            'enableStrictParsing'   => true,
+            'rules' => [
+                '/' => 'common/site/index',
+                '<controller:(site|admin)>/<action>' => 'common/<controller>/<action>',
+                [
+                    'class' => \app\modules\page\components\UrlRule::class,
+                    'pattern' => '<url:\\S*>',
+                    'route' => 'page/default/view',
+                ],
+                '<module>s' => '<module>/default/index',
+                '<module>/<id:\d+>' => '<module>/default/view',
+                '<module>/<id:\d+>/<key:\w+>' => '<module>/default/share',
+                '<module>/<action:(update|delete)>/<id:\d+>' => '<module>/default/<action>',
+                '<module>/<controller>/<id:\d+>' => '<module>/<controller>/view',
+                '<module>/<action>/pr<project_id:\d+>' => '<module>/default/<action>',
+                '<module>/<controller>ies' => '<module>/<controller>y/index',
+                '<module>/<controller>ses' => '<module>/<controller>s/index',
+                '<module>/<controller:(department)>s' => '<module>/<controller>/index',
+                '<module>/<action>' => '<module>/default/<action>',
+                //'<module>/<controller>' => '<module>/<controller>/index',
+
+                '<module>/<controller>/<action>/<id:\d+>' => '<module>/<controller>/<action>',
+                '<module>/<controller>/<action>/pr<project_id:\d+>' => '<module>/<controller>/<action>',
+                '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
+            ],
+        ],
+
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/mail' => '@app/modules/common/views/mail',
+                ],
+            ],
+            'renderers' => [
+                'js' => \app\modules\test\ReactRenderer::class,
+                'jsx' => \app\modules\test\ReactRenderer::class,
+            ]
         ],
     ],
     'modules' => [

@@ -5,6 +5,7 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\common\components\Container;
 use app\modules\user\models\Auth;
 use app\modules\user\models\forms\Login;
 use app\modules\user\models\forms\Register;
@@ -15,6 +16,7 @@ use app\modules\user\models\User;
 use yii\authclient\BaseOAuth;
 use Yii;
 use yii\web\ForbiddenHttpException;
+use yii\web\Response;
 
 /**
  * Default controller for all users.
@@ -203,5 +205,36 @@ class DefaultController extends Controller
             Yii::$app->session->addFlash('success', Yii::t('user', 'Data has been successfully updated!'));
         }
         return $this->render('update', ['model' => $model]);
+    }
+
+    /**
+     * OAuth2 login for external applications
+     * @return array|string[]|Response
+     * @throws ForbiddenHttpException
+     */
+    public function actionOauth()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        extract(Yii::$app->request->post());/** @var $redirect_uri *//** @var $client_id *//** @var $client_secret *//** @var $code *//** @var $client_id */
+        if ($key = str_replace('Bearer ', '', Yii::$app->request->headers->get('Authorization'))) {
+            $user = User::findIdentityByAccessToken($key);
+            return ['result' => (bool) $user, 'username' => ($user ? $user->name : '')]; //zapier test
+        }
+        $params = Yii::$app->params['oauth']['external'];
+        if (!in_array(Yii::$app->request->get('client_id', @$client_id), $params['clientId'])) {
+            throw new ForbiddenHttpException();
+        }
+        if (Yii::$app->request->isPost) { // user successfully logged in - give them his Bearer access_token
+            if (!in_array($client_secret, $params['clientSecret'])) {
+                throw new ForbiddenHttpException();
+            }
+            return ['access_token' => User::findOne(decode($code))->key ?? 123, 'expires_in' => 999999999 ,'token_type' => 'Bearer', 'scope' => 'all'];
+        }
+        $redirect_uri = Yii::$app->request->get('redirect_uri', @$redirect_uri).'?state='.Yii::$app->request->get('state');
+        if (User::current()) {
+            return $this->redirect($redirect_uri."&code=".@User::current()->id);
+        }
+        Yii::$app->user->setReturnUrl($redirect_uri);
+        return $this->redirect(['/user/default/login', 'oauth' => 1]);
     }
 }
