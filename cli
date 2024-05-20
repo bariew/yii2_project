@@ -25,7 +25,7 @@ case "$COMMAND" in
         chmod 0777 runtime
         chmod 0777 web/assets
         chmod -R 0777 web/files
-        cp -n config/local.php.example config/local.php
+        cp -n config/example.local.php config/local.php
         chmod +x yii
         php composer.phar install --prefer-dist
         php yii migrate --interactive=0

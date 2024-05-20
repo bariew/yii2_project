@@ -23,14 +23,20 @@ class DateHelper
 
     /**
      * @param string $diff
-     * @param string $format
-     * @param string $timezone
+     * @param null $format
+     * @param string $fromTimezone
+     * @param string $toTimezone
      * @return false|string
      * @throws \Exception
      */
-    public static function now($diff = 'now', $format = self::DATE_DEFAULT_FORMAT, $timezone = 'UTC')
+    public static function now($diff = 'now', $format = null, $fromTimezone = 'UTC', $toTimezone = 'UTC')
     {
-        return (new \DateTime($diff, new \DateTimeZone($timezone)))->format($format);
+        try {
+            return (new \DateTime($diff, new \DateTimeZone($fromTimezone ?:'UTC')))->setTimezone(new \DateTimeZone($toTimezone ?:'UTC'))
+                ->format($format ?? self::DATE_DEFAULT_FORMAT);
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**

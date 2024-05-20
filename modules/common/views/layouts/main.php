@@ -79,7 +79,17 @@ AppAsset::register($this);
     }
     \yii\bootstrap4\NavBar::end();
     ?>
-
+    <?php \yii\widgets\Pjax::begin(['id' => 'pjax', 'timeout' => 10000]);
+    $this->registerJs(<<<JS
+// $('.select2').remove();
+$(document).pjax('header nav>a, header li:not(".no-pjax")>a:not([href*=\\\#]), .footer-area a', '#pjax');
+$(document).on('pjax:success', function() {
+  if (window.location.href.indexOf('#top') > 0) {
+      $("html, body").animate({ scrollTop: 0 });
+  }
+})
+JS
+        , \yii\web\View::POS_END)?>
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -92,6 +102,7 @@ AppAsset::register($this);
         <?php endforeach; ?>
         <?= $content ?>
     </div>
+    <?php \yii\widgets\Pjax::end(); ?>
 
 </div>
 

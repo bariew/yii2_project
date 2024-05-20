@@ -6,6 +6,7 @@
 namespace app\modules\user\controllers;
 
 use app\modules\common\components\Container;
+use app\modules\common\components\Mailer;
 use app\modules\user\models\Auth;
 use app\modules\user\models\forms\Login;
 use app\modules\user\models\forms\Register;
@@ -88,11 +89,9 @@ class DefaultController extends Controller
 
     /**
      * Renders login form.
-     * @param string $view
-     * @param bool $partial
      * @return string view.
      */
-    public function actionLogin($view = 'login', $partial = false)
+    public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -101,10 +100,7 @@ class DefaultController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect($this->getLoginRedirect());
         }
-        if (Yii::$app->request->isAjax || $partial) {
-            return $this->renderAjax($view, compact('model'));
-        }
-        return $this->render($view, compact('model'));
+        return $this->render('login', compact('model'));
     }
 
     /**
@@ -124,14 +120,13 @@ class DefaultController extends Controller
      */
     public function actionRegister()
     {
-        return;//TODO!
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
         $model = new Register(['status' => User::STATUS_INACTIVE]);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->trigger($model::EVENT_AFTER_COMPLETE);
-            Yii::$app->session->addFlash('success', Yii::t('user', 'Password reset link is sent to your email!'));
+            Mailer::send(Mailer::VIEW_REGISTRATION_COMPLETE, ['model' => $model], $model->email);
+            Yii::$app->session->addFlash('success', Yii::t('user', 'Registration confirm link has been sent to your email!'));
             return $this->goHome();
         }
         return $this->render('register', compact('model'));
@@ -165,7 +160,7 @@ class DefaultController extends Controller
         $model = new Login();
         $model->scenario = $model::SCENARIO_PASSWORD_FORGOT;
         if ($model->load(Yii::$app->request->post()) && $model->validate() && ($user = $model->getUser())) {
-            $model->trigger($model::EVENT_PASSWORD_FORGOT);
+            Mailer::send(Mailer::VIEW_PASSWORD_FORGOT, ['model' => $model], $model->email);
             Yii::$app->session->addFlash('success', Yii::t('user', 'Password reset link is sent to your email!'));
             return $this->goHome();
         }

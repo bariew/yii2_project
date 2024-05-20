@@ -15,7 +15,7 @@ class m151028_112214_log_error extends Migration
             'log_time' => $this->integer(),
             'prefix' => $this->string(),
             'message' => $this->text(),
-        ]);
+        ], 'ENGINE = MyISAM');
         $this->createIndex('idx_log_level', $this->table, 'level');
         $this->createIndex('idx_log_category', $this->table, 'category');
         return true;

@@ -16,7 +16,7 @@ class m151028_113215_log_item extends Migration
             'model_id' => $this->string(),
             'message' => $this->text(),
             'created_at' => $this->integer(),
-        ]);
+        ], 'ENGINE = MyISAM');
     }
 
     public function down()

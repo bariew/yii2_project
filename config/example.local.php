@@ -12,7 +12,7 @@ return [
             'useFileTransport'=>true,
         ],
         'db'    => [
-            'dsn'   => 'mysql:host=mysql;dbname=yii2_project',
+            'dsn'   => 'mysql:host=localhost;dbname=yii2_project',
             'username' => 'root',
             'password'  => 'root',
         ],

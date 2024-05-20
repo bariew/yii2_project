@@ -18,6 +18,7 @@
         "ext-json":  "*",
         "ext-fileinfo": "*",
         "ext-xml": "*",
+        "ext-openssl": "*",
         "yiisoft/yii2": ">=2.0.14",
         "yiisoft/yii2-swiftmailer": ">=2.1.0",
         "bariew/yii2-node-tree" : "dev-master",
@@ -38,7 +39,8 @@
         "cboden/ratchet": "dev-master",
         "vova07/yii2-imperavi-widget": "^2.0",
         "guzzlehttp/guzzle": "7.4.5",
-        "yiisoft/yii2-imagine": "^2.3"
+        "yiisoft/yii2-imagine": "^2.3",
+        "box/spout": "^3.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -8,19 +8,27 @@
 namespace app\modules\i18n\controllers;
 
 use app\modules\common\helpers\DbHelper;
+use app\modules\common\helpers\FileHelper;
 use app\modules\common\widgets\Alert;
 use app\modules\i18n\models\SourceMessage;
-use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use app\modules\user\models\User;
+use Box\Spout\Common\Entity\Cell;
+use Box\Spout\Common\Entity\Row;
+use Box\Spout\Common\Entity\Style\Style;
 use Yii;
 use app\modules\i18n\models\Message;
 use app\modules\i18n\models\SourceMessageSearch;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
+use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+
 
 /**
  * Manages site translation from admin area.
@@ -123,23 +131,6 @@ class MessageController extends Controller
     }
 
     /**
-     * @param $id
-     * @return array[]
-     */
-    public function actionSync($id)
-    {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return array_map(function (SourceMessage $v) {
-            return [
-                'source' => $v->getAttributes(['category', 'message']),
-                'messages' => array_map(function (Message $w) {
-                    return $w->getAttributes(['language', 'translation']);
-                }, $v->messages)
-            ];
-        }, SourceMessage::find()->andWhere(['>', 'id', $id])->with('messages')->all());
-    }
-
-    /**
      * @return Response
      * @throws \yii\db\Exception
      */
@@ -148,8 +139,11 @@ class MessageController extends Controller
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 0);
         if ($file = UploadedFile::getInstanceByName('file')) {
+            $sources = [];
+            $en = [];
             $data = [];
-            $existingMessageIds = SourceMessage::find()->select('id')->column();
+            SourceMessage::deleteAll();
+            Message::deleteAll();
             $reader = ReaderEntityFactory::createXLSXReader();
             $reader->open($file->tempName);
 
@@ -161,7 +155,7 @@ class MessageController extends Controller
                     $item = array_map(function ($v) { return $v->getValue();}, $row->getCells());
                     if ($k == 1) {
                         try {
-                            list($from_lang, $to_lang) = array_values(array_intersect(array_keys(Yii::$app->params['languages']), $item));
+                            list($from_lang, $to_lang) = array_values(array_intersect($item, array_keys(Yii::$app->params['languages'])));
                         } catch (\Exception $e) {
                             throw new BadRequestHttpException("Incorrect Languages");
                         }
@@ -174,23 +168,24 @@ class MessageController extends Controller
                         }
                         break; // quit processing rows for there might be much more empty ones
                     }
-                    if (!in_array($item[$keys['id']], $existingMessageIds)) {
-                        continue;
-                    }
+                    $sources[] = ['id' => $item[$keys['id']], 'message' => $item[$keys['message']], 'category' => $item[$keys['category']]];
+                    $en[] = ['id' => $item[$keys['id']], 'language' => $from_lang, 'translation' => $item[$keys[$from_lang]]];
                     $data[] = ['id' => $item[$keys['id']], 'language' => $to_lang, 'translation' => $item[$keys[$to_lang]]];
                 }
             }
             $reader->close();
             Yii::$app->session->addFlash(Alert::TYPE_SUCCESS, "Successfully imported");
-            foreach (array_chunk($data, 100) as $values) {
-                DbHelper::insertUpdate(Message::tableName(), $values, Message::getDb());
-            }
+            DbHelper::insertUpdate(SourceMessage::tableName(), $sources, SourceMessage::getDb());
+            DbHelper::insertUpdate(Message::tableName(), $en, Message::getDb());
+            DbHelper::insertUpdate(Message::tableName(), $data, Message::getDb());
         }
         return $this->redirect('index');
     }
 
     /**
      * @return \yii\console\Response|Response
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      * @throws \yii\web\RangeNotSatisfiableHttpException
      */
     public function actionExport()
@@ -200,15 +195,16 @@ class MessageController extends Controller
         $model->language = $model->language ? : 'en';
         $query = $model->search(Yii::$app->request->getQueryParams())->query;
         $data = $query->select(['t.id', 't.category', 't.message', 'en' => 't.id', $model->language => new Expression('ANY_VALUE(messages.translation)')])->asArray()->all();
-        $csv = $data ? [implode("\t", array_diff(array_keys($data[0]), ['messages']))] : array();
+        $writer = WriterEntityFactory::createXLSXWriter();
+        $file = FileHelper::tmpFile();
+        $writer->openToFile($file);
+        $writer->addRow(new Row(array_map(function ($v) { return new Cell($v); }, array_diff(array_keys($data[0]), ['messages'])), new Style()));
         foreach ($data as $row) {
             $row['en'] = @$row['messages']['en']['translation'];
             unset($row['messages']);
-            $csv[] = implode("\t", $row);
+            $writer->addRow(new Row(array_map(function ($v) { return new Cell($v); }, $row), new Style()));
         }
-        $csv = implode("\n", $csv);
-        $csv = chr(255) . chr(254) . mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
-
-        return Yii::$app->response->sendContentAsFile($csv, 'translations.csv', ['mimeType' => 'text/csv']);
+        $writer->close() ;
+        return Yii::$app->response->sendContentAsFile(file_get_contents($file), 'translations.xlsx', ['mimeType' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']);
     }
 }
