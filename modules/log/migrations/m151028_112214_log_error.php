@@ -11,9 +11,8 @@ class m151028_112214_log_error extends Migration
         $this->createTable($this->table, [
             'id' => $this->primaryKey(),
             'level' => $this->integer(),
-            'category' => $this->string(),
+            'category' => $this->string(10),
             'log_time' => $this->integer(),
-            'prefix' => $this->string(),
             'message' => $this->text(),
         ], 'ENGINE = MyISAM');
         $this->createIndex('idx_log_level', $this->table, 'level');
@@ -23,6 +22,6 @@ class m151028_112214_log_error extends Migration
 
     public function down()
     {
-        return $this->dropTable($this->table);
+         $this->dropTable($this->table);
     }
 }

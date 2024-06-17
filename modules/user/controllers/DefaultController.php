@@ -100,7 +100,7 @@ class DefaultController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect($this->getLoginRedirect());
         }
-        return $this->render('login', compact('model'));
+        return Yii::$app->request->isAjax ? $this->renderAjax('login', compact('model')) : $this->render('login', compact('model'));
     }
 
     /**
@@ -125,7 +125,7 @@ class DefaultController extends Controller
         }
         $model = new Register(['status' => User::STATUS_INACTIVE]);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Mailer::send(Mailer::VIEW_REGISTRATION_COMPLETE, ['model' => $model], $model->email);
+            Mailer::send(Mailer::VIEW_REGISTRATION_COMPLETE, Yii::t('mail', 'Registration complete'), ['model' => $model], $model->email);
             Yii::$app->session->addFlash('success', Yii::t('user', 'Registration confirm link has been sent to your email!'));
             return $this->goHome();
         }
@@ -160,7 +160,7 @@ class DefaultController extends Controller
         $model = new Login();
         $model->scenario = $model::SCENARIO_PASSWORD_FORGOT;
         if ($model->load(Yii::$app->request->post()) && $model->validate() && ($user = $model->getUser())) {
-            Mailer::send(Mailer::VIEW_PASSWORD_FORGOT, ['model' => $model], $model->email);
+            Mailer::send(Mailer::VIEW_PASSWORD_FORGOT, Yii::t('mail', 'Password restore email'), ['model' => $model], $model->email);
             Yii::$app->session->addFlash('success', Yii::t('user', 'Password reset link is sent to your email!'));
             return $this->goHome();
         }
@@ -200,36 +200,5 @@ class DefaultController extends Controller
             Yii::$app->session->addFlash('success', Yii::t('user', 'Data has been successfully updated!'));
         }
         return $this->render('update', ['model' => $model]);
-    }
-
-    /**
-     * OAuth2 login for external applications
-     * @return array|string[]|Response
-     * @throws ForbiddenHttpException
-     */
-    public function actionOauth()
-    {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        extract(Yii::$app->request->post());/** @var $redirect_uri *//** @var $client_id *//** @var $client_secret *//** @var $code *//** @var $client_id */
-        if ($key = str_replace('Bearer ', '', Yii::$app->request->headers->get('Authorization'))) {
-            $user = User::findIdentityByAccessToken($key);
-            return ['result' => (bool) $user, 'username' => ($user ? $user->name : '')]; //zapier test
-        }
-        $params = Yii::$app->params['oauth']['external'];
-        if (!in_array(Yii::$app->request->get('client_id', @$client_id), $params['clientId'])) {
-            throw new ForbiddenHttpException();
-        }
-        if (Yii::$app->request->isPost) { // user successfully logged in - give them his Bearer access_token
-            if (!in_array($client_secret, $params['clientSecret'])) {
-                throw new ForbiddenHttpException();
-            }
-            return ['access_token' => User::findOne(decode($code))->key ?? 123, 'expires_in' => 999999999 ,'token_type' => 'Bearer', 'scope' => 'all'];
-        }
-        $redirect_uri = Yii::$app->request->get('redirect_uri', @$redirect_uri).'?state='.Yii::$app->request->get('state');
-        if (User::current()) {
-            return $this->redirect($redirect_uri."&code=".@User::current()->id);
-        }
-        Yii::$app->user->setReturnUrl($redirect_uri);
-        return $this->redirect(['/user/default/login', 'oauth' => 1]);
     }
 }

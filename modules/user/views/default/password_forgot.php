@@ -11,7 +11,7 @@ $this->title = Yii::t('user', 'Forgot Password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?php echo Html::encode($this->title) ?></h1>
+
 
     <p><?= Yii::t('user', 'We will send password reset link to this email:') ?></p>
 

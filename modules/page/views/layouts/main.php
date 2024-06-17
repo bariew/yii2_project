@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap4\Alert;
-use yii\bootstrap4\Breadcrumbs;
+use yii\bootstrap5\Alert;
+use yii\bootstrap5\Breadcrumbs;
 use app\views\AppAsset;
 
 /**
@@ -23,44 +23,44 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
     <div class="wrap">
-        <?php \yii\bootstrap4\NavBar::begin( array(
+        <?php \yii\bootstrap5\NavBar::begin( array(
             'options' => ['class' => 'navbar-light navbar-expand'],
             'brandLabel' => Yii::$app->name,
         ));
         if (Yii::$app->user->can('admin')) {
-            echo \yii\bootstrap4\Nav::widget([
+            echo \yii\bootstrap5\Nav::widget([
                 'options' => ['class' => 'navbar-nav'],
                 'items' => [
-                    ['label' => Yii::t('home', 'Logs'), 'items' => [
-                        ['label' => Yii::t('home', 'Index'), 'url' => ['/log/item/index']],
-                        ['label' => Yii::t('home', 'Errors'), 'url' => ['/log/error/index']],
+                    ['label' => Yii::t('common', 'Logs'), 'items' => [
+                        ['label' => Yii::t('common', 'Index'), 'url' => ['/log/item/index']],
+                        ['label' => Yii::t('common', 'Errors'), 'url' => ['/log/error/index']],
                     ]],
-                    ['label' => Yii::t('home', 'Users'), 'url' => ['/user/user/index']],
+                    ['label' => Yii::t('common', 'Users'), 'url' => ['/user/user/index']],
                 ]
             ]);
         }
         if (Yii::$app->user->isGuest) {
-            echo \yii\bootstrap4\Nav::widget([
-                'options' => ['class' => 'navbar-nav ml-auto'],
+            echo \yii\bootstrap5\Nav::widget([
+                'options' => ['class' => 'navbar-nav ms-auto'],
                 'items' => [
                     ['label' => 'Log In', 'url' => ['/user/default/login']],
                 ]
             ]);
         } else {
-            echo \yii\bootstrap4\Nav::widget([
-                'options' => ['class' => 'navbar-nav ml-auto'],
+            echo \yii\bootstrap5\Nav::widget([
+                'options' => ['class' => 'navbar-nav ms-auto'],
                 'items' => [
                     [
                         'label' => \app\modules\user\models\User::current()->email,
                         'items' => [
-                            ['label' => Yii::t('home', 'Profile'), 'url' => ['/user/default/update']],
-                            ['label' => Yii::t('home', 'Logout'), 'url' => ['/user/default/logout']],
+                            ['label' => Yii::t('common', 'Profile'), 'url' => ['/user/default/update']],
+                            ['label' => Yii::t('common', 'Logout'), 'url' => ['/user/default/logout']],
                         ]
                     ],
                 ]
             ]);
         }
-        \yii\bootstrap4\NavBar::end();
+        \yii\bootstrap5\NavBar::end();
         ?>
         <div class="container">
             <?= Breadcrumbs::widget([

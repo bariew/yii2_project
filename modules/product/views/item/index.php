@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
     <p>
         <?= Html::a(
             Yii::t('product', 'Create Item'), 

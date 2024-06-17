@@ -21,15 +21,15 @@ $this->title = Yii::t('models/nalog', 'Sources');
         'summary' => false,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'options' => ['class' => 'paper grid-view text-right bg-white shoadow-sm p-2'],
-        'pager' => ['class' => \yii\bootstrap4\LinkPager::class, 'options' => ['class' => 'float-right']],
+        'options' => ['class' => 'paper grid-view text-end bg-white shoadow-sm p-2'],
+        'pager' => ['class' => \yii\bootstrap5\LinkPager::class, 'options' => ['class' => 'float-right']],
         'columns' => [
             'name',
             \app\modules\common\helpers\GridHelper::listFormat($searchModel, 'type'),
             'description:ntext',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'buttonOptions' => ['data-toggle' => "ajax-modal", 'class' => 'text-dark'],
+                'buttonOptions' => ['data-bs-toggle' => "ajax-modal", 'class' => 'text-dark'],
                 'options' => ['style' => 'width:90px']
             ],
         ],

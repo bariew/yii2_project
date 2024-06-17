@@ -14,13 +14,13 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=8.1.0",
         "ext-json":  "*",
         "ext-fileinfo": "*",
         "ext-xml": "*",
         "ext-openssl": "*",
-        "yiisoft/yii2": ">=2.0.14",
-        "yiisoft/yii2-swiftmailer": ">=2.1.0",
+        "ext-simplexml": "*",
+        "yiisoft/yii2": "2.0.50",
         "bariew/yii2-node-tree" : "dev-master",
         "creocoder/yii2-nested-sets": "0.9.*",
         "yiisoft/yii2-jui": "*",
@@ -28,31 +28,29 @@
         "kartik-v/yii2-widget-select2": ">=2.1@dev",
         "kartik-v/yii2-editors": "@dev",
         "kartik-v/yii2-widget-fileinput": "^1.0@dev",
-        "yiisoft/yii2-bootstrap4": "^1.0@dev",
+        "yiisoft/yii2-bootstrap5": "dev-master",
         "sweelix/yii2-postmark": "dev-master",
         "kartik-v/yii2-datecontrol": "^1.9",
         "kartik-v/yii2-widget-datetimepicker": "^1.4@dev",
         "kartik-v/yii2-number": "1.0.x-dev",
         "kartik-v/yii2-date-range": "1.7.x-dev",
-        "rubix/ml": "dev-master",
-        "scheb/yahoo-finance-api": "4.x-dev",
-        "cboden/ratchet": "dev-master",
         "vova07/yii2-imperavi-widget": "^2.0",
         "guzzlehttp/guzzle": "7.4.5",
         "yiisoft/yii2-imagine": "^2.3",
-        "box/spout": "^3.3"
+        "madcoda/php-youtube-api": "dev-master",
+        "league/oauth2-google": "dev-main",
+        "hashids/hashids": "^4.1",
+        "google/apiclient": "^2.16",
+        "google-gemini-php/client": "dev-main",
+        "yiisoft/yii2-symfonymailer": "^4.0",
+      "ext-curl": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
         "yiisoft/yii2-gii": "~2.2.5",
         "yiisoft/yii2-faker": "~2.0.0",
         "symfony/browser-kit": ">=2.7 <=4.2.4",
-        "bariew/yii2-doctest-extension": "^2.2",
-        "codeception/codeception": "^4.1",
-        "codeception/module-asserts": "^1.3",
-        "codeception/module-phpbrowser": "^1.0",
-        "codeception/module-filesystem": "^1.0",
-        "codeception/module-yii2": "^1.1"
+        "bariew/yii2-doctest-extension": "^2.2"
     },
     "config": {
         "process-timeout": 1800,
@@ -60,7 +58,8 @@
             "enabled": false
         },
         "allow-plugins": {
-            "yiisoft/yii2-composer": true
+            "yiisoft/yii2-composer": true,
+            "php-http/discovery": true
         }
     },
     "scripts": {

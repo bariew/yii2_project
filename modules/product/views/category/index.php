@@ -11,7 +11,7 @@ $this->title = Yii::t('product', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
-    <h1><?= Html::encode($this->title) ?></h1>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

@@ -10,7 +10,7 @@ namespace app\modules\common\widgets;
  * Class Modal
  * @package app\modules\common\widgets
  */
-class Modal extends \yii\bootstrap4\Modal
+class Modal extends \yii\bootstrap5\Modal
 {
     public $title = '<div></div>';
     public $options = ['id' => 'ajax-modal'];
@@ -21,21 +21,30 @@ class Modal extends \yii\bootstrap4\Modal
     public function run()
     {
         $this->view->registerJs(<<<JS
-
-$(document).on('click', '[data-toggle="ajax-modal"]', function(e) {
+var myModal = new bootstrap.Modal(document.getElementById('ajax-modal'), {
+  keyboard: false
+})
+$(document).on('click', '[data-bs-toggle="ajax-modal"]', function(e) {
     e.preventDefault();
     var href = $(this).data('remote') || $(this).attr('href');
+    var title = $(this).text();
     if (href.indexOf('.') > 0) { // renders an image
-        $('#ajax-modal').find('.modal-body').html('<div><img style="width:100%" src="'+href+'" />').end().modal();
+        $('#ajax-modal').find('.modal-body').html('<div><img style="width:100%" src="'+href+'" />');
+        myModal.show();
     } else if ($(this).attr('data-force')) {
         $('#ajax-modal').modal().load(href);
     } else {
         $.post(href, $(this).data('params'), function (data) {
             $('#ajax-modal-label').html($(data).find('.modal-title').text());
-            data && $('#ajax-modal').find('.modal-body').html(data).end().modal();
-            $('#ajax-modal .modal-body').find('.modal-title').remove();
+            data && $('#ajax-modal').find('.modal-body').html(data);
+            myModal.handleUpdate();
+            myModal.show();
+            $('#ajax-modal .modal-title').text(title);
         })
     }
+});
+$(document).on('click', '[data-bs-dismiss="modal"]', function(e) {
+    myModal.hide();
 });
 $(document).on("submit", "#ajax-modal form", function(event){ // ajax submit form from modal window
     event.preventDefault();
@@ -47,7 +56,8 @@ $(document).on("submit", "#ajax-modal form", function(event){ // ajax submit for
         processData: false,
         contentType: false,
         success: function (data) {
-             $('#ajax-modal').find('.modal-body').html(data).end().modal();
+             $('#ajax-modal').find('.modal-body').html(data);
+             myModal.show();
         }
     });
 });
@@ -55,7 +65,8 @@ $(document).ready(function(event){ // load modal from url ajax-modal parameter
     var href = (new URL(window.location.href)).searchParams.get("ajax-modal");
     if (href) {
         $.get(href, function (data) {
-            data && $('#ajax-modal').find('.modal-body').html(data).end().modal();
+            data && $('#ajax-modal').find('.modal-body').html(data);
+            myModal.show();
         })
     }
 });

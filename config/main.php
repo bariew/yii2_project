@@ -80,17 +80,19 @@ return \yii\helpers\ArrayHelper::merge([
         ],
 
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => \yii\symfonymailer\Mailer::class,
             'htmlLayout' => 'layout_default',
-            'view' => ['theme' => ['pathMap' => ['@app/mail' => '@app/modules/common/views/mail',],],],
-//            'view' => ['theme' => ['pathMap' => ['@app/mail' => '@app/views/mail',],],],
+            'viewPath' => '@app/modules/common/views/mail',
+            'transport' => [
+                'dsn' => 'sendmail://default',
+            ],
 //            'transport' => [
-//                'class' => 'Swift_SmtpTransport',
-//                'host' => 'smtp.gmail.com',
-//                'username' => 'xxxxxx',
-//                'password' => 'xxxxx',
-//                'port' => '465',
-//                'encryption' => 'ssl',
+//                'scheme' => 'smtps',
+//                'host' => '',
+//                'username' => '',
+//                'password' => '',
+//                'port' => 465,
+//                'dsn' => 'native://default',
 //            ],
         ],
         'urlManager' => [
@@ -148,7 +150,7 @@ return \yii\helpers\ArrayHelper::merge([
         'datecontrol' => ['class' => '\kartik\datecontrol\Module'],//, 'convertAction' => '/common/site/date-convert'],
     ],
     'params' => [
-        'bsVersion' => 4, //for kartik widgets
+        'bsVersion' => 5, //for kartik widgets
         'adminMail' => 'admin@test.com',
         'salt' => 'a689839638e2243145ac9b2683cac9bd',
         'hostInfo' => 'http://localhost:8080',

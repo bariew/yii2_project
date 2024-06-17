@@ -10,16 +10,15 @@ class m141208_072026_guest_permissions extends Migration
     private function getPermissions()
     {
         $guestAccess = [
+            'common/site',
+            'lesson/dashboard',
             'page/default',
             'user/default',
             'debug/default/toolbar',
         ];
         return [
             AuthItem::ROLE_GUEST => $guestAccess,
-            AuthItem::ROLE_DEFAULT => array_merge($guestAccess, [
-                'user/default/logout',
-                'user/default/update',
-            ]),
+            AuthItem::ROLE_DEFAULT => $guestAccess,
         ];
     }
 

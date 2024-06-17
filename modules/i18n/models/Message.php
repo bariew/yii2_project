@@ -19,7 +19,6 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property string $language
  * @property string $translation
- * @property string $updated_at
  *
  * @property SourceMessage $source
  */
@@ -58,15 +57,6 @@ class Message extends ActiveRecord
             'sourceCategory' => Yii::t('modules/i18n', 'Message category'),
             'translation'    => Yii::t('modules/i18n', 'Translation'),
         ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function beforeSave($insert)
-    {
-        $this->updated_at = DateHelper::now();
-        return parent::beforeSave($insert);
     }
 
     /**

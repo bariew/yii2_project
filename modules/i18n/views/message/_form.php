@@ -16,7 +16,7 @@
         'plugins' => ['imagemanager'],
         //'imageUpload' => \yii\helpers\Url::to(['image-upload']),
     ]]) ?>
-    <div class="form-group well text-right">
+    <div class="form-group well text-end">
         <?= \yii\helpers\Html::submitButton(Yii::t('modules/i18n', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 <?php $form::end(); ?>

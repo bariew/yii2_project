@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
     
-    <?php echo \yii\bootstrap4\Tabs::widget([
+    <?php echo \yii\bootstrap5\Tabs::widget([
         'items' => [
             [
                 'label' => 'Content',

@@ -2,7 +2,7 @@
 /**
  * Error class file.
  */
- 
+
 namespace app\modules\log\models;
 
 use Yii;
@@ -16,7 +16,6 @@ use yii\log\Logger;
  * @property integer $level
  * @property string $category
  * @property integer $log_time
- * @property string $prefix
  * @property string $message
  * @property boolean $active Whether error is fixed.
  */
@@ -54,7 +53,7 @@ class Error extends ActiveRecord
     {
         return [
             [['level', 'log_time', 'active'], 'integer'],
-            [['category', 'prefix'], 'string', 'max' => 255]
+            [['category'], 'string', 'max' => 255]
         ];
     }
 
@@ -68,7 +67,6 @@ class Error extends ActiveRecord
             'level'    =>  Yii::t('log', 'Level'),
             'category' =>  Yii::t('log', 'Category'),
             'log_time' =>  Yii::t('log', 'Log Time'),
-            'prefix'   =>  Yii::t('log', 'Prefix'),
             'message'  =>  Yii::t('log', 'Message'),
             'active'   =>  Yii::t('log', 'Active'),
         ];
@@ -94,7 +92,7 @@ class Error extends ActiveRecord
     }
 
     /**
-     * @return \self
+     * @return \self|ActiveRecord
      */
     public function getErrorQuery()
     {
@@ -141,11 +139,11 @@ class Error extends ActiveRecord
     public function getUrl($string = null)
     {
         $string = ($string === null) ? @$this->getErrorQuery()->message : $string;
-        $prefix = preg_match('/.*\'HTTPS\' => \'(.*)\'.*/', $string, $prefix)
+        $prefix = preg_match('/.*\'HTTPS\' => \'(.*)\'.*/', (string) $string, $prefix)
             ? empty($prefix[1]) ? 'http://' : 'https://' : '';
-        $serverName = preg_match('/.*\'HTTP_HOST\' => \'(.*)\'.*/', $string, $serverName)
+        $serverName = preg_match('/.*\'HTTP_HOST\' => \'(.*)\'.*/', (string) $string, $serverName)
             ? $serverName[1] : '';
-        $requestUri = preg_match('/.*\'REQUEST_URI\' => \'(.*)\'.*/', $string, $matches)
+        $requestUri = preg_match('/.*\'REQUEST_URI\' => \'(.*)\'.*/', (string) $string, $matches)
             ? $matches[1] : '';
         return $prefix . $serverName . $requestUri;
     }

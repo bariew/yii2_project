@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = Yii::t('product', 'Update');
 ?>
 <div class="item-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
 
     <?= $this->render('_form', [
         'model' => $model,

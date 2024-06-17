@@ -5,11 +5,7 @@
 
 namespace app\modules\common\components;
 
-use app\modules\page\models\ContactForm;
-use app\modules\user\models\forms\Login;
-use app\modules\user\models\forms\Register;
 use Yii;
-use yii\base\Event;
 
 /**
  * Description:
@@ -22,14 +18,14 @@ class Mailer
 
     /**
      * @param $view
+     * @param null $subject
      * @param $params
      * @param $to
-     * @param null $subject
      * @return bool
      */
-    public static function send($view, $params, $to = null, $subject = null)
+    public static function send($view, $subject, $params = [], $to = null)
     {
-        /** @var \yii\swiftmailer\Mailer|\sweelix\postmark\Mailer $mailer */
+        /** @var \yii\symfonymailer\Mailer $mailer */
         $mailer = Yii::$app->mailer;
         $to = $to ? : Yii::$app->params['admin_email'];
         return $mailer->compose($view, $params)

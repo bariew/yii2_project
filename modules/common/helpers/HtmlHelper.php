@@ -168,7 +168,7 @@ JS
     public static function button($icon = 'plus', $url = ['create'], $options = [])
     {
         return Html::a('<i class="glyphicon glyphicon-'.$icon.'"></i>', $url, array_merge(
-            ['class' => 'btn btn-default shadow-sm float-right rounded-circle', 'data-toggle' => "ajax-modal"],
+            ['class' => 'btn btn-default shadow-sm float-right rounded-circle', 'data-bs-toggle' => "ajax-modal"],
             $options
         ));
     }
@@ -192,7 +192,7 @@ JS
         }, $items));
         return <<<HTML
 <div class="dropdown">
-    <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false"> {$title} </a>
+    <a href="#" class="dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false"> {$title} </a>
     <div class="dropdown-menu"> {$items} </div>
 </div>
 HTML;

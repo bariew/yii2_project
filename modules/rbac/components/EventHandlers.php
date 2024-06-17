@@ -60,7 +60,7 @@ class EventHandlers
     {
         /** @var Controller $controller */
         $controller = $event->sender;
-        if (!$controller->module || !in_array($controller->module->id, AuthItem::ACCESS_MODULES)) {
+        if (!$controller->module || in_array($controller->module->id, AuthItem::ACCESS_MODULES)) {
             return;
         }
         $permissionName = AuthItem::createPermissionName([$controller->module->id, $controller->id, $controller->action->id]);

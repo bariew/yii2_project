@@ -48,15 +48,13 @@ class SourceMessageSearch extends SourceMessage
             'language' =>  new Expression('ANY_VALUE(messages.language)')]);
         $query->joinWith('messages')->groupBy(['t.id']);
         
-        $dataProvider = new ActiveDataProvider(['query' => $query]);
-        $dataProvider->getSort()->attributes['language'] = [
-            'asc' => ['messages.language' => SORT_ASC],
-            'desc' => ['messages.language' => SORT_DESC],
-        ];
-        $dataProvider->getSort()->attributes['translation'] = [
-            'asc' => ['messages.translation' => SORT_ASC],
-            'desc' => ['messages.translation' => SORT_DESC],
-        ];
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => ['translation' => SORT_ASC],
+                'attributes' => array_merge(parent::attributes(), ['language', 'translation'])
+            ]
+        ]);
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;

@@ -11,7 +11,7 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?php echo Html::encode($this->title) ?></h1>
+
 
     <p><?= Yii::t('user', 'Please fill out the following fields to login:') ?></p>
 
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
-            <?= yii\authclient\widgets\AuthChoice::widget(['baseAuthUrl' => ['auth']]) ?>
+            <?= '';//yii\authclient\widgets\AuthChoice::widget(['baseAuthUrl' => ['auth']]) ?>
         </div>
     </div>
 

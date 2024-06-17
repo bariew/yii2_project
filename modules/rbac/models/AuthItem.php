@@ -7,6 +7,7 @@ namespace app\modules\rbac\models;
 
 use app\controllers\SiteController;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\FileHelper;
 use \yii\rbac\Item;
 use yii\db\ActiveRecord;
@@ -36,7 +37,7 @@ class AuthItem extends ActiveRecord
     const ROLE_DEFAULT = 'default';
     const ROLE_GUEST = 'guest';
 
-    const ACCESS_MODULES = ['rbac', 'admin', 'log'];
+    const ACCESS_MODULES = ['common'];
     /**
      * @var array container for autItem tree for menu widget.
      */
@@ -55,12 +56,18 @@ class AuthItem extends ActiveRecord
         ];
     }
 
+    /**
+     * @param $role
+     * @return bool
+     */
     public function isDefaultRole($role)
     {
         return in_array($role, array_keys(static::defaultRoleList()));
     }
 
-
+    /**
+     * @return array
+     */
     public static function typeList()
     {
         return [
@@ -79,6 +86,9 @@ class AuthItem extends ActiveRecord
         return implode('/', $data);
     }
 
+    /**
+     * @param $user_id
+     */
     protected static function setDefaultRoles($user_id)
     {
         static::$defaultRoles = $user_id
@@ -120,8 +130,11 @@ class AuthItem extends ActiveRecord
         if (!static::$defaultRoles) {
             static::setDefaultRoles($user->id);
         }
-        if (in_array($permissionName, static::$defaultRoles)) {
-            return true;
+
+        foreach (static::$defaultRoles as $defaultRole) {
+            if (strpos($permissionName, $defaultRole) === 0) {
+                return true;
+            }
         }
 
         return $user->can($permissionName, $params);
@@ -151,10 +164,13 @@ class AuthItem extends ActiveRecord
         ];
     }
 
+    /**
+     * @param $attribute
+     */
     public function defaultRoleRenameRule($attribute)
     {
         if ($this->isAttributeChanged($attribute) && $this->isDefaultRole(@$this->oldAttributes['name'])) {
-            return $this->addError($attribute, Yii::t('modules/rbac', 'default_role_renaming_error'));
+             $this->addError($attribute, Yii::t('modules/rbac', 'default_role_renaming_error'));
         }
     }
 
@@ -190,6 +206,23 @@ class AuthItem extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
+     */
+    public function beforeDelete()
+    {
+        if (!parent::beforeDelete()) {
+            return false;
+        }
+        if ($this->isDefaultRole($this->name)) {
+            throw new HttpException(403, Yii::t('modules/rbac', 'default_role_delete_error'));
+        }
+        return Yii::$app->authManager->remove($this->getItem());
+    }
+
+
+    // RELATIONS
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getAuthItemParents()
@@ -215,14 +248,16 @@ class AuthItem extends ActiveRecord
 
     /**
      * Gets items attached to current one by AuthItemChild relation.
-     * @return array of AuthItems
+     * @return ActiveQuery
      */
     public function getChildren()
     {
-        return $this->hasMany(static::className(), ['name' => 'child'])
-            ->via('authItemChildren');
+        return $this->hasMany(static::className(), ['name' => 'child'])->via('authItemChildren');
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getRoles()
     {
         return $this->hasMany(static::className(), ['name' => 'child'])
@@ -251,15 +286,14 @@ class AuthItem extends ActiveRecord
 
     /**
      * Gets items attached to current one by AuthItemChild relation.
-     * @return array of AuthItems
+     * @return ActiveQuery | []
      */
     public function getUsers()
     {
         if (!$user = AuthAssignment::userInstance()) {
             return [];
         }
-        return $this->hasMany($user::className(), ['id' => 'user_id'])
-            ->via('authAssignments');
+        return $this->hasMany($user::className(), ['id' => 'user_id'])->via('authAssignments');
     }
 
     /**
@@ -271,11 +305,17 @@ class AuthItem extends ActiveRecord
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getRuleName()
     {
         return $this->rule_name;
     }
 
+    /**
+     * @return Item
+     */
     public function getItem()
     {
         return new Item([
@@ -289,10 +329,15 @@ class AuthItem extends ActiveRecord
         ]);
     }
 
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     public function updateItem()
     {
         return Yii::$app->authManager->update($this->oldAttributes['name'], $this->getItem());
     }
+
     /**
      * Detaches this model from its old parent
      * and attaches to the new one.
@@ -328,19 +373,5 @@ class AuthItem extends ActiveRecord
     public function removeChild($item)
     {
         return Yii::$app->authManager->removeChild($this, $item);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function beforeDelete()
-    {
-        if (!parent::beforeDelete()) {
-            return false;
-        }
-        if ($this->isDefaultRole($this->name)) {
-            throw new HttpException(403, Yii::t('modules/rbac', 'default_role_delete_error'));
-        }
-        return Yii::$app->authManager->remove($this->getItem());
     }
 }

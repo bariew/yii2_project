@@ -23,8 +23,8 @@ $hideOptions = array_fill_keys(['headerOptions', 'filterOptions','contentOptions
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'showFooter' => true,
-        'options' => ['class' => 'paper grid-view text-right bg-white shoadow-sm p-2'],
-        'pager' => ['class' => \yii\bootstrap4\LinkPager::class, 'options' => ['class' => 'float-right']],
+        'options' => ['class' => 'paper grid-view text-end bg-white shoadow-sm p-2'],
+        'pager' => ['class' => \yii\bootstrap5\LinkPager::class, 'options' => ['class' => 'float-right']],
         'columns' => [
             \app\modules\common\helpers\GridHelper::listFormat($searchModel, 'type', $hideOptions),
             \app\modules\common\helpers\GridHelper::listFormat($searchModel, 'tax_type', $hideOptions),
@@ -34,7 +34,7 @@ $hideOptions = array_fill_keys(['headerOptions', 'filterOptions','contentOptions
             array_merge(['attribute' => 'description'], $hideOptions),
             [
                 'class' => 'yii\grid\ActionColumn',
-                'buttonOptions' => ['data-toggle' => "ajax-modal", 'class' => 'text-dark'],
+                'buttonOptions' => ['data-bs-toggle' => "ajax-modal", 'class' => 'text-dark'],
                 'header' =>
                     Html::a('<i class="glyphicon glyphicon-fullscreen"></i>', \yii\helpers\Url::current([
                         'fullscreen' => !Yii::$app->request->get('fullscreen')

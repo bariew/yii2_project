@@ -14,7 +14,7 @@ $this->title = Yii::t('modules/i18n', "Translations");
         'accept' => '.xlsx'
     ]); ?>
     <?= Html::button('Import translations', ['class' => 'btn btn-primary', 'onclick' => '$("#import-input").click()']); ?>
-    <?= Html::a('Export Results', \yii\helpers\Url::current(['export']), ['class' => 'btn btn-success float-right']); ?>
+    <?= Html::a('Export Results', \yii\helpers\Url::current(['export']), ['class' => 'btn btn-success float-end']); ?>
 <?php $form::end(); ?>
 <?= \yii\grid\GridView::widget([
     'dataProvider' => $dataProvider,
@@ -35,8 +35,10 @@ $this->title = Yii::t('modules/i18n', "Translations");
             'value' => function(SourceMessageSearch $model) {
                 return $model->language
                     ? "<div contentEditable='true' style='overflow: auto' 
-                        onkeydown='if (event.ctrlKey && event.keyCode == 13) {
-                            $(this).parents(\"tr\").find(\".btn-success\").click();
+                        onkeydown='if (event.keyCode === 9) {
+                            event.preventDefault(); event.stopPropagation();
+                            $(this).parents(\"tr\").find(\".save-btn\").click();
+                            $(this).parents(\"tr\").next().find(\".translate-live-input\").get(0).focus();                            
                         }'
                         class='form-control translate-live-input'
                     >{$model->translation}</div>"
@@ -53,17 +55,18 @@ $this->title = Yii::t('modules/i18n', "Translations");
             'options' => ['width' => '120px'],
             'format' => 'raw',
             'value' => function(SourceMessageSearch $model) {
-                return  \yii\helpers\Html::a("<i class='fa fa-plus'></i>", ['create', 'id' => $model->id], [
+                return  \yii\helpers\Html::a("<i class='glyphicon glyphicon-plus'></i>", ['create', 'id' => $model->id], [
                     'title' => Yii::t('i18n', 'Add translation'),
                 ]) . ' '
                 . ($model->language
                     ? \yii\helpers\Html::a(
-                        "<i class='fa fa-pen'></i>",
+                        "<i class='glyphicon glyphicon-pencil'></i>",
                         ['update', 'id' => $model->id, 'language' => $model->language],
                         ['title' => Yii::t('common', 'Update')]
                     ) . ' '
-                    . \yii\helpers\Html::a("<i class='fa fa-save'></i>", '#', [
+                    . \yii\helpers\Html::a("<i class='glyphicon glyphicon-save'></i>", '#', [
                         'data-url'=>\yii\helpers\Url::toRoute(['fast-update', 'id' => $model->id]),
+                        'class' => 'save-btn',
                         'onclick' => "
                                $(this).parents('tr').fadeOut();
                                $.post($(this).data('url'), {
@@ -72,7 +75,7 @@ $this->title = Yii::t('modules/i18n', "Translations");
                                     _csrf : '".Yii::$app->request->csrfToken."'
                                }); return false;"
                     ]) . ' '
-                    . \yii\helpers\Html::a("<i class='fa fa-trash'></i>", '#', [
+                    . \yii\helpers\Html::a("<i class='glyphicon glyphicon-trash'></i>", '#', [
                         'data-id'=>"{$model->id}-{$model->language}",
                         'data-url'=>\yii\helpers\Url::toRoute(['delete', 'id' => $model->id, 'language' => $model->language]),
                         'onclick' => "

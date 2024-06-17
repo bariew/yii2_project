@@ -21,7 +21,7 @@ class Main extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-6 col-sm-offset-3">
-                            <h1>{this.state.props.translations.test.page_title}</h1>
+
                         </div>
                     </div>
                 </div>

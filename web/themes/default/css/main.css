@@ -1,11 +1,14 @@
 html,
 body {
     height: 100%;
+    /*background-color: #000;*/
+    /*background-image: url("/img/stars.jpg");*/
 }
-@font-face {
-    font-family: "graffiti";
-    src: local("graffiti"), url("graffiti.ttf?v=1") format("opentype");
+.blinker {
+    animation: blinker 2.3s cubic-bezier(0, 0, 1, 1) infinite alternate;
 }
+@keyframes blinker { to { opacity: 0; } }
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -102,6 +105,10 @@ a[data-sort]{
 .page-link {
     color: #6c757d;
 }
+.pagination li {
+    padding: 5px 13px;
+    border: 1px solid #eee;
+}
 /* NAVBAR */
 .navbar-dark .dropdown-menu{
     background-color: #343a40;
@@ -115,4 +122,29 @@ a[data-sort]{
 .modal-content {
     border: 10px solid #dee2e6 !important;
 }
-/* PAPER */
+/* BOOTSTRAP 5 fix*/
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.form-row > .col {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+label {
+    margin-bottom: 0.5rem;
+}

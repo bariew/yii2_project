@@ -1,3 +1,10 @@
+<?php
+/** @var \yii\web\View $this */
+/** @var \app\modules\rbac\models\AuthItem $model */
+$this->title = $model->isNewRecord
+    ? Yii::t('rbac', 'Create Auth Item')
+    : Yii::t('rbac', 'Edit "{name}"', ['name' => $model->name])
+?>
 <div class="row">
     <div class="col-md-3 well">
         <?= \Yii::$app->controller->menu; ?>
