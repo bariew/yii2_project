@@ -9,8 +9,6 @@ $this->title = Yii::t('models/nalog', 'Create Transaction');
 ?>
 <div class="transaction-create">
 
-    <h2 class="modal-title"><?= Html::encode($this->title) ?></h2>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

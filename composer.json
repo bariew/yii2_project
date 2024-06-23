@@ -43,7 +43,8 @@
         "google/apiclient": "^2.16",
         "google-gemini-php/client": "dev-main",
         "yiisoft/yii2-symfonymailer": "^4.0",
-      "ext-curl": "*"
+      "ext-curl": "*",
+        "box/spout": "^3.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

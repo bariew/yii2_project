@@ -11,8 +11,6 @@ $this->title = $model->name;
 ?>
 <div class="source-view">
 
-    <h2 class="modal-title"><?= Html::encode($this->title) ?></h2>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

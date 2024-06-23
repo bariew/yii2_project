@@ -9,8 +9,6 @@ $this->title = Yii::t('models/nalog', 'Update Source: {name}', ['name' => $model
 ?>
 <div class="source-update">
 
-    <h2 class="modal-title"><?= Html::encode($this->title) ?></h2>
-
     <?= $this->render('_form', ['model' => $model,]) ?>
 
 </div>

@@ -14,8 +14,6 @@ $hideOptions = array_fill_keys(['headerOptions', 'filterOptions','contentOptions
 
     <?= \app\modules\common\helpers\HtmlHelper::button() ?>
 
-    <h2><?= Html::encode($this->title) ?></h2>
-
     <?php Pjax::begin(); ?>
 
     <?= GridView::widget([

@@ -11,8 +11,6 @@ $this->title = Yii::t('nalog', "Transaction");
 ?>
 <div class="transaction-view">
 
-    <h2 class="modal-title"><?= Html::encode($this->title) ?></h2>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

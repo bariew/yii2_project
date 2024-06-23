@@ -8,6 +8,7 @@ namespace app\modules\common\helpers;
 use kartik\mpdf\Pdf;
 use Yii;
 use yii\helpers\Html;
+use yii\helpers\Inflector;
 
 /**
  * Class FileHelper
@@ -23,6 +24,16 @@ class FileHelper
         'file', 'checkExtensionByMimeType' => false, 'maxSize' => self::MAX_SIZE,
         'maxFiles' => self::MAX_FILES, 'extensions' => self::AVAILABLE_EXTENSIONS
     ];
+
+
+    /**
+     * Generates tmp file path
+     * @return string
+     */
+    public static function tmpFile()
+    {
+        return tempnam(sys_get_temp_dir(), Inflector::slug(Yii::$app->name, '_'));
+    }
 
     /**
      * @return string

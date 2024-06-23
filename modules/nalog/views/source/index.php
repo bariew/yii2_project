@@ -13,8 +13,6 @@ $this->title = Yii::t('models/nalog', 'Sources');
 
     <?= \app\modules\common\helpers\HtmlHelper::button() ?>
 
-    <h2><?= Html::encode($this->title) ?></h2>
-
     <?php Pjax::begin(); ?>
 
     <?= GridView::widget([

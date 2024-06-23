@@ -13,8 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cbr-index">
 
-    <h2><?= Html::encode($this->title) ?></h2>
-
     <?php $form = ActiveForm::begin(['method' => 'get', 'options' => [
         'class' => 'form-inline'
     ]]); ?>

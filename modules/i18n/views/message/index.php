@@ -8,13 +8,13 @@ use app\modules\i18n\models\SourceMessageSearch;
  */
 $this->title = Yii::t('modules/i18n', "Translations");
 ?>
-<?php $form = \yii\widgets\ActiveForm::begin(['action' => ['import'], 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = \yii\widgets\ActiveForm::begin(['action' => ['import'], 'options' => ['class' => 'pb-4', 'enctype' => 'multipart/form-data']]); ?>
     <?= Html::fileInput('file', null, ['class' => 'd-none', 'id' => 'import-input',
         'onchange' => "$(this).parents('form').submit()",
         'accept' => '.xlsx'
     ]); ?>
-    <?= Html::button('Import translations', ['class' => 'btn btn-primary', 'onclick' => '$("#import-input").click()']); ?>
-    <?= Html::a('Export Results', \yii\helpers\Url::current(['export']), ['class' => 'btn btn-success float-end']); ?>
+    <?= Html::button('<i class="glyphicon glyphicon-download"></i>', ['class' => 'btn btn-primary float-end mx-1', 'onclick' => '$("#import-input").click()', 'title' => Yii::t('i18n', 'Import translations')]); ?>
+    <?= Html::a('<i class="glyphicon glyphicon-upload"></i>', \yii\helpers\Url::current(['export']), ['class' => 'btn btn-success float-end', 'title' => Yii::t('i18n', 'Export Results')]); ?>
 <?php $form::end(); ?>
 <?= \yii\grid\GridView::widget([
     'dataProvider' => $dataProvider,

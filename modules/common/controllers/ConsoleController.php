@@ -7,19 +7,9 @@
 namespace app\modules\common\controllers;
 
 
-use app\modules\ad\models\Item;
-use app\modules\common\helpers\DbHelper;
-use app\modules\common\widgets\videochat\VideoChat;
-use app\modules\nalog\components\Cbr;
-use app\modules\nalog\models\CurrencyHistory;
-use app\modules\user\models\User;
-use Google\Cloud\BigQuery\Dataset;
-use Google\Cloud\BigQuery\Table;
-use Google\Cloud\BigQuery\Timestamp;
-use Ratchet\App;
-use Ratchet\Http\HttpServer;
-use Ratchet\Server\IoServer;
-use Ratchet\WebSocket\WsServer;
+
+use app\modules\common\components\google\Gemini;
+
 use Yii;
 use yii\base\ErrorException;
 use yii\console\Controller;
@@ -159,7 +149,30 @@ class ConsoleController extends Controller
 
     public function actionTmp()
     {
-        (new \app\modules\rbac\models\AuthAssignment(['item_name' => \app\modules\rbac\models\AuthItem::ROLE_ROOT, 'user_id' => 1]))->save();
+        var_dump(Gemini::yii()->request('', "Куда пойти в Ижевске (согласно этим новостям): ". json_encode(
+            [
+                "1. Новые специальности и целевое обучение: что в Ижевске изменилось для абитуриентов в 2024 году",
+               "2. Два человека пострадали в столкновении BMW и такси в Ижевске",
+               "3. Процесс по делу об обманутых туристах из Удмуртии пройдет в Первомайском суде Ижевска",
+                "4. Пять пенсионеров из Ижевска лишились 1 млн рублей",
+               "5. Движение трамваев в городок Металлургов временно закроют в Ижевске - udmurt.media",
+               "6. Новую награду для многодетных семей учредили в Ижевске - udmurt.media",
+               "7. В Ижевске учредили специальный знак «Семейная доблесть»",
+               "8. В Ижевске задержали замначальника Управтодора Удмуртии по подозрению в превышении полномочий",
+               "9. Ещё один заместитель появится у главы Ижевска",
+               "10. Замначальника «Управтодора» задержали в Ижевске по делу о превышении полномочий на 11 млн рублей",
+               "11. Еще один заместитель появится у Главы Ижевска",
+               "12. Жительницу Ижевска осудили за гибель бывшей подруги сожителя",
+               "13. В Ижевском аэропорту силовики под аплодисменты задержали подозреваемого",
+               "14. Александр Бречалов и Игорь Маковский подписали соглашение о создании в Удмуртии ситуационно-аналитического центра - Лента новостей Ижевска",
+               "15. В аэропорту Ижевска мужчину задержали под аплодисменты встречающих - ГТРК Удмуртия",
+               "16. 21 июня в Ижевске отметят международный день йоги",
+               "17. Фотофакт: обезглавленных куриц нашли у детской школы искусств в Ижевске",
+               "18. Проезд по улице Майской в Ижевске у школы №88 перекроют на четыре дня",
+               "19. Мужчину жестко задержали в аэропорту Ижевска под аплодисменты встречающих",
+               "20. Сквозной проезд по улице Майской закроют в Ижевске",
+            ]
+        )));
 
     }
 }
