@@ -10,9 +10,11 @@ namespace app\modules\common\controllers;
 
 use app\modules\common\components\google\Gemini;
 
+use app\modules\common\components\google\Youtube;
 use Yii;
 use yii\base\ErrorException;
 use yii\console\Controller;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 
 /**
@@ -173,6 +175,36 @@ class ConsoleController extends Controller
                "20. Сквозной проезд по улице Майской закроют в Ижевске",
             ]
         )));
+    }
 
+
+    public function actionBest(...$text)
+    {
+        $question = implode(' ', $text);
+        $videos = Youtube::yii()->videoSearchParsed($question);
+        $result = [];
+        foreach (array_slice($videos, 0, 3) as $i => $video) {
+            $result = array_merge($result, array_map(function ($v) {
+                //   $v['textOriginal'] = substr($v['textOriginal'], 0, 200);
+                return $v;
+            }, Youtube::yii()->videoComments($video)));
+        }
+        usort($result, function ($a, $b) {
+            return $b['likeCount'] <=> $a['likeCount'];
+        });;
+        $data = ArrayHelper::map(array_slice($result, 0, 50), 'textOriginal', 'likeCount');
+//        file_put_contents(Yii::getAlias('@app/runtime/best/'.$question), json_encode($data, JSON_UNESCAPED_UNICODE));
+        echo json_encode($data, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+//        echo "\n\n\n Лучше всего:";
+//        static::runProgram("nmcli con up id gemini");
+//        var_dump(Gemini::yii()->chat($question." согласно данным мнениям (выдай результат в виде списка мнений в формате JSON): ". implode("\n\n", array_keys($data))));
+//        static::runProgram("nmcli con down id gemini");
+
+//        $result = ArrayHelper::map(array_slice($result, 0, 10), 'textOriginal', 'likeCount');
     }
 }
+/**
+ * продажа ботов для телеграма
+ * слив купленных курсов
+ * свой ТГ канал с платным контентом
+ */

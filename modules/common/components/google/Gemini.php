@@ -61,18 +61,8 @@ class Gemini
         $rollingCurl->setCallback($callback)->execute(); /** @return \RollingCurl\Request */
     }
 
-    public function request($url= null, $post = [])
+    public function request($url, $post = [])
     {
-        $url = $url ? : "models/{$this->version}:generateContent";
-        $post = is_array($post) ? $post : [
-            'contents' => [['parts' => ['text' => $post]]],
-            'safetySettings' => [
-               ["category"=> "HARM_CATEGORY_HARASSMENT", "threshold"=> "BLOCK_NONE",],
-                ["category"=> "HARM_CATEGORY_HATE_SPEECH", "threshold"=> "BLOCK_NONE",],
-                ["category"=> "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold"=> "BLOCK_NONE",],
-                ["category"=> "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold"=> "BLOCK_NONE",],
-            ]
-        ];
         $result = (new Client())->request($post ? 'POST' : 'GET', $this->url.$url.'?'.http_build_query(['key' => $this->key]), [
             'headers' => array_filter([
                 'Content-Type' => $post ? 'application/json' : null,
@@ -81,5 +71,18 @@ class Gemini
             'body' => $post ? json_encode($post) : null,
         ])->getBody()->getContents();
         return json_decode($result, true)['candidates'][0]['content']['parts'][0]['text'] ?? $result;
+    }
+
+    public function chat($text)
+    {
+        return $this->request('models/gemini-pro:generateContent',[
+            'contents' => [['parts' => ['text' => implode(' ', (array) $text)]]],
+            'safetySettings' => [
+                ["category"=> "HARM_CATEGORY_HARASSMENT", "threshold"=> "BLOCK_NONE",],
+                ["category"=> "HARM_CATEGORY_HATE_SPEECH", "threshold"=> "BLOCK_NONE",],
+                ["category"=> "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold"=> "BLOCK_NONE",],
+                ["category"=> "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold"=> "BLOCK_NONE",],
+            ],
+        ]);
     }
 }
