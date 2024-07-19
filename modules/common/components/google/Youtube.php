@@ -205,7 +205,7 @@ class Youtube
      * @return mixed
      * @throws \Exception
      */
-    private function request($point, $params)
+    public function request($point, $params)
     {
         return json_decode($this->api->api_get('https://www.googleapis.com/youtube/v3/'.$point, $params), true);
     }

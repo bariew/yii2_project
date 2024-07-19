@@ -11,6 +11,8 @@ namespace app\modules\common\controllers;
 use app\modules\common\components\google\Gemini;
 
 use app\modules\common\components\google\Youtube;
+use GuzzleHttp\Client;
+use Telegram\Bot\Api;
 use Yii;
 use yii\base\ErrorException;
 use yii\console\Controller;
@@ -151,48 +153,60 @@ class ConsoleController extends Controller
 
     public function actionTmp()
     {
-        var_dump(Gemini::yii()->request('', "Куда пойти в Ижевске (согласно этим новостям): ". json_encode(
-            [
-                "1. Новые специальности и целевое обучение: что в Ижевске изменилось для абитуриентов в 2024 году",
-               "2. Два человека пострадали в столкновении BMW и такси в Ижевске",
-               "3. Процесс по делу об обманутых туристах из Удмуртии пройдет в Первомайском суде Ижевска",
-                "4. Пять пенсионеров из Ижевска лишились 1 млн рублей",
-               "5. Движение трамваев в городок Металлургов временно закроют в Ижевске - udmurt.media",
-               "6. Новую награду для многодетных семей учредили в Ижевске - udmurt.media",
-               "7. В Ижевске учредили специальный знак «Семейная доблесть»",
-               "8. В Ижевске задержали замначальника Управтодора Удмуртии по подозрению в превышении полномочий",
-               "9. Ещё один заместитель появится у главы Ижевска",
-               "10. Замначальника «Управтодора» задержали в Ижевске по делу о превышении полномочий на 11 млн рублей",
-               "11. Еще один заместитель появится у Главы Ижевска",
-               "12. Жительницу Ижевска осудили за гибель бывшей подруги сожителя",
-               "13. В Ижевском аэропорту силовики под аплодисменты задержали подозреваемого",
-               "14. Александр Бречалов и Игорь Маковский подписали соглашение о создании в Удмуртии ситуационно-аналитического центра - Лента новостей Ижевска",
-               "15. В аэропорту Ижевска мужчину задержали под аплодисменты встречающих - ГТРК Удмуртия",
-               "16. 21 июня в Ижевске отметят международный день йоги",
-               "17. Фотофакт: обезглавленных куриц нашли у детской школы искусств в Ижевске",
-               "18. Проезд по улице Майской в Ижевске у школы №88 перекроют на четыре дня",
-               "19. Мужчину жестко задержали в аэропорту Ижевска под аплодисменты встречающих",
-               "20. Сквозной проезд по улице Майской закроют в Ижевске",
-            ]
-        )));
+//        file_put_contents(Yii::getAlias('@app/runtime/test'), file_get_contents('https://mediametrics.ru/satellites/api/search/?ac=search&nolimit=1&q=Москва&p=0&c=ru&d=week&dbg=debug&callback=JSONP'));
+        var_export(json_decode((new Client())->get('https://ru.wikipedia.org/w/api.php?action=opensearch&search=гагарин&limit=1&namespace=0&format=json')->getBody()->getContents(), true));
+        // var_dump(Youtube::yii()->request('activities', ['part' => 'snippet', 'channelId' => 'UCUTTx5ART70fUXmUUiwlRRA']));
+//        var_dump(Gemini::yii()->request('', "Куда пойти в Ижевске (согласно этим новостям): ". json_encode(
+//            [
+//                "1. Новые специальности и целевое обучение: что в Ижевске изменилось для абитуриентов в 2024 году",
+//               "2. Два человека пострадали в столкновении BMW и такси в Ижевске",
+//               "3. Процесс по делу об обманутых туристах из Удмуртии пройдет в Первомайском суде Ижевска",
+//                "4. Пять пенсионеров из Ижевска лишились 1 млн рублей",
+//               "5. Движение трамваев в городок Металлургов временно закроют в Ижевске - udmurt.media",
+//               "6. Новую награду для многодетных семей учредили в Ижевске - udmurt.media",
+//               "7. В Ижевске учредили специальный знак «Семейная доблесть»",
+//               "8. В Ижевске задержали замначальника Управтодора Удмуртии по подозрению в превышении полномочий",
+//               "9. Ещё один заместитель появится у главы Ижевска",
+//               "10. Замначальника «Управтодора» задержали в Ижевске по делу о превышении полномочий на 11 млн рублей",
+//               "11. Еще один заместитель появится у Главы Ижевска",
+//               "12. Жительницу Ижевска осудили за гибель бывшей подруги сожителя",
+//               "13. В Ижевском аэропорту силовики под аплодисменты задержали подозреваемого",
+//               "14. Александр Бречалов и Игорь Маковский подписали соглашение о создании в Удмуртии ситуационно-аналитического центра - Лента новостей Ижевска",
+//               "15. В аэропорту Ижевска мужчину задержали под аплодисменты встречающих - ГТРК Удмуртия",
+//               "16. 21 июня в Ижевске отметят международный день йоги",
+//               "17. Фотофакт: обезглавленных куриц нашли у детской школы искусств в Ижевске",
+//               "18. Проезд по улице Майской в Ижевске у школы №88 перекроют на четыре дня",
+//               "19. Мужчину жестко задержали в аэропорту Ижевска под аплодисменты встречающих",
+//               "20. Сквозной проезд по улице Майской закроют в Ижевске",
+//            ]
+//        )));
     }
 
+    public function actionWiki(...$text)
+    {
+        $title = json_decode((new Client())->get('https://ru.wikipedia.org/w/api.php?action=opensearch&search='.implode(' ', $text).'&limit=1&namespace=0&format=json')->getBody()->getContents(), true)[1][0];
+        var_export($title);
+        var_export(json_decode((new Client())->get("https://ru.wikipedia.org//w/api.php?action=query&format=json&prop=revisions&titles={$title}&formatversion=2&prop=extracts")->getBody()->getContents(), true)['query']['pages'][0]['extract']);
+    }
 
-    public function actionBest(...$text)
+    public function actionYoutube(...$text)
     {
         $question = implode(' ', $text);
-        $videos = Youtube::yii()->videoSearchParsed($question);
+        $ids = Youtube::yii()->videoSearchParsed($question);
         $result = [];
-        foreach (array_slice($videos, 0, 3) as $i => $video) {
-            $result = array_merge($result, array_map(function ($v) {
-                //   $v['textOriginal'] = substr($v['textOriginal'], 0, 200);
+        var_dump($ids);return;
+        foreach (array_slice($ids, 0, 3) as $id) {
+            $result = array_merge($result, array_map(function ($v) use ($id) {
+                   $v['link'] = "https://youtube.com?v=".$id;
                 return $v;
-            }, Youtube::yii()->videoComments($video)));
+            }, Youtube::yii()->videoComments($id)));
         }
         usort($result, function ($a, $b) {
             return $b['likeCount'] <=> $a['likeCount'];
         });;
-        $data = ArrayHelper::map(array_slice($result, 0, 50), 'textOriginal', 'likeCount');
+        $data = ArrayHelper::map(array_slice($result, 0, 50), 'textOriginal', function ($v) {
+            return $v['likeCount'] . ' ' . $v['link'];
+        });
 //        file_put_contents(Yii::getAlias('@app/runtime/best/'.$question), json_encode($data, JSON_UNESCAPED_UNICODE));
         echo json_encode($data, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 //        echo "\n\n\n Лучше всего:";
@@ -202,9 +216,11 @@ class ConsoleController extends Controller
 
 //        $result = ArrayHelper::map(array_slice($result, 0, 10), 'textOriginal', 'likeCount');
     }
+
+    public function actionTele()
+    {
+        $telegram = new Api(Yii::$app->params['telegram']['api_key']);
+     //   var_dump(json_decode($telegram->("https://api.telegram.org/bot".Yii::$app->params['telegram']['api_key'].'/getUpdates')->getBody()->getContents(), true));
+       // var_dump($telegram->get('messages.getHistory', ['peer' => ['channel_id' => '@toporch']]));
+    }
 }
-/**
- * продажа ботов для телеграма
- * слив купленных курсов
- * свой ТГ канал с платным контентом
- */

@@ -35,7 +35,7 @@
         "kartik-v/yii2-number": "1.0.x-dev",
         "kartik-v/yii2-date-range": "1.7.x-dev",
         "vova07/yii2-imperavi-widget": "^2.0",
-        "guzzlehttp/guzzle": "7.4.5",
+        "guzzlehttp/guzzle": ">=7.4.5",
         "yiisoft/yii2-imagine": "^2.3",
         "madcoda/php-youtube-api": "dev-master",
         "league/oauth2-google": "dev-main",
@@ -45,7 +45,8 @@
         "yiisoft/yii2-symfonymailer": "^4.0",
       "ext-curl": "*",
         "box/spout": "^3.3",
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "telegram-bot-sdk/telegram-bot-sdk": "4.x-dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -61,7 +62,8 @@
         },
         "allow-plugins": {
             "yiisoft/yii2-composer": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "thecodingmachine/discovery": true
         }
     },
     "scripts": {
