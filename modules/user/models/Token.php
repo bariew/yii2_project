@@ -3,7 +3,7 @@
  * Token class file
  */
 
-namespace app\modules\common\components\google;
+namespace app\modules\user\models;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 
@@ -15,8 +15,9 @@ class Token
 {
     const TYPE_GOOGLE = 'google';
     const TYPE_MICROSOFT = 'microsoft';
+    const TYPE_TWITTER = 'twitter';
 
-    public $owner, $access_token, $refresh_token, $expires_in, $created;
+    public $type, $owner, $access_token, $refresh_token, $expires_in, $created;
 
     /**
      * @param $array
@@ -47,12 +48,13 @@ class Token
      * @param $code
      * @return static
      */
-    public static function fromProvider(AbstractProvider $provider, $code)
+    public static function fromProvider(AbstractProvider $provider, $type, $code)
     {
         $accessToken = $provider->getAccessToken('authorization_code', ['code' => $code]);
         $model = new static;
+        $model->type = $type;
         $owner = $provider->getResourceOwner($accessToken)->toArray();
-        $model->owner = empty($owner['email']) ? $owner['name'] : $owner['email'];
+        $model->owner = $owner['sub'];
         $model->access_token = $accessToken->getToken();
         $model->refresh_token = $accessToken->getRefreshToken();
         $model->expires_in = $accessToken->getExpires() - $accessToken->getTimeNow();
@@ -133,6 +135,15 @@ class Token
                     'urlResourceOwnerDetails' => 'https://graph.microsoft.com/oidc/userinfo',
                     'scopes'                  => ['openid', 'profile', 'offline_access', 'user.read'],
                     'resource'                => 'https://graph.microsoft.com/',
+                ]));
+            case static::TYPE_TWITTER:
+                return new \League\OAuth2\Client\Provider\GenericProvider(array_merge($options, [
+                    'urlAuthorize'            => 'https://twitter.com/i/oauth2/authorize',
+                    'urlAccessToken'          => 'https://api.twitter.com/2/oauth2/token',
+                    'scopes'                  => ['users.read'],
+//                    'scopes'                  => ['tweet.read', 'tweet.write', 'offline_access', 'users.read'],
+             //       'resource'                => 'https://api.twitter.com/1.1',
+                    'accessType'              => 'offline',
                 ]));
             default: throw new \Exception("Illegal calendar type: {$type}");
         }

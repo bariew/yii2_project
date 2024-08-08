@@ -119,7 +119,7 @@ return \yii\helpers\ArrayHelper::merge([
                 '<module>/<action>' => '<module>/default/<action>',
                 //'<module>/<controller>' => '<module>/<controller>/index',
 
-                '<module>/<controller>/<action>/<id:\d+>' => '<module>/<controller>/<action>',
+                '<module>/<controller>/<action>/<id:\w+>' => '<module>/<controller>/<action>',
                 '<module>/<controller>/<action>/pr<project_id:\d+>' => '<module>/<controller>/<action>',
                 '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
             ],

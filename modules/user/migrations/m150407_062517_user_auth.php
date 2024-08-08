@@ -11,7 +11,7 @@ class m150407_062517_user_auth extends Migration
         $this->createTable('{{%user_auth}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
-            'name' => $this->smallInteger(3),
+            'name' => $this->string(3),
             'service_id' => $this->string(),
             'created_at' => $this->integer(),
             'data' => $this->text()

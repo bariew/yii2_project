@@ -23,18 +23,13 @@ use yii\widgets\ActiveForm;
 
     <?php echo $form->field($model, 'api_key')->textInput(['maxlength' => 255]) ?>
 
-    <?php if ($clients = array_diff_key(\app\modules\user\models\Auth::clientCollection()->getClients(), $model->auths)): ?>
-        <div class="form-group">
-            <label><?= Yii::t('user/default/update', 'Attach social accounts') ?></label>
-            <?= yii\authclient\widgets\AuthChoice::widget(['baseAuthUrl' => ['auth-attach'], 'clients' => $clients]) ?>
-        </div>
-    <?php endif ?>
-    <?php if ($clients = array_intersect_key(\app\modules\user\models\Auth::clientCollection()->getClients(), $model->auths)): ?>
-        <div class="form-group">
-            <label><?= Yii::t('user/default/update', 'Detach attached social accounts') ?></label>
-            <?= yii\authclient\widgets\AuthChoice::widget(['baseAuthUrl' => ['auth-detach'], 'clients' => $clients]) ?>
-        </div>
-    <?php endif ?>
+    <div class="form-group">
+        <label><?= Yii::t('user/default/update', 'Attach social accounts') ?></label>
+        <ul class="auth-clients">
+            <li><a class="google auth-link" href="<?= \yii\helpers\Url::to(['/user/oauth/attach', 'id'=>'google']); ?>" title="Google">Google</a></li>
+            <li><a class="twitter auth-link" href="<?= \yii\helpers\Url::to(['/user/oauth/attach', 'id'=>'twitter']); ?>" title="Twitter">Twitter</a></li>
+        </ul>
+    </div>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

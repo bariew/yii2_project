@@ -6,9 +6,11 @@
 namespace app\modules\common\components\google;
 
 
+use app\modules\user\models\Auth;
+use app\modules\user\models\User;
 use Google\Service;
 use yii\base\Event;
-
+use app\modules\user\models\Token;
 
 /**
  * Class Contact
@@ -68,11 +70,11 @@ class GoogleContact
 
     public static function event(Event $e)
     {
-        $sender = $e->sender;
+        $sender = $e->sender;/** @var User $sender */
         $provider = (new GoogleContact(
             \Yii::$app->params['oauth']['google']['clientId'],
             \Yii::$app->params['oauth']['google']['clientSecret'],
-            Token::fromArray($sender->store->oauth_google)
+            Auth::token($sender->id)
         ));
         $provider->search($sender->email ? : $sender->phone) || $provider->create(
             $sender->first_name,

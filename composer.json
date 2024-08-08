@@ -46,7 +46,8 @@
       "ext-curl": "*",
         "box/spout": "^3.3",
         "roave/security-advisories": "dev-latest",
-        "telegram-bot-sdk/telegram-bot-sdk": "4.x-dev"
+        "norkunas/youtube-dl-php": "^2.6",
+        "irazasyed/telegram-bot-sdk": "3.x-dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

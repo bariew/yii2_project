@@ -6,9 +6,10 @@
 namespace app\modules\user\controllers;
 
 use app\modules\common\components\Container;
-use app\modules\common\components\google\Token;
 use app\modules\common\models\Settings;
 use app\modules\common\widgets\Alert;
+use app\modules\user\models\Auth;
+use app\modules\user\models\forms\Login;
 use Yii;
 use app\modules\user\models\User;
 use yii\filters\AccessControl;
@@ -17,6 +18,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
+use app\modules\user\models\Token;
 
 /**
  * Class OauthController
@@ -40,24 +42,26 @@ class OauthController extends Controller
         ];
     }
     /**
+     * @param string $id google microsoft
      * @param string $code
      * @param string $error
      * @return Response
      * @throws BadRequestHttpException
      */
-    public function actionMicrosoft($code = '', $error = '')
+    public function actionAttach($id, $code = '', $error = '')
     {
         $client = Token::authClient(
-            Token::TYPE_MICROSOFT,
-            Yii::$app->params['oauth']['microsoft']['clientId'],
-            Yii::$app->params['oauth']['microsoft']['clientSecret'],
-            Url::to(['/user/oauth/microsoft'], true)
+            $id,
+            Yii::$app->params[$id]['oauth_clientId'],
+            Yii::$app->params[$id]['oauth_clientSecret'],
+            Url::to(['/user/oauth/attach', 'id' => $id], true)
         );
         if ($error) {
             throw new BadRequestHttpException($error);
         } else if ($code) {
             Alert::successfullySaved();
-            Settings::findOrCreate(Settings::NAME_OAUTH_MICROSOFT, Token::fromProvider($client, $code));
+            $user = Auth::clientInstance(Token::fromProvider($client, $id, $code))->user;
+            (new Login(['email' => $user->email]))->login(false);
             return $this->goBack();
         } else {
             return $this->redirect($client->getAuthorizationUrl());
@@ -74,8 +78,8 @@ class OauthController extends Controller
     {
         $client = Token::authClient(
             Token::TYPE_GOOGLE,
-            Yii::$app->params['oauth']['google']['clientId'],
-            Yii::$app->params['oauth']['google']['clientSecret'],
+            Yii::$app->params['google']['oauth_clientId'],
+            Yii::$app->params['google']['oauth_clientSecret'],
             Url::to(['/user/oauth/google'], true)
         );
         if ($error) {
@@ -89,6 +93,24 @@ class OauthController extends Controller
         }
     }
 
+    public function actionTwitter($code = '', $error = '')
+    {
+        $client = Token::authClient(
+            Token::TYPE_TWITTER,
+            Yii::$app->params['twitter']['oauth_clientId'],
+            Yii::$app->params['twitter']['oauth_clientSecret'],
+            Url::to(['/user/oauth/twitter'], true)
+        );
+        if ($error) {
+            throw new BadRequestHttpException($error);
+        } else if ($code) {
+            Alert::successfullySaved();
+            Settings::findOrCreate(Settings::NAME_OAUTH_GOOGLE, Token::fromProvider($client, $code));
+            return $this->goBack();
+        } else {
+            return $this->redirect($client->getAuthorizationUrl());
+        }
+    }
     /**
      * OAuth2 login for external applications
      * @return array|string[]|Response

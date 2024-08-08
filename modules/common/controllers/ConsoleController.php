@@ -13,11 +13,14 @@ use app\modules\common\components\google\Gemini;
 use app\modules\common\components\google\Youtube;
 use GuzzleHttp\Client;
 use Telegram\Bot\Api;
+use Telegram\Bot\FileUpload\InputFile;
 use Yii;
 use yii\base\ErrorException;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
+use YoutubeDl\Options;
+use YoutubeDl\YoutubeDl;
 
 /**
  * Description:
@@ -154,8 +157,17 @@ class ConsoleController extends Controller
     public function actionTmp()
     {
 //        file_put_contents(Yii::getAlias('@app/runtime/test'), file_get_contents('https://mediametrics.ru/satellites/api/search/?ac=search&nolimit=1&q=Москва&p=0&c=ru&d=week&dbg=debug&callback=JSONP'));
-        var_export(json_decode((new Client())->get('https://ru.wikipedia.org/w/api.php?action=opensearch&search=гагарин&limit=1&namespace=0&format=json')->getBody()->getContents(), true));
-        // var_dump(Youtube::yii()->request('activities', ['part' => 'snippet', 'channelId' => 'UCUTTx5ART70fUXmUUiwlRRA']));
+
+        //var_export(Youtube::yii()->playlistVideos('https://www.youtube.com/@pavel_t', 'humor'));
+        $telegram = new Api(Yii::$app->params['telegram']['api_key']); //https://core.telegram.org/bots/api#available-methods
+        //var_dump($telegram->sendMessage(['chat_id' => '@emogreat', 'text' => 'Hello World']));
+        $path = Yii::getAlias('@app/runtime/youtube/');
+        file_exists($path) && FileHelper::removeDirectory($path);
+        FileHelper::createDirectory($path);
+        var_dump(Youtube::yii()->videoDownload('tjoFbl9fPiY', $path, Yii::$app->params['google']['username'],
+            Yii::$app->params['google']['password'], Yii::getAlias('@app/runtime/cookies.txt')
+        ));
+        var_dump($telegram->sendVideo(['chat_id' => '@emogreat', 'video' => InputFile::createFromContents(file_get_contents(FileHelper::findFiles($path)[0]), 'video.mp4')]));
 //        var_dump(Gemini::yii()->request('', "Куда пойти в Ижевске (согласно этим новостям): ". json_encode(
 //            [
 //                "1. Новые специальности и целевое обучение: что в Ижевске изменилось для абитуриентов в 2024 году",
@@ -194,7 +206,6 @@ class ConsoleController extends Controller
         $question = implode(' ', $text);
         $ids = Youtube::yii()->videoSearchParsed($question);
         $result = [];
-        var_dump($ids);return;
         foreach (array_slice($ids, 0, 3) as $id) {
             $result = array_merge($result, array_map(function ($v) use ($id) {
                    $v['link'] = "https://youtube.com?v=".$id;

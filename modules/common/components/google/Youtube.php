@@ -5,10 +5,11 @@
 
 namespace app\modules\common\components\google;
 
-use app\modules\common\components\google\Token;
-use app\modules\common\models\Settings;
+use app\modules\user\models\Auth;
 use GuzzleHttp\Client;
 use Madcoda\Youtube\Youtube as YoutubeAPI;
+use YoutubeDl\Options;
+use YoutubeDl\YoutubeDl;
 
 /**
  * Class Youtube
@@ -71,17 +72,51 @@ class Youtube
     /**
      * @param $id // iVWXd4yCcAQ
      * @param $language
+     * @param bool $raw
      * @return mixed|null
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function videoCaptions($id, $language)
+    public function videoCaptions($id, $language, $raw = true)
     {
         $content = str_replace('\u0026', '&', (new Client())->get("https://www.youtube.com/watch?v={$id}")->getBody()->getContents());
         if (!preg_match('/\{"baseUrl":"([^\"]+lang='.$language.')"/', $content, $matches)) {
             return null;
         }
-        return @json_decode(json_encode(simplexml_load_string((new Client())->get($matches[1])->getBody()->getContents())),TRUE)['text'];
+        $content = simplexml_load_string((new Client())->get($matches[1])->getBody()->getContents());
+        $result = [];
+        foreach ($content->children() as $v) {
+            $data = json_decode(json_encode($v), true);
+            $result[] = array_merge($data['@attributes'], ['text' => $data[0]]);
+        }
+        return $raw ? implode("\n", array_column($result, 'text')) : $result;
     }
+
+    /**
+     * @param $id
+     * @param $path
+     * @return
+     */
+    public function videoDownload($id, $path, $user, $password, $cookies)
+    {
+        $yt = new YoutubeDl();
+        $yt->setBinPath('/usr/bin/yt-dlp');
+        return static::exec("/usr/bin/yt-dlp -f136+140 https://www.youtube.com/watch?v={$id} -u{$user} -p{$password} --cookies {$cookies} -P {$path}");
+    }
+
+//    /**
+//     * @param $id
+//     * @param $path
+//     * @return \YoutubeDl\Entity\VideoCollection
+//     */
+//    public function videoDownload($id, $path, $options = [])
+//    {
+//        $yt = new YoutubeDl();
+//        $yt->setBinPath('/usr/bin/yt-dlp');
+//        return $yt->download(Options::create()->authenticate(@$options['username'], @$options['password'])->cookies(@$options['cookies'])
+//            ->format(Options::MERGE_OUTPUT_FORMAT_MP4)
+//            ->audioFormat(Options::AUDIO_FORMAT_M4A)
+//            ->downloadPath($path)->url('https://www.youtube.com/watch?v='.$id));
+//    }
 
     /**
      * @param $id
@@ -108,13 +143,13 @@ class Youtube
      */
     public function videoCaptionsMy($id, $language)
     {
-        foreach (($this->request('captions', ['part' => 'snippet', 'videoId' => $id,])['items'] ?? []) as $item) {
+        foreach (($this->request('captions.txt', ['part' => 'snippet', 'videoId' => $id,])['items'] ?? []) as $item) {
             if ($item['snippet']['language'] != $language) {
                 continue;
             }
             var_dump($item);
-            $result = Token::fromArray(Settings::findOne(['name' => Settings::NAME_OAUTH_GOOGLE])->value)->google(['https://www.googleapis.com/auth/youtube.force-ssl'])
-                ->authorize()->request('GET', '/youtube/v3/captions/'.$item['id'].'?key='.$this->key);
+            $result = Auth::token()->google(['https://www.googleapis.com/auth/youtube.force-ssl'])
+                ->authorize()->request('GET', '/youtube/v3/captions.txt/'.$item['id'].'?key='.$this->key);
             return $result->getBody()->getContents();
         }
     }
@@ -137,20 +172,45 @@ class Youtube
         return @$this->request('channels', $params)['items']['0'];
     }
 
+    public function channelPlaylists($id)
+    {
+        $data = array_map(function ($v) {
+            return array_merge(['id' => $v['id']], $v['snippet']);
+        }, $this->request('playlists', ['part' => 'snippet', 'channelId' => $id])['items']);
+        return array_combine(array_column($data, 'title'), $data);
+    }
+
     /**
      * @param $url
-     * @return array|mixed
+     * @param string $playlist
+     * @return array|mixed    ['kind' => 'youtube#playlistItem', 'etag' => 'BXhlXNGHKyAdtaUs27whWRjen2c', 'id' => 'UExrcWNJcE1lRHlWMGVoYjdLZEFtdEVwZ2k0RVZkdkF2ZS40QTA3NTU2RkM1QzlCMzYx',
+        'snippet' => ['publishedAt' => '2023-09-01T07:39:22Z', 'channelId' => 'UCUTTx5ART70fUXmUUiwlRRA','title' => 'Остров, на котором есть дом (Герои 3)', 'description' => 'Оригинал называется так же)  #Герои3',
+            'thumbnails' => [
+                'default' => ['url' => 'https://i.ytimg.com/vi/mhpX5Y0vuo8/default.jpg','width' => 120,'height' => 90,],
+                'medium' => ['url' => 'https://i.ytimg.com/vi/mhpX5Y0vuo8/mqdefault.jpg','width' => 320,'height' => 180,],
+                'high' => ['url' => 'https://i.ytimg.com/vi/mhpX5Y0vuo8/hqdefault.jpg','width' => 480,'height' => 360,],
+                'standard' => ['url' => 'https://i.ytimg.com/vi/mhpX5Y0vuo8/sddefault.jpg', 'width' => 640, 'height' => 480,],
+                'maxres' => ['url' => 'https://i.ytimg.com/vi/mhpX5Y0vuo8/maxresdefault.jpg','width' => 1280,'height' => 720,],
+            ],
+            'channelTitle' => 'Pavel T','playlistId' => 'PLkqcIpMeDyV0ehb7KdAmtEpgi4EVdvAve','position' => 26,
+            'resourceId' => ['kind' => 'youtube#video', 'videoId' => 'mhpX5Y0vuo8',],
+            'videoOwnerChannelTitle' => 'Gangena', 'videoOwnerChannelId' => 'UCe4TR_FzNPj8HtZpcCOlzKQ',
+        ],
+    ]
      * @throws \Exception
      */
-    public function channelVideos($url)
+    public function playlistVideos($url, $playlist = 'uploads')
     {
         set_time_limit(0);
         if (!$data = $this->channelDataByUrl($url)) {
             throw new \Exception("Channel not found");
         }
+        $playlistId = ($playlist == 'uploads')
+            ? $data['contentDetails']['relatedPlaylists'][$playlist]
+            : $this->channelPlaylists($data['id'])[$playlist]['id'];
         return $this->requestPaginated('playlistItems', [
             'part' => 'snippet',
-            'playlistId' => $data['contentDetails']['relatedPlaylists']['uploads'],
+            'playlistId' => $playlistId,
             'maxResults' => 50,
         ]);
     }
@@ -197,6 +257,20 @@ class Youtube
             $items = array_merge($items, $result['items']);
         }
         return array_slice($items, 0, $limit);
+    }
+
+    /**
+     * @param $string
+     * @return int|null
+     */
+    private static function exec($string)
+    {
+        $handle = proc_open($string, [STDIN, STDOUT, STDERR], $pipes);
+        $output = null;
+        if (is_resource($handle)) {
+            $output = proc_close($handle);
+        }
+        return $output;
     }
 
     /**

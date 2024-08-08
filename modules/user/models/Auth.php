@@ -2,6 +2,7 @@
 
 namespace app\modules\user\models;
 
+use app\modules\common\components\behaviors\EncryptBehavior;
 use Yii;
 use yii\authclient\BaseOAuth;
 use yii\authclient\Collection;
@@ -42,26 +43,33 @@ class Auth extends \yii\db\ActiveRecord
             'data' => Yii::t('user', 'Data'),
         ];
     }
+    /**
+     * @inheritDoc
+     */
+    public function behaviors()
+    {
+        return [
+            'encrypt' => ['class' => EncryptBehavior::class, 'attributes' => ['data']],
+        ];
+    }
 
     /**
      * @param BaseOAuth $client
      * @return self
      */
-    public static function clientInstance(BaseOAuth $client)
+    public static function clientInstance(Token $token)
     {
         $attributes = [
-            'name' => $client->getName(),
-            'service_id' => $client->id
+            'name' => $token->type,
+            'service_id' => $token->owner
         ];
         /**
          * @var self $model
          */
         $user = User::current() ? : new User(['status' => User::STATUS_ACTIVE]);
         if (!$model = static::findOne($attributes)) {
-            $model = new self(array_merge($attributes, [
-                'created_at' => time(),
-                'data' => json_encode($client->getUserAttributes())
-            ]));
+            $model = new self(array_merge($attributes, ['created_at' => time()]));
+            $model->data = $token->toArray();
             $model->save(false);
             if ($user->isNewRecord) {
                 $user->email = $user->username = $model->name . $model->id;
@@ -76,18 +84,20 @@ class Auth extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return Collection
-     */
-    public static function clientCollection()
-    {
-        return Yii::$app->authClientCollection;
-    }
-
-    /**
      * @return \yii\db\ActiveQuery
      */
     public function getUser()
     {
         return static::hasOne(User::className(), ['id'=> 'user_id']);
+    }
+
+    /**
+     * @param null $user_id
+     * @param string $type
+     * @return Token
+     */
+    public static function token($user_id = null, $type = Token::TYPE_GOOGLE)
+    {
+        return Token::fromArray(Auth::findOne(['user_id' => $user_id ?? \Yii::$app->user->id, 'name' => $type]));
     }
 }
